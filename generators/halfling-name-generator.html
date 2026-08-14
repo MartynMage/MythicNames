@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
       gtag('js', new Date());
       gtag('config', 'G-9C2LDVSHZZ');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halfling Name Generator | Free D&D Names | MythicNames</title>
@@ -109,7 +114,7 @@
 <a href="fairy-name-generator.html" class="related-link"><span class="icon">🧚</span><span class="label">Fairy Names</span></a></div></section>
         </article>
         <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Full Character Backstories?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">Our main generator creates complete characters with history, factions, and personality.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
-        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a></div></footer>
+        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
     const D = {pre: {"m": ["Mer", "Per", "Sam", "Bil", "Fro", "Pip", "Ban", "Cor", "Odo", "Wil", "Ham", "Tom", "Pal", "Gar", "Fol", "And", "Bung", "Cade", "Dro", "Eld", "Fin", "Grif", "Hal", "Isen", "Jol", "Lyle", "Milo", "Ned", "Os", "Reg"], "f": ["Ros", "Lav", "Cer", "Myr", "Pop", "Dais", "Lil", "Mar", "Vel", "Tan", "Pri", "May", "Cor", "Sar", "Ama", "Bell", "Cam", "Dor", "Est", "Fern", "Hat", "Ida", "Jill", "Kit", "Nora", "Oli", "Pans", "Ruby", "Til", "Wren"], "n": ["Ever", "Good", "Under", "High", "Thorn", "Green", "Brown", "Fair", "Sweet", "Warm", "Apple", "Bramble", "Clover", "Deep", "Elder", "Free", "Glen", "Honey", "Long", "Whit"]}, suf: {"m": ["ry", "in", "do", "bo", "go", "ric", "ard", "wise", "ton", "wick", "bert", "mund", "co", "der", "fast", "gar", "man", "o"], "f": ["ie", "y", "a", "ina", "etta", "ose", "ily", "ica", "ine", "wen", "la", "ma", "anna", "ola", "ry", "sy"], "n": ["barrel", "bough", "bottom", "burrow", "hill", "leaf", "topple", "worthy", "fellow", "brook", "garden", "meadow", "willow", "hollow"]}, meanings: ["hearth", "garden", "sunshine", "harvest", "feast", "luck", "wander", "brave", "merry", "cozy"]};

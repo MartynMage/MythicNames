@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
       gtag('js', new Date());
       gtag('config', 'G-9C2LDVSHZZ');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dwarf Name Generator | Free D&D Names | MythicNames</title>
@@ -109,7 +114,7 @@
 <a href="halfling-name-generator.html" class="related-link"><span class="icon">🧑‍🌾</span><span class="label">Halfling Names</span></a></div></section>
         </article>
         <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Full Character Backstories?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">Our main generator creates complete characters with history, factions, and personality.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
-        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a></div></footer>
+        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
     const D = {pre: {"m": ["Thor", "Dur", "Bar", "Gim", "Kil", "Bro", "Thra", "Gro", "Mor", "Bal", "Dol", "Kaz", "Gar", "Bom", "Ulf", "Bruen", "Dain", "Fal", "Gund", "Harb", "Kild", "Mord", "Nal", "Orsik", "Rang", "Rur", "Thard", "Torg", "Trav", "Vond"], "f": ["Kat", "Dis", "Hil", "Aud", "Ber", "Dag", "Keth", "Thra", "Gur", "Hel", "Bry", "Tild", "Rig", "Sig", "Frey", "Amber", "Bard", "Dagn", "Eld", "Finel", "Gunn", "Hlin", "Ilde", "Liftr", "Mard", "Risw", "Torb", "Vist", "Yrs", "Oda"], "n": ["Flint", "Stone", "Iron", "Steel", "Granite", "Onyx", "Slate", "Amber", "Jade", "Coal", "Battle", "Bronze", "Copper", "Deep", "Fire", "Gold", "Grim", "Oak", "Silver", "Storm"]}, suf: {"m": ["in", "im", "ur", "or", "ak", "ek", "grim", "mir", "mund", "rik", "din", "bor", "brek", "dahr", "gran", "nar", "thane", "zahr"], "f": ["a", "is", "ra", "da", "lin", "wyn", "hild", "rid", "run", "dis", "ga", "ella", "gret", "inn", "nora", "rasa", "vera"], "n": ["ax", "hammer", "forge", "shield", "helm", "beard", "fist", "heart", "brow", "delver", "guard", "maker"]}, meanings: ["stone", "iron", "gold", "hammer", "forge", "mountain", "deep", "battle", "honor", "ancestor"]};

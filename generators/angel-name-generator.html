@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
       gtag('js', new Date());
       gtag('config', 'G-9C2LDVSHZZ');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel Name Generator | Free D&D Names | MythicNames</title>
@@ -109,7 +114,7 @@
 <a href="human-name-generator.html" class="related-link"><span class="icon">👤</span><span class="label">Human Names</span></a></div></section>
         </article>
         <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Full Character Backstories?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">Our main generator creates complete characters with history, factions, and personality.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
-        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a></div></footer>
+        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
     const D = {pre: {"m": ["Mich", "Gabr", "Raph", "Uri", "Azr", "Seraph", "Kass", "Mal", "Zad", "Bara", "Cham", "Joph", "Raz", "Sari", "Zeph", "Cael", "Dan", "Rem", "Sach", "Uzz", "Phan", "Cast", "Emm", "Nath", "Rag", "Sam", "Tob", "Zach", "Adon", "Elior"], "f": ["Sera", "Celes", "Aur", "Lum", "Radi", "Glor", "Clar", "Han", "Soph", "Virt", "Graci", "Bened", "Eter", "Trini", "Anun", "Ari", "Dian", "Eli", "Iri", "Laur", "Mira", "Nol", "Val", "Ador", "Bea", "Cyn", "Evan", "Isa", "Ola", "Thea"], "n": ["Ever", "Light", "Truth", "Grace", "Glory", "Peace", "Hope", "Faith", "Mercy", "Justice", "Dawn", "Halo", "Song", "Valor", "Solace", "Vigil", "Zeal", "Aurora", "Star", "Sky"]}, suf: {"m": ["ael", "iel", "ion", "ius", "ial", "anael", "ariel", "azar", "ikon", "eron", "aphon", "ediel", "ophiel", "ezer", "aniel", "emiah"], "f": ["iel", "ia", "ine", "elle", "esta", "ina", "ora", "ica", "alia", "ith", "aria", "ienne", "essa", "onia", "ara", "wynne"], "n": ["bringer", "bearer", "keeper", "warden", "herald", "voice", "hand", "wing", "light", "flame", "crest", "song", "born", "guard"]}, meanings: ["divine", "holy", "radiant", "eternal", "guardian", "mercy", "justice", "truth", "hope", "celestial"]};

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
       gtag('js', new Date());
       gtag('config', 'G-9C2LDVSHZZ');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demon Name Generator | Free D&D Names | MythicNames</title>
@@ -109,7 +114,7 @@
 <a href="orc-name-generator.html" class="related-link"><span class="icon">⚔️</span><span class="label">Orc Names</span></a></div></section>
         </article>
         <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Full Character Backstories?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">Our main generator creates complete characters with history, factions, and personality.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
-        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a></div></footer>
+        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
     const D = {pre: {"m": ["Bael", "Mal", "Zar", "Gor", "Astar", "Bel", "Dis", "Mamm", "Meph", "Orcus", "Demog", "Bapho", "Graz", "Juib", "Yeeno", "Abadd", "Balth", "Chorn", "Drav", "Gol", "Karn", "Lev", "Malph", "Nerg", "Phlog", "Sarg", "Thal", "Ur", "Xaph", "Zeb"], "f": ["Lil", "Mal", "Eresh", "Heca", "Zar", "Bel", "Mor", "Nyx", "Shax", "Tiam", "Vex", "Sith", "Kar", "Drax", "Vorn", "Agr", "Bathe", "Carn", "Dredg", "Ereb", "Hexa", "Isca", "Jez", "Lamash", "Naam", "Rava", "Sel", "Verm", "Xul", "Ziz"], "n": ["Shadow", "Void", "Dread", "Blight", "Doom", "Wrath", "Torment", "Ruin", "Despair", "Corruption", "Malice", "Spite", "Hunger", "Plague", "Ash", "Venom", "Scorn", "Havoc", "Gloom", "Bane"]}, suf: {"m": ["zoth", "gorgon", "othur", "eus", "on", "azar", "emon", "roth", "phon", "rak", "xis", "goroth", "ius", "abus", "ophis", "argon", "ezoth", "ammon"], "f": ["ith", "ael", "ura", "ia", "is", "yss", "rix", "ena", "yra", "oth", "eth", "ossa", "irix", "ania", "ymra", "ashta"], "n": ["bringer", "lord", "prince", "master", "king", "herald", "avatar", "spawn", "born", "touched", "render", "eater", "binder", "flayer"]}, meanings: ["shadow", "flame", "void", "torment", "corruption", "dread", "ruin", "chaos", "darkness", "infernal"]};
