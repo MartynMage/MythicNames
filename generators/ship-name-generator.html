@@ -84,7 +84,7 @@
             <p class="page-subtitle">Generate authentic ship names for your fantasy characters</p>
             <div class="generator-box">
                 <div class="gen-controls">
-                    <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Neutral</option></select></div>
+                    <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Merchant</option><option value="f">Pirate</option><option value="n">Warship</option></select></div>
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate Ship Names</button>
@@ -104,7 +104,7 @@
         <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a></div></footer>
     </div>
     <script>
-    const D = {pre: {"m": ["Storm", "Sea", "Wind", "Thunder", "Dragon", "Black", "Crimson", "Golden", "Silver", "Shadow", "Iron", "Swift", "Savage", "Dread", "Night"], "f": ["Storm", "Sea", "Wind", "Thunder", "Dragon", "Black", "Crimson", "Golden", "Silver", "Shadow", "Iron", "Swift", "Savage", "Dread", "Night"], "n": ["Storm", "Sea", "Wind", "Thunder", "Dragon", "Black", "Crimson", "Golden", "Silver", "Shadow", "Iron", "Swift", "Savage", "Dread", "Night"]}, suf: {"m": ["chaser", "runner", "dancer", "hunter", "fury", "vengeance", "pride", "glory", "spirit", "serpent", "hawk", "fortune", "maiden", "rose", "star"], "f": ["chaser", "runner", "dancer", "hunter", "fury", "vengeance", "pride", "glory", "spirit", "serpent", "hawk", "fortune", "maiden", "rose", "star"], "n": ["chaser", "runner", "dancer", "hunter", "fury", "vengeance", "pride", "glory", "spirit", "serpent", "hawk", "fortune", "maiden", "rose", "star"]}, meanings: ["voyage", "adventure", "fortune", "glory", "freedom", "vengeance", "honor", "courage", "speed", "might"]};
+    const D = {pre: {"m": ["Gold", "Fair", "Trade", "Swift", "Lucky", "Amber", "Spice", "Silk", "Sun", "Merry", "Wave", "Morning", "Fortune", "Star", "Sea"], "f": ["Black", "Blood", "Dread", "Grim", "Devil", "Skull", "Rogue", "Storm", "Night", "Kraken", "Crimson", "Savage", "Shadow", "Bone", "Rum"], "n": ["Iron", "Steel", "Royal", "Storm", "Thunder", "War", "Bold", "Noble", "Crown", "Sea", "Valiant", "Sovereign", "Tempest", "Vigilant", "Stalwart"]}, suf: {"m": ["runner", "trader", "wind", "fortune", "star", "gull", "dancer", "breeze", "crest", "wake", "merchant", "swallow", "drift", "haven", "spray"], "f": ["reaver", "fury", "vengeance", "curse", "fang", "blade", "serpent", "revenge", "howl", "plague", "hunter", "wraith", "scourge", "maw", "claw"], "n": ["guard", "ward", "lance", "hammer", "shield", "spear", "bastion", "valor", "banner", "sentinel", "pride", "glory", "spirit", "hawk", "defiance"]}, meanings: ["voyage", "adventure", "fortune", "glory", "freedom", "vengeance", "honor", "courage", "speed", "might"]};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     function generateName(gender) {

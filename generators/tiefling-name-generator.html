@@ -84,7 +84,7 @@
             <p class="page-subtitle">Generate authentic tiefling names for your fantasy characters</p>
             <div class="generator-box">
                 <div class="gen-controls">
-                    <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Neutral</option></select></div>
+                    <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Virtue Name</option></select></div>
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate Tiefling Names</button>
@@ -104,7 +104,7 @@
         <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a></div></footer>
     </div>
     <script>
-    const D = {pre: {"m": ["Akem", "Amn", "Dae", "Kair", "Leu", "Mord", "Nek", "Tham", "Zar", "Val", "Hex", "Mal", "Crim", "Ash", "Bael"], "f": ["Aka", "Bry", "Cri", "Dae", "Ear", "Kal", "Ler", "Mak", "Nym", "Ori", "Phe", "Riz", "Shar", "Tar", "Vel"], "n": ["Art", "Carrion", "Chant", "Creed", "Despair", "Excellence", "Fear", "Glory", "Hope", "Ideal", "Music", "Nowhere", "Open", "Poetry", "Quest", "Random", "Reverence", "Sorrow", "Temerity", "Torment", "Weary"]}, suf: {"m": ["nos", "on", "eus", "ius", "sar", "xes", "ton", "rak", "ziel", "mond", "phis", "cris"], "f": ["eia", "ai", "eth", "is", "ra", "shta", "tai", "zira", "xis", "riel", "va", "ni"]}, meanings: ["infernal", "shadow", "flame", "torment", "redemption", "outcast", "defiant", "cunning", "mystery", "destiny"]};
+    const D = {pre: {"m": ["Akem", "Amn", "Dae", "Kair", "Leu", "Mord", "Nek", "Tham", "Zar", "Val", "Hex", "Mal", "Crim", "Ash", "Bael", "Andr", "Barak", "Dam", "Ekem", "Iad", "Morth", "Nizz", "Orian", "Pesh", "Skam", "Ther", "Xar", "Zeth", "Nemm", "Kov"], "f": ["Aka", "Bry", "Cri", "Dae", "Ear", "Kal", "Ler", "Mak", "Nym", "Ori", "Phe", "Riz", "Shar", "Tar", "Vel", "Anak", "Dama", "Eza", "Ishte", "Kasd", "Lev", "Mez", "Naar", "Osah", "Phel", "Quil", "Rieta", "Sekh", "Ulk", "Zai"], "n": ["Art", "Carrion", "Chant", "Creed", "Despair", "Excellence", "Fear", "Glory", "Hope", "Ideal", "Music", "Nowhere", "Open", "Poetry", "Quest", "Random", "Reverence", "Sorrow", "Temerity", "Torment", "Weary"]}, suf: {"m": ["nos", "on", "eus", "ius", "sar", "xes", "ton", "rak", "ziel", "mond", "phis", "cris", "ai", "akas", "emmon", "imar", "ecai", "olis"], "f": ["eia", "ai", "eth", "is", "ra", "shta", "tai", "zira", "xis", "riel", "va", "ni", "ari", "ina", "esta", "ora", "ussa", "yre"]}, meanings: ["infernal", "shadow", "flame", "torment", "redemption", "outcast", "defiant", "cunning", "mystery", "destiny"]};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     function generateName(gender) {
