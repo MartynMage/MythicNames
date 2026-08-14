@@ -129,6 +129,9 @@
         .secondary-btn{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.9rem 1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:0.4rem}
         .secondary-btn:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
         .secondary-btn svg{width:14px;height:14px}
+        .seed-bar{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;padding:0.6rem 0.85rem;margin-bottom:0.75rem}
+        .seed-bar-label{font-family:'Cinzel',serif;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
+        .seed-bar-value{font-family:'Crimson Pro',monospace;font-size:0.9rem;color:var(--accent-gold);background:var(--bg-parchment);padding:0.2rem 0.5rem;border-radius:4px;flex:1;min-width:80px}
         .results-section{margin-top:1.25rem}
         .results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem}
         .results-title{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em}
@@ -581,9 +584,13 @@
                     </div>
                 </div>
                 <div class="control-row">
-                    <div class="control-group full-width">
+                    <div class="control-group">
                         <label>Keywords <i class="tooltip-icon" data-tip="Optional words to influence name generation">?</i></label>
                         <input type="text" id="keywords" placeholder='e.g. "Shadow", "Fire", "Ancient"'>
+                    </div>
+                    <div class="control-group">
+                        <label>Seed <i class="tooltip-icon" data-tip="Same seed and settings always give the same names">?</i></label>
+                        <input type="text" id="seed" placeholder="Leave blank for random">
                     </div>
                 </div>
                 <div class="btn-row">
@@ -609,6 +616,11 @@
                         </div>
                     </div>
                     <div class="compare-items" id="compareItems"></div>
+                </div>
+                <div class="seed-bar" id="seedBar" style="display:none;">
+                    <span class="seed-bar-label">Seed</span>
+                    <code class="seed-bar-value" id="seedValue"></code>
+                    <button class="secondary-btn" onclick="copySeedLink()">🔗 Copy link to these names</button>
                 </div>
                 <div id="resultsContainer">
                     <div class="empty-state"><div class="empty-icon">📜</div><p>Choose your preferences and generate names</p></div>
@@ -1054,8 +1066,43 @@
         }
     };
     
+    // ============ SEEDED RANDOMNESS ============
+    // Every batch runs from a seed so results can be shared and reproduced.
+    // With no active seed we fall back to Math.random().
+    let prngState = null;
+    let currentSeed = null;
+
+    function hashSeed(str) {
+        let h = 1779033703 ^ str.length;
+        for (let i = 0; i < str.length; i++) {
+            h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+            h = (h << 13) | (h >>> 19);
+        }
+        return h >>> 0;
+    }
+
+    function setSeed(seed) {
+        currentSeed = seed || null;
+        prngState = seed ? hashSeed(String(seed)) : null;
+    }
+
+    function rnd() {
+        if (prngState === null) return Math.random();
+        // mulberry32
+        prngState = (prngState + 0x6D2B79F5) >>> 0;
+        let t = prngState;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+
+    function randomSeed() {
+        const words = ['ember','frost','raven','oak','storm','ash','wolf','moon','iron','thorn','dawn','vale'];
+        return words[Math.floor(Math.random()*words.length)] + '-' + Math.floor(Math.random()*9000+1000);
+    }
+
     // ============ UTILITIES ============
-    const r = a => a[Math.floor(Math.random() * a.length)];
+    const r = a => a[Math.floor(rnd() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     
@@ -1223,7 +1270,7 @@
     function baseName(style, gender) {
         const sd = D.styles[style] || D.styles.fantasy;
         let n = r(sd.pre);
-        if (Math.random() > 0.35 && sd.mid.length) n += r(sd.mid);
+        if (rnd() > 0.35 && sd.mid.length) n += r(sd.mid);
         const gk = gender === 'any' ? r(['m','f','n']) : gender[0];
         n += r(sd.suf[gk] || sd.suf.n || sd.suf.m);
         return cap(n);
@@ -1232,7 +1279,7 @@
     function lastName(style) {
         const sd = D.styles[style] || D.styles.fantasy;
         let n = r(sd.pre);
-        if (Math.random() > 0.5 && sd.mid.length) n += r(sd.mid);
+        if (rnd() > 0.5 && sd.mid.length) n += r(sd.mid);
         n += r(sd.suf.m);
         return cap(n);
     }
@@ -1240,7 +1287,7 @@
     function raceName(race, gender) {
         const rd = D.races[race] || D.races.human;
         let n = r(rd.pre);
-        if (Math.random() > 0.4 && rd.mid.length) n += r(rd.mid);
+        if (rnd() > 0.4 && rd.mid.length) n += r(rd.mid);
         const gk = gender === 'any' ? r(['m','f','n']) : gender[0];
         n += r(rd.suf[gk] || rd.suf.n);
         return cap(n);
@@ -1284,27 +1331,27 @@
             do {
                 if (cat === 'characters') {
                     name = baseName(style, gender);
-                    if (kwWord && Math.random() > 0.4) {
+                    if (kwWord && rnd() > 0.4) {
                         name += ' ' + kwWord + r(['bane','born','heart','walker','song','blade','fall','wind','brand','veil']);
-                    } else if (cf && Math.random() > 0.3) {
+                    } else if (cf && rnd() > 0.3) {
                         name += ' ' + r(cf.sur) + r(cf.suf);
-                    } else if (Math.random() > 0.4) {
+                    } else if (rnd() > 0.4) {
                         name += ' ' + lastName(style);
                     }
-                } else if (cat === 'kingdoms' && kwWord && Math.random() > 0.5) {
+                } else if (cat === 'kingdoms' && kwWord && rnd() > 0.5) {
                     name = kwWord + r(['ia','land','heim','mark','hold','vale','reach','oria']);
                 } else if (cat === 'kingdoms') {
                     name = cap(r(D.styles[style]?.pre || D.styles.fantasy.pre) + r(['ia','land','or','heim','gar','oria','ium','dale','mark','hold','vale','reach','moor','holm','mere','fell','shire','ford','wick','march','strand','haven','crest','garde','stead']));
                 } else if (cat === 'ships') {
-                    name = 'The ' + (kwWord && Math.random() > 0.5 ? kwWord : r(['Swift','Bold','Silver','Golden','Dark','Storm','Sea','Iron','Crimson','Shadow','Wandering','Restless','Midnight','Scarlet','Salty','Roaring','Gilded','Broken','Laughing','Weeping','Howling','Fearless','Wayward','Drowned'])) + ' ' + r(['Dragon','Serpent','Wave','Wind','Star','Dawn','Maiden','Queen','Fury','Fortune','Gull','Kraken','Tempest','Horizon','Revenge','Mermaid','Albatross','Corsair','Tide','Phantom','Arrow','Leviathan','Compass','Widow']);
+                    name = 'The ' + (kwWord && rnd() > 0.5 ? kwWord : r(['Swift','Bold','Silver','Golden','Dark','Storm','Sea','Iron','Crimson','Shadow','Wandering','Restless','Midnight','Scarlet','Salty','Roaring','Gilded','Broken','Laughing','Weeping','Howling','Fearless','Wayward','Drowned'])) + ' ' + r(['Dragon','Serpent','Wave','Wind','Star','Dawn','Maiden','Queen','Fury','Fortune','Gull','Kraken','Tempest','Horizon','Revenge','Mermaid','Albatross','Corsair','Tide','Phantom','Arrow','Leviathan','Compass','Widow']);
                 } else if (cat === 'taverns') {
-                    name = 'The ' + (kwWord && Math.random() > 0.5 ? kwWord : r(['Prancing','Sleeping','Golden','Silver','Rusty','Jolly','Drunken','Lucky','Dancing','Wandering','Crooked','Salty','Gilded','Howling','Bearded','Copper','Broken','Wicked','Thirsty','Grinning','Limping','Blind','Burning','Velvet','Stumbling','Whistling','Moonlit','Ragged','Cheerful','Weary'])) + ' ' + r(['Pony','Dragon','Griffin','Knight','Maiden','Tankard','Sword','Crown','Raven','Oak','Goblin','Wyvern','Boar','Stag','Flagon','Kettle','Candle','Anchor','Lantern','Barrel','Hound','Rooster','Unicorn','Mermaid','Ogre','Piper','Cauldron','Goose','Badger','Harp']);
+                    name = 'The ' + (kwWord && rnd() > 0.5 ? kwWord : r(['Prancing','Sleeping','Golden','Silver','Rusty','Jolly','Drunken','Lucky','Dancing','Wandering','Crooked','Salty','Gilded','Howling','Bearded','Copper','Broken','Wicked','Thirsty','Grinning','Limping','Blind','Burning','Velvet','Stumbling','Whistling','Moonlit','Ragged','Cheerful','Weary'])) + ' ' + r(['Pony','Dragon','Griffin','Knight','Maiden','Tankard','Sword','Crown','Raven','Oak','Goblin','Wyvern','Boar','Stag','Flagon','Kettle','Candle','Anchor','Lantern','Barrel','Hound','Rooster','Unicorn','Mermaid','Ogre','Piper','Cauldron','Goose','Badger','Harp']);
                 } else if (cat === 'weapons') {
-                    name = baseName(style, 'n') + ', ' + r(['Blade','Sword','Axe','Hammer','Bow','Spear','Staff','Dagger','Scythe','Glaive','Halberd','Maul','Flail','Lance','Claymore','Warpick']) + ' of ' + (kwWord && Math.random() > 0.5 ? kwWord : r(['Doom','Light','Shadow','Fire','Ice','Thunder','Death','Glory','Eternity','Sorrow','Vengeance','Dawn','Winter','Storms','Ruin','Kings','Whispers','Souls','Stars','Ashes']));
+                    name = baseName(style, 'n') + ', ' + r(['Blade','Sword','Axe','Hammer','Bow','Spear','Staff','Dagger','Scythe','Glaive','Halberd','Maul','Flail','Lance','Claymore','Warpick']) + ' of ' + (kwWord && rnd() > 0.5 ? kwWord : r(['Doom','Light','Shadow','Fire','Ice','Thunder','Death','Glory','Eternity','Sorrow','Vengeance','Dawn','Winter','Storms','Ruin','Kings','Whispers','Souls','Stars','Ashes']));
                 } else if (cat === 'spells') {
-                    name = baseName(style, 'n') + "'s " + (kwWord && Math.random() > 0.5 ? kwWord : r(['Fire','Ice','Shadow','Light','Thunder','Arcane','Divine','Chaos','Frost','Void','Storm','Blood','Spirit','Rune'])) + ' ' + r(['Bolt','Blast','Wave','Shield','Storm','Touch','Binding','Word','Lance','Cage','Veil','Grasp','Fury','Ward','Chains','Echo']);
+                    name = baseName(style, 'n') + "'s " + (kwWord && rnd() > 0.5 ? kwWord : r(['Fire','Ice','Shadow','Light','Thunder','Arcane','Divine','Chaos','Frost','Void','Storm','Blood','Spirit','Rune'])) + ' ' + r(['Bolt','Blast','Wave','Shield','Storm','Touch','Binding','Word','Lance','Cage','Veil','Grasp','Fury','Ward','Chains','Echo']);
                 } else if (cat === 'guilds') {
-                    name = 'The ' + (kwWord && Math.random() > 0.5 ? kwWord : r(['Silver','Golden','Iron','Crimson','Shadow','Azure','Emerald','Obsidian','Ashen','Gilded','Ebon','Scarlet','Ivory','Cobalt','Verdant','Argent','Dusk','Thorned','Veiled','Hollow'])) + ' ' + r(['Hand','Eye','Blade','Shield','Crown','Circle','Order','Legion','Dagger','Serpent','Rose','Raven','Lantern','Chalice','Compass','Quill','Mask','Wolf','Spire','Key']);
+                    name = 'The ' + (kwWord && rnd() > 0.5 ? kwWord : r(['Silver','Golden','Iron','Crimson','Shadow','Azure','Emerald','Obsidian','Ashen','Gilded','Ebon','Scarlet','Ivory','Cobalt','Verdant','Argent','Dusk','Thorned','Veiled','Hollow'])) + ' ' + r(['Hand','Eye','Blade','Shield','Crown','Circle','Order','Legion','Dagger','Serpent','Rose','Raven','Lantern','Chalice','Compass','Quill','Mask','Wolf','Spire','Key']);
                 } else if (cat === 'artifacts') {
                     name = 'The ' + r(['Crown','Ring','Orb','Scepter','Amulet','Tome','Eye','Heart','Blade','Mirror','Chalice','Lantern','Mask','Codex','Sigil','Shard']) + ' of ' + baseName(style, 'n');
                 } else if (cat === 'dungeons') {
@@ -1441,7 +1488,7 @@
     // ============ BACKSTORY GENERATION ============
     function genBackstoryForName(name) {
         const bd = D.back;
-        const gn = Math.random() > 0.5 ? 'feminine' : 'masculine';
+        const gn = rnd() > 0.5 ? 'feminine' : 'masculine';
         const pronoun = gn === 'feminine' ? 'she' : 'he';
         const pPoss = gn === 'feminine' ? 'her' : 'his';
         const pObj = gn === 'feminine' ? 'her' : 'him';
@@ -1452,7 +1499,7 @@
         
         const faction = r(bd.faction);
         const factionRole = r(faction.role);
-        const hasFaction = Math.random() > 0.4;
+        const hasFaction = rnd() > 0.4;
         
         let back = r(bd.origin) + ', ' + name + ' ' + r(bd.childhood).toLowerCase() + ' ';
         back += '\n\nIn ' + pPoss + ' youth, ' + pronoun + ' ' + r(bd.event) + '. ' + r(bd.turning) + ' ';
@@ -1486,7 +1533,7 @@
         
         // Generate base party members
         for (let i = 0; i < size; i++) {
-            const role = available.length ? available.splice(Math.floor(Math.random()*available.length),1)[0] : r(Object.keys(D.cls));
+            const role = available.length ? available.splice(Math.floor(rnd()*available.length),1)[0] : r(Object.keys(D.cls));
             const gender = r(['masculine','feminine']);
             const name = baseName(style, gender) + ' ' + lastName(style);
             const cd = D.cls[role] || D.cls.warrior;
@@ -1501,7 +1548,7 @@
         if (party.length >= 3) {
             relationships.push({a: 1, b: 2, type: r(D.relationships.negative), typeCategory: 'negative'});
         }
-        if (party.length >= 4 && Math.random() > 0.5) {
+        if (party.length >= 4 && rnd() > 0.5) {
             relationships.push({a: 0, b: 3, type: r(D.relationships.romantic), typeCategory: 'romantic'});
         }
         if (party.length >= 5) {
@@ -1571,7 +1618,7 @@
             
             // Origin - some share origins based on relationships
             const hasPositiveRel = relMap[i].find(r => r.category === 'positive' || r.category === 'romantic');
-            if (hasPositiveRel && Math.random() > 0.4) {
+            if (hasPositiveRel && rnd() > 0.4) {
                 const otherName = party[hasPositiveRel.other].name.split(' ')[0];
                 back += `${firstName} and ${otherName} both hail from ${sharedOrigin}. `;
             } else {
@@ -1724,7 +1771,7 @@
 
         const kingdomName = cap(r(D.styles[cfg.style].pre) + r(cfg.sufs));
         const rulerTitle = r(cfg.rulers);
-        const rulerName = baseName(cfg.style, Math.random()>0.5?'masculine':'feminine') + ' ' + lastName(cfg.style);
+        const rulerName = baseName(cfg.style, rnd()>0.5?'masculine':'feminine') + ' ' + lastName(cfg.style);
 
         const cities = [];
         const seenCities = new Set();
@@ -2439,6 +2486,10 @@
         showSkeletons(count);
 
         setTimeout(() => {
+            // A blank seed box still gets a seed — that's what makes the batch shareable.
+            const typedSeed = document.getElementById('seed').value.trim();
+            setSeed(typedSeed || randomSeed());
+
             const opts = {
                 cat: document.getElementById('category').value,
                 style: document.getElementById('style').value,
@@ -2458,11 +2509,54 @@
             });
             const names = genNames(opts);
             displayNames(names);
+            showSeedBar(opts);
+            setSeed(null); // back to unseeded for anything generated outside this batch
             btn.classList.remove('loading');
             btn.disabled = false;
         }, 300);
     }
-    
+
+    // ============ SEED SHARING ============
+    let lastSeedLink = '';
+
+    function showSeedBar(opts) {
+        const bar = document.getElementById('seedBar');
+        if (!bar) return;
+        const params = new URLSearchParams({
+            seed: currentSeed, cat: opts.cat, style: opts.style, gender: opts.gender,
+            length: opts.length, count: String(opts.count), cls: opts.classType
+        });
+        if (opts.keywords) params.set('kw', opts.keywords);
+        lastSeedLink = location.origin + location.pathname + '?' + params.toString();
+        document.getElementById('seedValue').textContent = currentSeed;
+        bar.style.display = 'flex';
+    }
+
+    async function copySeedLink() {
+        try {
+            await navigator.clipboard.writeText(lastSeedLink);
+            showToast('Link copied — same settings, same names');
+            gaEvent('share_seed');
+        } catch (e) {}
+    }
+
+    // Restore a shared batch from the URL and regenerate it exactly.
+    function restoreFromUrl() {
+        const p = new URLSearchParams(location.search);
+        if (!p.get('seed')) return;
+        const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+        set('seed', p.get('seed'));
+        set('category', p.get('cat'));
+        set('style', p.get('style'));
+        set('gender', p.get('gender'));
+        set('length', p.get('length'));
+        set('count', p.get('count'));
+        set('classType', p.get('cls'));
+        set('keywords', p.get('kw'));
+        gaEvent('open_shared_seed');
+        handleGenerate();
+    }
+
     // ============ INIT ============
     document.addEventListener('DOMContentLoaded', () => {
         // Tab switching
@@ -2518,9 +2612,9 @@
         
         // Pack generator
         const packGen = {
-            villains: () => baseName('dark', 'any') + ' ' + lastName('dark') + (Math.random() > 0.5 ? ' the ' + r(['Dread','Terrible','Dark','Cruel','Vile','Merciless','Undying','Defiler']) : ''),
+            villains: () => baseName('dark', 'any') + ' ' + lastName('dark') + (rnd() > 0.5 ? ' the ' + r(['Dread','Terrible','Dark','Cruel','Vile','Merciless','Undying','Defiler']) : ''),
             heroes: () => baseName('fantasy', 'any') + ' ' + r(['Iron','Bright','True','Storm','Lion','Dawn','Oath','Sun']) + r(['heart','blade','shield','born','mane','bringer','sworn']),
-            royalty: () => r(['King','Queen','Prince','Princess','Duke','Duchess','Archduke','Baroness']) + ' ' + baseName('medieval', 'any') + (Math.random() > 0.5 ? ' ' + r(['II','III','IV','the Great','the Wise','the Young','of the North','the Fair']) : ''),
+            royalty: () => r(['King','Queen','Prince','Princess','Duke','Duchess','Archduke','Baroness']) + ' ' + baseName('medieval', 'any') + (rnd() > 0.5 ? ' ' + r(['II','III','IV','the Great','the Wise','the Young','of the North','the Fair']) : ''),
             wizards: () => r(['Archmage ','Magus ','','','']) + baseName('dnd', 'any') + ' the ' + r(['Arcane','Learned','Unseen','Stormtouched','Everwise','Grey','Astral','Runebound']),
             rogues: () => baseName('fantasy', 'any') + ' "' + r(['Fingers','Whisper','Shadow','Quickhand','Lockpick','The Fox','Two-Coins','Smoke','Velvet','Sixblades']) + '" ' + lastName('dark'),
             merchants: () => baseName('medieval', 'any') + ' ' + r(['Baker','Cooper','Smith','Fletcher','Tanner','Miller','Weaver','Chandler','Mason','Potter','Brewer','Wainwright']),
@@ -2593,6 +2687,9 @@
         
         // Init history badge
         updateHistoryBadge();
+
+        // Rebuild a shared batch if the URL carries a seed
+        restoreFromUrl();
     });
     
     async function copyCharacter() {
