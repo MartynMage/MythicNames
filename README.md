@@ -38,6 +38,8 @@ node tools/generate-sitemaps.js
 
 No frameworks, no dependencies. Names are generated client-side from syllable pools tuned per style — Norse, Celtic, Lovecraftian, and about 17 others. Campaigns, favourites and history are saved to localStorage, so nothing leaves your browser.
 
+Every batch is generated from a seed, so `?seed=ember-4821&cat=taverns&style=norse` gives you the same taverns every time. Handy if you want your party to see the list you saw.
+
 ## Support
 
 If the site's been useful, there's a [tip jar](https://ko-fi.com/meeeertyn). Found a bug or want a generator added? Open an issue.
