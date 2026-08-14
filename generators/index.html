@@ -36,6 +36,8 @@
     <meta name="twitter:description" content="Free name generators for every fantasy race and creature. Generate authentic names for elves, dwarves, orcs, humans, tieflings, dragonborn, taverns, kingdoms, ships, and more.">
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"CollectionPage","name":"Fantasy Name Generators","description":"Free name generators for every fantasy race, creature, and location.","url":"https://mythicnames.io/generators/"}
     </script>
@@ -146,5 +148,8 @@
             </div>
         </footer>
     </div>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
 </body>
 </html>

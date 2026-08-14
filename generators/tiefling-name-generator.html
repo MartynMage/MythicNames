@@ -36,6 +36,8 @@
     <meta name="twitter:description" content="Generate mysterious tiefling names for D&D. Names reflecting infernal heritage and chosen identity.">
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tiefling Name Generator","description":"Generate mysterious tiefling names for D&D. Names reflecting infernal heritage and chosen identity.","url":"https://mythicnames.io/generators/tiefling-name-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
     </script>
@@ -178,6 +180,9 @@
     }
     showSharedName();
     generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
     </script>
 </body>
 </html>

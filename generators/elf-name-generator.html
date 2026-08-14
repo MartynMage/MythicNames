@@ -36,6 +36,8 @@
     <meta name="twitter:description" content="Free elf name generator for D&D, Pathfinder, and fantasy writing. Generate authentic elven names with pronunciations, meanings, and character backstories.">
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -428,6 +430,9 @@
     }
     showSharedName();
     generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
     </script>
 </body>
 </html>

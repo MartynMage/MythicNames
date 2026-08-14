@@ -36,6 +36,8 @@
     <meta name="twitter:description" content="Generate authentic dwarven names for D&D and fantasy games. Strong, sturdy names with clan traditions.">
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebApplication","name":"Dwarf Name Generator","description":"Generate authentic dwarven names for D&D and fantasy games. Strong, sturdy names with clan traditions.","url":"https://mythicnames.io/generators/dwarf-name-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
     </script>
@@ -177,6 +179,9 @@
     }
     showSharedName();
     generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
     </script>
 </body>
 </html>

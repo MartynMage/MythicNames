@@ -35,6 +35,8 @@
     <meta name="twitter:description" content="Complete sitemap of MythicNames fantasy name generator. Find all our generators, guides, and resources for D&D and fantasy naming.">
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6481650173817853"
      crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,5 +155,8 @@
             </div>
         </footer>
     </div>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
 </body>
 </html>

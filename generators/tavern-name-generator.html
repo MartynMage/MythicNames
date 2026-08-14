@@ -36,6 +36,8 @@
     <meta name="twitter:description" content="Generate memorable tavern and inn names for D&D. Perfect for DMs creating locations.">
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"WebApplication","name":"Tavern Name Generator","description":"Generate memorable tavern and inn names for D&D. Perfect for DMs creating locations.","url":"https://mythicnames.io/generators/tavern-name-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
     </script>
@@ -177,6 +179,9 @@
     }
     showSharedName();
     generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
     </script>
 </body>
 </html>

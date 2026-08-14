@@ -1,9 +1,12 @@
 {
+    "id": "/",
     "name": "MythicNames Fantasy Name Generator",
     "short_name": "MythicNames",
     "description": "Free fantasy name generator with backstory creator for D&D, RPGs, novels and worldbuilding",
     "start_url": "/",
+    "scope": "/",
     "display": "standalone",
+    "orientation": "any",
     "background_color": "#0d0b0e",
     "theme_color": "#d4a857",
     "icons": [
@@ -20,17 +23,45 @@
         {
             "src": "icon-192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
         },
         {
             "src": "icon-512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         },
         {
             "src": "apple-touch-icon.png",
             "sizes": "180x180",
             "type": "image/png"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Generate names",
+            "short_name": "Names",
+            "url": "/",
+            "description": "Open the main name generator"
+        },
+        {
+            "name": "All generators",
+            "short_name": "Generators",
+            "url": "/generators/",
+            "description": "Browse every race and world generator"
         }
     ],
     "categories": ["utilities", "entertainment", "games"],
