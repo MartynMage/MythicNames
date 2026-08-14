@@ -107,6 +107,8 @@
             <p class="page-subtitle">Generate authentic vampire names for your fantasy characters</p>
             <div class="generator-box">
                 <div class="gen-controls">
+                    
+                    <div class="gen-control"><label>Lineage</label><select id="variant"><option value="any">Any Vampire</option><option value="ancient">Ancient (Carpathian)</option><option value="noble">Noble Court</option><option value="feral">Feral (Nosferatu)</option></select></div>
                     <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Neutral</option></select></div>
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
@@ -127,28 +129,47 @@
         <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
-    const D = {pre: {"m": ["Vlad", "Strah", "Alucard", "Viktor", "Drac", "Cass", "Arn", "Lazar", "Nik", "Alexand", "Dmitr", "Raz", "Serg", "Vasil", "Mircea", "Ambro", "Bela", "Corvin", "Dorian", "Emeric", "Feodor", "Grigor", "Kazim", "Luci", "Marius", "Nosfer", "Radu", "Theron", "Vasko", "Zolt"], "f": ["Mircalla", "Eliz", "Carm", "Sel", "Vict", "Lil", "Anas", "Morg", "Ser", "Isab", "Nat", "Cass", "Mir", "Viol", "Valer", "Adel", "Bathor", "Camil", "Drusil", "Ecat", "Helen", "Ingr", "Katar", "Lenor", "Marcel", "Nadi", "Oct", "Raven", "Rosal", "Tatia"], "n": ["Night", "Blood", "Shadow", "Crimson", "Dark", "Midnight", "Twilight", "Dusk", "Moon", "Grave", "Ash", "Bat", "Raven", "Thorn", "Winter", "Wolf", "Vesper", "Umbra", "Sable", "Onyx"]}, suf: {"m": ["ius", "escu", "ov", "us", "van", "imir", "andru", "os", "as", "ion", "stan", "mir", "ain", "ar", "off", "ovich", "ul", "yan"], "f": ["ella", "ana", "ina", "ovna", "ette", "essa", "ira", "itha", "cia", "mina", "esca", "ia", "ita", "lena", "ora", "ya"], "n": ["walker", "born", "child", "heart", "soul", "hunter", "lord", "prince", "king", "father", "bane", "shade", "whisper", "veil"]}, meanings: ["eternal", "shadow", "blood", "night", "darkness", "immortal", "ancient", "noble", "hunger", "undying"]};
+    const D = {"ancient":{"pre":["Vlad","Strah","Drac","Mircea","Radu","Vasil","Dmitr","Lazar","Bela","Zolt","Kazim","Feodor","Grigor","Nosfer","Vasko","Anas","Ecat","Tatia"],"mid":["es","ul","an","im","ov","ar","en","isl"],"meanings":["old blood","impaler","dread","the first","grave-born","undying","the pale","elder","crypt","thirst"]},"noble":{"pre":["Alucard","Viktor","Cass","Alexand","Ambro","Corvin","Dorian","Emeric","Luci","Marius","Theron","Isab","Marcel","Camil","Adel","Oct","Rosal","Seren"],"mid":["ia","an","el","or","in","ess","al","ien"],"meanings":["velvet","patron","salon","heirloom","masquerade","decadence","lineage","signet","court","mirror"]},"feral":{"pre":["Grael","Skarn","Morg","Krev","Vurm","Thress","Nagl","Skrag","Vorl","Hests","Drav","Ulk","Grisl","Kruve","Nezr","Brack","Vell","Gnash"],"mid":["ur","ak","ez","ol","ith","usk","ar","en"],"meanings":["rot","hollow","the sewer","plague","bone","carrion","vermin","the shunned","husk","famine"]},"suf":{"m":["ius","escu","ov","us","van","imir","andru","os","as","ion","stan","mir","ain","ar","off","ovich","ul","yan"],"f":["ella","ana","ina","ovna","ette","essa","ira","itha","cia","mina","esca","ia","ita","lena","ora","ya"],"n":["walker","born","child","heart","soul","hunter","lord","prince","father","bane","shade","veil"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-    function generateName(gender) {
+    function pron(n) {
+        const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
+        const st = Math.floor(s.length / 2);
+        return s.map((x, i) => i === st ? x.toUpperCase() : x).join('-');
+    }
+    const VARIANT_NAMES = {"ancient":"Ancient (Carpathian)","noble":"Noble Court","feral":"Feral (Nosferatu)"};
+    function generateName(gender, variant) {
+        const v = variant === 'any' ? r(["ancient","noble","feral"]) : variant;
+        const data = D[v];
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
-        let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        const sufs = (D.suf[gk] && D.suf[gk].join("")) ? D.suf[gk] : D.suf.m;
+        // Collapse a doubled letter where two pieces meet (Lily+y+wing).
+        const join = (a, b) => (a.slice(-1).toLowerCase() === b.slice(0,1).toLowerCase() ? a + b.slice(1) : a + b);
+        let n = r(data.pre);
+        if (data.standalone) return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        const suf = r(sufs);
+        // Neutral suffixes are whole words ('crusher', 'meadow'), so skip the
+        // middle syllable there and after an already-long prefix.
+        const wordSuffix = gk === 'n' || suf.length > 4;
+        if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
+        n = join(n, suf);
+        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
+        const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
         for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
-            const nm = generateName(gender);
+            const nm = generateName(gender, variant);
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             i++;
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
-        gaEvent('generate_names', {variant: gender, count: count});
+        gaEvent('generate_names', {variant: variant, gender: gender, count: count});
         results.innerHTML = html;
     }
     function gaEvent(name, params) {

@@ -33,6 +33,10 @@ a:hover{color:var(--accent-amber)}
 .site-nav a{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
 .site-nav a:hover{color:var(--accent-gold)}
 
+/* Generator name rows */
+.gen-name-pron{color:var(--accent-blue);font-style:italic;font-size:0.9rem}
+.gen-name-variant{color:var(--text-faded);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em}
+
 /* Shared name banner (?name= links) */
 .shared-name{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;background:var(--bg-parchment);border:1px solid var(--accent-gold);border-left-width:4px;border-radius:6px;padding:0.9rem 1.1rem;margin:1.5rem 0}
 .shared-name-label{font-family:'Cinzel',serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}

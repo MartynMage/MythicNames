@@ -130,10 +130,15 @@
     const D = {pre: {"m": ["Val", "Gold", "Silver", "Sun", "High", "Crown", "Bright", "Fair", "Regal", "Aur", "Cael", "Lor", "Ser", "Coron", "Aldor"], "f": ["Shadow", "Night", "Raven", "Grim", "Black", "Dusk", "Thorn", "Ash", "Blood", "Mor", "Drak", "Vex", "Umber", "Gloom", "Nether"], "n": ["Storm", "Wolf", "Iron", "Frost", "Stone", "Wild", "North", "Elk", "Bear", "Thunder", "Winter", "Hawk", "Pine", "Fjord", "Boulder"]}, suf: {"m": ["oria", "land", "haven", "garde", "crest", "shire", "mere", "vale", "ia", "dale", "ium", "elle", "lyn", "reach", "ford"], "f": ["heim", "hold", "mark", "fell", "moor", "gard", "mire", "reach", "crag", "deep", "grave", "shade", "spire", "row", "hollow"], "n": ["land", "mark", "fell", "holm", "ford", "strand", "moor", "reach", "dale", "heim", "wick", "stead", "gate", "run", "watch"]}, meanings: ["crown", "throne", "dominion", "sovereignty", "legacy", "dynasty", "heritage", "glory", "honor", "might"]};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    function pron(n) {
+        const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
+        const st = Math.floor(s.length / 2);
+        return s.map((x, i) => i === st ? x.toUpperCase() : x).join('-');
+    }
     function generateName(gender) {
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
         let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        return { name: cap(n), pron: pron(n), meaning: '"' + r(D.meanings) + '"' };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
@@ -146,7 +151,7 @@
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             i++;
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
         gaEvent('generate_names', {variant: gender, count: count});
         results.innerHTML = html;

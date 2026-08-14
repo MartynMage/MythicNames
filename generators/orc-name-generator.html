@@ -107,6 +107,8 @@
             <p class="page-subtitle">Generate authentic orc names for your fantasy characters</p>
             <div class="generator-box">
                 <div class="gen-controls">
+                    
+                    <div class="gen-control"><label>Role</label><select id="variant"><option value="any">Any Orc</option><option value="warband">Warband</option><option value="shaman">Shaman</option><option value="halforc">Half-Orc</option></select></div>
                     <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Neutral</option></select></div>
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
@@ -127,28 +129,47 @@
         <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
-    const D = {pre: {"m": ["Grok", "Thrak", "Morg", "Uzg", "Gor", "Krag", "Zug", "Durg", "Brug", "Naz", "Grum", "Shag", "Bolg", "Azog", "Lug", "Bru", "Crag", "Dreg", "Ghor", "Hruk", "Jark", "Karg", "Mub", "Nog", "Rok", "Skar", "Tusk", "Varg", "Yak", "Zar"], "f": ["Shel", "Gra", "Ura", "Bag", "Yag", "Mog", "Nar", "Bor", "Gor", "Ush", "Lur", "Zara", "Kira", "Grish", "Og", "Atub", "Bulf", "Durz", "Ghak", "Homr", "Kotri", "Lash", "Morn", "Olg", "Rasha", "Shar", "Ulf", "Urz", "Vola", "Yaz"], "n": ["Skull", "Blood", "Iron", "War", "Death", "Bone", "Fang", "Claw", "Storm", "Fire", "Ash", "Doom", "Gore", "Grim", "Rust", "Scar", "Smash", "Spike", "Thunder", "Wolf"]}, suf: {"m": ["uk", "ak", "og", "ag", "ug", "ash", "gor", "nak", "mak", "gul", "zog", "bash", "grat", "luk", "rok", "thak", "urk", "zur"], "f": ["a", "ra", "sha", "ga", "na", "ri", "shi", "la", "ka", "ba", "aka", "gri", "mi", "ura", "za", "ash"], "n": ["crusher", "splitter", "render", "breaker", "ripper", "slayer", "bane", "rage", "gnasher", "stomper", "howler", "mangler"]}, meanings: ["blood", "skull", "war", "death", "rage", "storm", "iron", "fang", "battle", "doom"]};
+    const D = {"warband":{"pre":["Grok","Thrak","Morg","Uzg","Gor","Krag","Zug","Durg","Brug","Naz","Grum","Shag","Bolg","Azog","Lug","Skar","Varg","Tusk"],"mid":["ag","uk","ar","og","ur","ak","on","ash"],"meanings":["blood","war","skull","rage","iron","fang","battle","doom","conquest","scar"]},"shaman":{"pre":["Gash","Mog","Ur","Zul","Rok","Nagr","Hul","Bruk","Ogg","Vash","Thak","Grish","Zar","Muk","Drak","Ghor","Sharg","Kul"],"mid":["zu","ma","th","gh","ra","oz","ul","ka"],"meanings":["spirit","ancestor","storm","omen","totem","smoke","vision","bone","ash","thunder"]},"halforc":{"pre":["Kel","Dar","Ren","Mar","Tor","Bran","Kre","Sul","Vor","Hald","Grel","Mira","Nara","Ash","Bor","Rath","Yan","Corm"],"mid":["en","ar","or","an","ur","el","ak","in"],"meanings":["two-blood","wanderer","proving","exile","strength","honour","border","kin","oath","resolve"]},"suf":{"m":["uk","ak","og","ag","ug","ash","gor","nak","mak","gul","zog","bash","grat","luk","rok","thak","urk","zur"],"f":["a","ra","sha","ga","na","ri","shi","la","ka","ba","aka","gri","mi","ura","za","ash"],"n":["crusher","splitter","render","breaker","ripper","slayer","bane","rage","gnasher","stomper","howler","mangler"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-    function generateName(gender) {
+    function pron(n) {
+        const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
+        const st = Math.floor(s.length / 2);
+        return s.map((x, i) => i === st ? x.toUpperCase() : x).join('-');
+    }
+    const VARIANT_NAMES = {"warband":"Warband","shaman":"Shaman","halforc":"Half-Orc"};
+    function generateName(gender, variant) {
+        const v = variant === 'any' ? r(["warband","shaman","halforc"]) : variant;
+        const data = D[v];
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
-        let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        const sufs = (D.suf[gk] && D.suf[gk].join("")) ? D.suf[gk] : D.suf.m;
+        // Collapse a doubled letter where two pieces meet (Lily+y+wing).
+        const join = (a, b) => (a.slice(-1).toLowerCase() === b.slice(0,1).toLowerCase() ? a + b.slice(1) : a + b);
+        let n = r(data.pre);
+        if (data.standalone) return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        const suf = r(sufs);
+        // Neutral suffixes are whole words ('crusher', 'meadow'), so skip the
+        // middle syllable there and after an already-long prefix.
+        const wordSuffix = gk === 'n' || suf.length > 4;
+        if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
+        n = join(n, suf);
+        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
+        const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
         for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
-            const nm = generateName(gender);
+            const nm = generateName(gender, variant);
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             i++;
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
-        gaEvent('generate_names', {variant: gender, count: count});
+        gaEvent('generate_names', {variant: variant, gender: gender, count: count});
         results.innerHTML = html;
     }
     function gaEvent(name, params) {

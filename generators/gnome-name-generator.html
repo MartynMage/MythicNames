@@ -107,6 +107,8 @@
             <p class="page-subtitle">Generate authentic gnome names for your fantasy characters</p>
             <div class="generator-box">
                 <div class="gen-controls">
+                    
+                    <div class="gen-control"><label>Kind</label><select id="variant"><option value="any">Any Gnome</option><option value="rock">Rock Gnome</option><option value="forest">Forest Gnome</option><option value="deep">Deep (Svirfneblin)</option></select></div>
                     <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Neutral</option></select></div>
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
@@ -127,28 +129,47 @@
         <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
-    const D = {pre: {"m": ["Bim", "Gim", "Nim", "Zook", "Boo", "Fiz", "Wiz", "Zig", "Pog", "Rin", "Seb", "Nak", "Jeb", "Dob", "Flib", "Alv", "Bod", "Cork", "Dim", "Erk", "Fon", "Glim", "Hob", "Igg", "Jin", "Kip", "Lor", "Mim", "Nib", "Ozz"], "f": ["Bin", "Ell", "Loo", "Nyx", "Pip", "Bree", "Zan", "Cara", "Dara", "Lini", "Niss", "Orla", "Oda", "Roo", "Trix", "Bimp", "Duv", "Fen", "Gib", "Jill", "Kess", "Lila", "Mip", "Nix", "Ona", "Poppy", "Quill", "Tana", "Ula", "Winni"], "n": ["Spark", "Gear", "Widget", "Cog", "Sprocket", "Fidget", "Gadget", "Whir", "Tink", "Buzz", "Bolt", "Crank", "Dingle", "Flick", "Gizmo", "Jingle", "Klax", "Ping", "Ratch", "Zap"]}, suf: {"m": ["wick", "wak", "dak", "nak", "pos", "bin", "lin", "kin", "doink", "bonk", "ber", "ble", "gle", "dook", "fiz", "nix", "pop", "zle"], "f": ["i", "y", "ee", "ix", "a", "ana", "ina", "ora", "ella", "ette", "ibell", "idi", "olla", "ynn", "izzi", "oda"], "n": ["fizzle", "wobble", "spark", "spring", "bottom", "nozzle", "toggle", "whistle", "tumble", "bundle", "gasket", "doodle", "widget", "socket"]}, meanings: ["invention", "discovery", "gem", "clockwork", "spark", "wonder", "mischief", "riddle", "treasure", "illusion"]};
+    const D = {"rock":{"pre":["Bim","Gim","Nim","Zook","Fiz","Wiz","Zig","Pog","Cork","Kip","Ozz","Klax","Ratch","Sprock","Wid","Gib","Fen","Dob"],"mid":["il","ib","ok","en","ub","er","iz","ad"],"meanings":["invention","clockwork","spark","gadget","tinker","spring","cog","patent","contraption","whirr"]},"forest":{"pre":["Fern","Alv","Bod","Mim","Nib","Lor","Rin","Seb","Jeb","Flib","Til","Bree","Ona","Winni","Poppy","Quill","Tana","Ula"],"mid":["a","i","o","el","in","y","ew","ol"],"meanings":["burrow","hidden","beast-friend","moss","glade","illusion","shy","root","birdsong","thicket"]},"deep":{"pre":["Grim","Bel","Drex","Skel","Vurm","Nizz","Kral","Grak","Thrum","Zeb","Murk","Slag","Drus","Vek","Gnar","Brill","Krix","Dov"],"mid":["ok","ur","ix","ez","ag","un","ol","ar"],"meanings":["deep stone","ward","silence","gem-sense","tunnel","wary","shadow-stone","patient","ore","the under"]},"suf":{"m":["wick","wak","dak","nak","pos","bin","lin","kin","doink","bonk","ber","ble","gle","dook","fiz","nix","pop","zle"],"f":["i","y","ee","ix","a","ana","ina","ora","ella","ette","ibell","idi","olla","ynn","izzi","oda"],"n":["fizzle","wobble","spark","spring","bottom","nozzle","toggle","whistle","tumble","bundle","gasket","doodle","widget","socket"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-    function generateName(gender) {
+    function pron(n) {
+        const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
+        const st = Math.floor(s.length / 2);
+        return s.map((x, i) => i === st ? x.toUpperCase() : x).join('-');
+    }
+    const VARIANT_NAMES = {"rock":"Rock Gnome","forest":"Forest Gnome","deep":"Deep (Svirfneblin)"};
+    function generateName(gender, variant) {
+        const v = variant === 'any' ? r(["rock","forest","deep"]) : variant;
+        const data = D[v];
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
-        let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        const sufs = (D.suf[gk] && D.suf[gk].join("")) ? D.suf[gk] : D.suf.m;
+        // Collapse a doubled letter where two pieces meet (Lily+y+wing).
+        const join = (a, b) => (a.slice(-1).toLowerCase() === b.slice(0,1).toLowerCase() ? a + b.slice(1) : a + b);
+        let n = r(data.pre);
+        if (data.standalone) return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        const suf = r(sufs);
+        // Neutral suffixes are whole words ('crusher', 'meadow'), so skip the
+        // middle syllable there and after an already-long prefix.
+        const wordSuffix = gk === 'n' || suf.length > 4;
+        if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
+        n = join(n, suf);
+        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
+        const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
         for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
-            const nm = generateName(gender);
+            const nm = generateName(gender, variant);
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             i++;
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
-        gaEvent('generate_names', {variant: gender, count: count});
+        gaEvent('generate_names', {variant: variant, gender: gender, count: count});
         results.innerHTML = html;
     }
     function gaEvent(name, params) {

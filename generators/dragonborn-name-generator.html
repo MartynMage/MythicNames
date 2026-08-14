@@ -107,6 +107,8 @@
             <p class="page-subtitle">Generate authentic dragonborn names for your fantasy characters</p>
             <div class="generator-box">
                 <div class="gen-controls">
+                    
+                    <div class="gen-control"><label>Ancestry</label><select id="variant"><option value="any">Any Dragonborn</option><option value="chromatic">Chromatic</option><option value="metallic">Metallic</option><option value="gem">Gem</option></select></div>
                     <div class="gen-control"><label>Style</label><select id="gender"><option value="any">Any</option><option value="m">Masculine</option><option value="f">Feminine</option><option value="n">Neutral</option></select></div>
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
@@ -127,28 +129,47 @@
         <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap.html">Sitemap</a><a href="/privacy.html">Privacy</a></div></footer>
     </div>
     <script>
-    const D = {pre: {"m": ["Bhas", "Dorn", "Gher", "Kriv", "Med", "Nar", "Pand", "Rho", "Sham", "Tor", "Vrond", "Balaz", "Ghesh", "Kris", "Nith", "Arj", "Don", "Fenk", "Ildr", "Kall", "Mor", "Nes", "Otar", "Pris", "Quar", "Ras", "Shed", "Tarh", "Vor", "Zed"], "f": ["Aki", "Biri", "Daar", "Fae", "Hari", "Kava", "Mish", "Nala", "Pera", "Rais", "Sora", "Thav", "Uad", "Vrak", "Yrj", "Atax", "Cor", "Ephi", "Gys", "Hav", "Jax", "Kor", "Lyx", "Mya", "Nym", "Ophi", "Sav", "Tha", "Vex", "Zof"], "n": ["Clethtinth", "Daardend", "Delmir", "Drached", "Fenkenk", "Kepeshk", "Kerrhyl", "Kimbat", "Linxak", "Myast", "Norixius", "Prexijandilin", "Shestendeliath", "Turnuroth", "Verthisathurgiesh", "Yarjerit", "Ophinshtalajiir", "Baharoosh", "Wivvyrholdalphiax", "Nemmonis"]}, suf: {"m": ["kyr", "sar", "jin", "ash", "aar", "ax", "ion", "ian", "us", "or", "asar", "rakas", "esh", "arr", "oth", "un", "irr", "akos"], "f": ["ann", "ava", "ana", "ith", "shann", "ri", "ra", "rinn", "wen", "xis", "ial", "isse", "ara", "yx", "ess", "ora"], "n": ["iallor", "rian", "ev", "ion", "abradon", "molik", "on", "uul", "endalor", "an"]}, meanings: ["honor", "flame", "storm", "thunder", "justice", "glory", "conquest", "wisdom", "ancient", "noble"]};
+    const D = {"chromatic":{"pre":["Bhas","Kriv","Med","Nar","Rho","Sham","Vrond","Ghesh","Nith","Morg","Skar","Zed","Vor","Kall","Ras","Thruk","Xar","Drez"],"mid":["ar","ur","ak","esh","ax","oth","ir","az"],"meanings":["acid","venom","ember","frost","storm","tyrant","hoard","wrath","cinder","tempest"]},"metallic":{"pre":["Dorn","Gher","Pand","Tor","Balaz","Kris","Arj","Fenk","Ildr","Otar","Pris","Tarh","Shed","Aur","Bral","Cael","Hesk","Rond"],"mid":["an","or","el","ir","as","un","ar","ath"],"meanings":["honour","gold","dawn","oath","justice","bronze","shield","mercy","vigil","platinum"]},"gem":{"pre":["Aki","Biri","Fae","Hari","Kava","Mish","Nala","Pera","Rais","Sora","Thav","Vrak","Yrj","Ephi","Lyx","Nym","Ophi","Zof"],"mid":["is","ya","ae","ix","ei","ov","ar","ii"],"meanings":["crystal","insight","amethyst","far-sight","sapphire","memory","prism","the deep mind","topaz","echo"]},"suf":{"m":["kyr","sar","jin","ash","aar","ax","ion","ian","us","or","asar","rakas","esh","arr","oth","un","irr","akos"],"f":["ann","ava","ana","ith","shann","ri","ra","rinn","wen","xis","ial","isse","ara","yx","ess","ora"],"n":["iallor","rian","ev","ion","abradon","molik","on","uul","endalor","an"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-    function generateName(gender) {
+    function pron(n) {
+        const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
+        const st = Math.floor(s.length / 2);
+        return s.map((x, i) => i === st ? x.toUpperCase() : x).join('-');
+    }
+    const VARIANT_NAMES = {"chromatic":"Chromatic","metallic":"Metallic","gem":"Gem"};
+    function generateName(gender, variant) {
+        const v = variant === 'any' ? r(["chromatic","metallic","gem"]) : variant;
+        const data = D[v];
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
-        let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        const sufs = (D.suf[gk] && D.suf[gk].join("")) ? D.suf[gk] : D.suf.m;
+        // Collapse a doubled letter where two pieces meet (Lily+y+wing).
+        const join = (a, b) => (a.slice(-1).toLowerCase() === b.slice(0,1).toLowerCase() ? a + b.slice(1) : a + b);
+        let n = r(data.pre);
+        if (data.standalone) return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        const suf = r(sufs);
+        // Neutral suffixes are whole words ('crusher', 'meadow'), so skip the
+        // middle syllable there and after an already-long prefix.
+        const wordSuffix = gk === 'n' || suf.length > 4;
+        if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
+        n = join(n, suf);
+        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
+        const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
         for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
-            const nm = generateName(gender);
+            const nm = generateName(gender, variant);
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             i++;
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
-        gaEvent('generate_names', {variant: gender, count: count});
+        gaEvent('generate_names', {variant: variant, gender: gender, count: count});
         results.innerHTML = html;
     }
     function gaEvent(name, params) {
