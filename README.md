@@ -10,10 +10,29 @@ I built this because naming D&D characters meant trawling through the same ten l
 - `generators/` — standalone pages for each race (elf, dwarf, orc, tiefling, and so on)
 - `blog/` — articles on fantasy naming
 - `styles.css` — shared styles for the generator and blog pages
+- `consent.js` / `sw.js` — cookie banner and the service worker that makes the site work offline
+- `functions/api/geo.js` — Cloudflare Pages Function; tells the browser whether the visitor needs a cookie banner
+- `tools/generate-sitemaps.js` — rebuilds the sitemaps; run it after adding pages
 
 ## Running it locally
 
-It's a static site, so just open `index.html` in a browser, or serve the folder with whatever you like (`python -m http.server` works fine). The live site is hosted on GitHub Pages with a custom domain.
+It's a static site, so just open `index.html` in a browser, or serve the folder with whatever you like (`npx http-server` works fine). The `/api/geo` endpoint won't exist locally — that's fine, the cookie banner falls back to showing itself.
+
+To run the Cloudflare bits locally too:
+
+```bash
+npx wrangler pages dev .
+```
+
+## Deploying
+
+Hosted on Cloudflare Pages, deployed straight from `main` — no build command, output directory `/`. Push and it goes live.
+
+Regenerate the sitemaps whenever you add a page:
+
+```bash
+node tools/generate-sitemaps.js
+```
 
 ## How it works
 

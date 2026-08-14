@@ -48,6 +48,10 @@ self.addEventListener('fetch', event => {
     const url = new URL(req.url);
     if (url.origin !== self.location.origin) return; // ads, analytics, fonts
 
+    // Never cache the edge functions. /api/geo is per-visitor: a cached copy
+    // would hand one country's answer to the next person on that device.
+    if (url.pathname.startsWith('/api/')) return;
+
     // Pages: network first, fall back to cache, then to the offline page.
     if (req.mode === 'navigate') {
         event.respondWith(
