@@ -352,8 +352,12 @@
         const count = parseInt(document.getElementById('count').value);
         const results = document.getElementById('results');
         let html = '';
-        for (let i = 0; i < count; i++) {
+        const seen = new Set();
+        for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
             const nm = generateName(gender, subrace);
+            if (seen.has(nm.name)) continue;
+            seen.add(nm.name);
+            i++;
             html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
         results.innerHTML = html;

@@ -1212,7 +1212,7 @@
     function baseName(style, gender) {
         const sd = D.styles[style] || D.styles.fantasy;
         let n = r(sd.pre);
-        if (Math.random() > 0.35 && sd.mid.length && sd.mid[0]) n += r(sd.mid);
+        if (Math.random() > 0.35 && sd.mid.length) n += r(sd.mid);
         const gk = gender === 'any' ? r(['m','f','n']) : gender[0];
         n += r(sd.suf[gk] || sd.suf.n || sd.suf.m);
         return cap(n);
@@ -1221,7 +1221,7 @@
     function lastName(style) {
         const sd = D.styles[style] || D.styles.fantasy;
         let n = r(sd.pre);
-        if (Math.random() > 0.5 && sd.mid.length && sd.mid[0]) n += r(sd.mid);
+        if (Math.random() > 0.5 && sd.mid.length) n += r(sd.mid);
         n += r(sd.suf.m);
         return cap(n);
     }
@@ -1249,7 +1249,7 @@
             return generateRidiculousNames(count, cat, gender);
         }
         
-        for (let i = 0; i < count * 3 && names.length < count; i++) {
+        for (let i = 0; i < count * 15 && names.length < count; i++) {
             let name, attempts = 0;
             do {
                 if (cat === 'characters') {

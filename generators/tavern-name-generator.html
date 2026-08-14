@@ -98,16 +98,20 @@
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     function generateName(gender) {
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
-        let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        const n = 'The ' + r(D.pre[gk] || D.pre.m) + ' ' + r(D.suf[gk] || D.suf.m);
+        return { name: n, meaning: '"' + r(D.meanings) + '"' };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
         const count = parseInt(document.getElementById('count').value);
         const results = document.getElementById('results');
         let html = '';
-        for (let i = 0; i < count; i++) {
+        const seen = new Set();
+        for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
             const nm = generateName(gender);
+            if (seen.has(nm.name)) continue;
+            seen.add(nm.name);
+            i++;
             html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
         results.innerHTML = html;
