@@ -33,6 +33,15 @@ a:hover{color:var(--accent-amber)}
 .site-nav a{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
 .site-nav a:hover{color:var(--accent-gold)}
 
+/* Related posts / generators module */
+.related-generators{margin-top:2rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px}
+.related-generators h3{font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:1rem}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.related-link{display:flex;flex-direction:column;align-items:center;padding:1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;text-decoration:none;transition:all 0.2s}
+.related-link:hover{border-color:var(--accent-gold);transform:translateY(-2px)}
+.related-link .icon{font-size:2rem;margin-bottom:0.5rem}
+.related-link .label{font-family:'Cinzel',serif;color:var(--text-primary);font-size:0.85rem;text-align:center}
+
 /* Generator name rows */
 .gen-name-pron{color:var(--accent-blue);font-style:italic;font-size:0.9rem}
 .gen-name-variant{color:var(--text-faded);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em}

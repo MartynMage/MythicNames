@@ -63,17 +63,19 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Static assets: cache first, refresh in the background.
+    // Static assets: stale-while-revalidate. Serve the cached copy instantly,
+    // but always refetch in the background so a deploy lands on the next visit
+    // instead of being pinned until the cache version changes.
     event.respondWith(
         caches.match(req).then(hit => {
-            if (hit) return hit;
-            return fetch(req).then(res => {
+            const network = fetch(req).then(res => {
                 if (res.ok && res.type === 'basic') {
                     const copy = res.clone();
                     caches.open(RUNTIME).then(c => c.put(req, copy));
                 }
                 return res;
             }).catch(() => hit);
+            return hit || network;
         })
     );
 });
