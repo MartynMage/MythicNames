@@ -146,15 +146,36 @@
             i++;
             html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
+        gaEvent('generate_names', {variant: gender, count: count});
         results.innerHTML = html;
     }
-    async function copyName(btn, name) { try { await navigator.clipboard.writeText(name); btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); } catch (e) {} }
+    function gaEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'gnome'}, params || {}));
+    }
+    async function copyName(btn, name) { try { await navigator.clipboard.writeText(name); gaEvent('copy_name'); btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); } catch (e) {} }
     function shareName(name) {
+        gaEvent('share_name');
         const url = window.location.href.split('?')[0] + '?name=' + encodeURIComponent(name);
         if (navigator.share) { navigator.share({ title: name + ' - Gnome Name', text: 'Check out this name I generated: ' + name, url: url }); }
         else { navigator.clipboard.writeText(url).then(() => alert('Link copied to clipboard!')); }
     }
     function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+    function showSharedName() {
+        var shared = null;
+        try { shared = new URLSearchParams(location.search).get('name'); } catch (e) {}
+        if (!shared) return;
+        var box = document.createElement('div');
+        box.className = 'shared-name';
+        box.innerHTML = '<span class="shared-name-label">Shared with you</span>' +
+            '<span class="shared-name-text"></span>' +
+            '<button class="gen-copy" type="button">Copy</button>';
+        box.querySelector('.shared-name-text').textContent = shared;
+        box.querySelector('button').addEventListener('click', function (e) { copyName(e.target, shared); });
+        var results = document.getElementById('results');
+        results.parentNode.insertBefore(box, results);
+        gaEvent('view_shared_name');
+    }
+    showSharedName();
     generateNames();
     </script>
 </body>

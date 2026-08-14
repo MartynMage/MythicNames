@@ -1471,7 +1471,8 @@
         const size = parseInt(document.getElementById('partySize').value);
         const comp = document.getElementById('partyComp').value;
         const style = document.getElementById('partyStyle').value;
-        
+        gaEvent('generate_party', {party_size: size, composition: comp, style: style});
+
         const roles = {
             balanced: ['warrior','mage','rogue','cleric','ranger','bard'],
             combat: ['warrior','warrior','barbarian','paladin','ranger','cleric'],
@@ -1706,7 +1707,8 @@
         const type = document.getElementById('worldType').value;
         const size = document.getElementById('worldSize').value;
         const conflict = document.getElementById('worldConflict').value;
-        
+        gaEvent('generate_world', {kingdom_type: type, size: size, conflict: conflict});
+
         const cityCounts = {small: 3, medium: 5, large: 8};
         const cityCount = cityCounts[size];
 
@@ -1881,6 +1883,7 @@
             showToast('Added to favorites');
         }
         localStorage.setItem('mythicFavorites', JSON.stringify(favoritesList));
+        gaEvent(idx >= 0 ? 'unfavorite_name' : 'favorite_name');
         if (document.getElementById('tab-history').classList.contains('active')) renderHistory();
     }
     
@@ -1981,6 +1984,7 @@
     async function copyN(btn, name) {
         try {
             await navigator.clipboard.writeText(name);
+            gaEvent('copy_name');
             btn.classList.add('copied');
             btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
             showToast('Copied: ' + name);
@@ -2422,15 +2426,20 @@
         `).join('') + '</div>';
     }
     
+    // ============ ANALYTICS ============
+    function gaEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, params || {});
+    }
+
     function handleGenerate() {
         const btn = document.getElementById('generateBtn');
         btn.classList.add('loading');
         btn.disabled = true;
         const count = parseInt(document.getElementById('count').value);
         showSkeletons(count);
-        
+
         setTimeout(() => {
-            const names = genNames({
+            const opts = {
                 cat: document.getElementById('category').value,
                 style: document.getElementById('style').value,
                 gender: document.getElementById('gender').value,
@@ -2438,7 +2447,16 @@
                 count: count,
                 classType: document.getElementById('classType').value,
                 keywords: document.getElementById('keywords').value
+            };
+            gaEvent('generate_names', {
+                category: opts.cat,
+                style: opts.style,
+                gender: opts.gender,
+                class_type: opts.classType,
+                count: count,
+                used_keywords: opts.keywords ? 'yes' : 'no'
             });
+            const names = genNames(opts);
             displayNames(names);
             btn.classList.remove('loading');
             btn.disabled = false;
@@ -2456,6 +2474,7 @@
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 btn.classList.add('active');
                 document.getElementById('tab-' + tabName).classList.add('active');
+                gaEvent('select_tab', {tab: tabName});
                 if (tabName === 'history') renderHistory();
                 if (tabName === 'campaign') renderCampaigns();
             });
@@ -2486,6 +2505,7 @@
         document.getElementById('generateRaceBtn').addEventListener('click', () => {
             const gender = document.getElementById('raceGender').value;
             const count = parseInt(document.getElementById('raceCount').value);
+            gaEvent('generate_race_names', {race: selectedRace, gender: gender, count: count});
             const names = [];
             for (let i = 0; i < count; i++) {
                 const name = raceName(selectedRace, gender);
@@ -2510,6 +2530,7 @@
         document.querySelectorAll('.pack-card').forEach(card => {
             card.addEventListener('click', () => {
                 const pack = card.dataset.pack;
+                gaEvent('generate_pack', {pack: pack});
                 const gen = packGen[pack] || packGen.heroes;
                 const names = [];
                 const seenPack = new Set();
@@ -2543,6 +2564,7 @@
             const cl = document.getElementById('charClass').value === 'random' ? r(classes) : document.getElementById('charClass').value;
             const gn = document.getElementById('charGender').value === 'random' ? r(['masculine','feminine']) : document.getElementById('charGender').value;
             
+            gaEvent('create_character', {race: rc, class_type: cl, gender: gn});
             const name = raceName(rc, gn) + ' ' + lastName('fantasy');
             const char = genBackstoryForName(name);
             char.race = cap(rc);

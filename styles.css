@@ -33,6 +33,11 @@ a:hover{color:var(--accent-amber)}
 .site-nav a{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
 .site-nav a:hover{color:var(--accent-gold)}
 
+/* Shared name banner (?name= links) */
+.shared-name{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;background:var(--bg-parchment);border:1px solid var(--accent-gold);border-left-width:4px;border-radius:6px;padding:0.9rem 1.1rem;margin:1.5rem 0}
+.shared-name-label{font-family:'Cinzel',serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
+.shared-name-text{font-family:'Cinzel',serif;font-size:1.25rem;color:var(--accent-gold);flex:1}
+
 /* Breadcrumbs */
 .breadcrumbs{font-size:0.85rem;color:var(--text-faded);margin-bottom:1.5rem}
 .breadcrumbs a{color:var(--text-secondary)}
