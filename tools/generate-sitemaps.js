@@ -72,15 +72,16 @@ console.log('sitemap.xml: index of ' + indexEntries.length + ' sitemaps');
 const GROUPS = {
     races: ['elf', 'dwarf', 'orc', 'human', 'halfling', 'gnome', 'tiefling', 'dragonborn', 'half-elf', 'drow', 'goblin'],
     creatures: ['fairy', 'angel', 'demon', 'vampire'],
-    world: ['tavern', 'kingdom', 'ship'],
-    archetypes: ['wizard', 'knight', 'villain'],
+    world: ['tavern', 'kingdom', 'ship', 'dungeon', 'guild'],
+    archetypes: ['wizard', 'knight', 'villain', 'monster'],
+    items: ['weapon', 'spell', 'artifact'],
 };
 const ICONS = {
     elf: '🧝', dwarf: '⛏️', orc: '⚔️', human: '👤', halfling: '🧑‍🌾', gnome: '🎩',
     tiefling: '😈', dragonborn: '🐲', 'half-elf': '🌗', drow: '🕷️', goblin: '👹',
     fairy: '🧚', angel: '👼', demon: '👿', vampire: '🧛',
     tavern: '🍺', kingdom: '👑', ship: '⛵',
-    wizard: '🧙', knight: '🛡️', villain: '💀',
+    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺',
 };
 const titleCase = s => s.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('-');
 
