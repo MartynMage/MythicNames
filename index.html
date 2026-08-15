@@ -1712,7 +1712,9 @@
         });
     }
     
+    let lastParty = null;
     function renderParty(party, relationships) {
+        lastParty = {party: party, relationships: relationships};
         const cont = document.getElementById('partyContainer');
         let html = '<div class="party-grid">';
         party.forEach((m, i) => {
@@ -1740,7 +1742,7 @@
             html += '</div>';
         }
         
-        html += '<div class="share-buttons"><button class="share-btn" onclick="copyParty()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Party</button><button class="share-btn twitter" onclick="sharePartyTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Tweet</button></div>';
+        html += '<div class="share-buttons"><button class="share-btn" onclick="copyParty()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Party</button><button class="share-btn" onclick="downloadParty()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download</button><button class="share-btn twitter" onclick="sharePartyTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Tweet</button></div>';
         
         cont.innerHTML = html;
         
@@ -2077,15 +2079,56 @@
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://mythicnames.io')}`, '_blank');
     }
     
-    async function copyParty() {
-        const members = document.querySelectorAll('.party-member');
-        let text = 'ADVENTURING PARTY\n═══════════════════\n\n';
-        members.forEach(m => {
-            text += m.querySelector('.party-member-name').textContent + ' (' + m.querySelector('.party-member-role').textContent + ')\n';
+    // Built from the party data rather than scraped from the DOM, so the
+    // export keeps the traits, backstories and relationships too.
+    function partyToText() {
+        if (!lastParty) return '';
+        const {party, relationships} = lastParty;
+        let t = 'ADVENTURING PARTY\n' + '═'.repeat(40) + '\n\n';
+        party.forEach(m => {
+            t += m.name + ' — ' + cap(m.role) + '\n';
+            t += '  ' + cap(m.gender) + ' · ' + cap(m.wep) + ' · ' + cap(m.trait) + '\n';
+            if (m.backstory) t += '  ' + m.backstory.replace(/\n+/g, ' ') + '\n';
+            t += '\n';
         });
-        try { await navigator.clipboard.writeText(text); showToast('Party copied!'); } catch(e) {}
+        if (relationships && relationships.length) {
+            t += 'PARTY DYNAMICS\n';
+            relationships.forEach(rel => {
+                t += '  • ' + party[rel.a].name.split(' ')[0] + ' & ' +
+                     party[rel.b].name.split(' ')[0] + ': ' + rel.type + '\n';
+            });
+            t += '\n';
+        }
+        t += 'Generated with MythicNames.io\n';
+        return t;
     }
-    
+
+    async function copyParty() {
+        const text = partyToText();
+        if (!text) return;
+        try {
+            await navigator.clipboard.writeText(text);
+            gaEvent('copy_party');
+            showToast('Party copied!');
+        } catch(e) {}
+    }
+
+    function downloadParty() {
+        const text = partyToText();
+        if (!text) return;
+        const blob = new Blob([text], {type: 'text/plain'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'adventuring-party.txt';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        gaEvent('download_party');
+        showToast('Party downloaded');
+    }
+
     function sharePartyTwitter() {
         const count = document.querySelectorAll('.party-member').length;
         const text = `Just generated an adventuring party of ${count} heroes with MythicNames! 🗡️⚔️`;
