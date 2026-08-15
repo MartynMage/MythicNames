@@ -122,7 +122,7 @@
         .control-row.four-col{grid-template-columns:repeat(4,1fr)}
         .control-group{display:flex;flex-direction:column;gap:0.4rem}
         .control-group.full-width{grid-column:1/-1}
-        label{font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;gap:0.4rem}
+        label{font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;gap:0.4rem}.control-spacer{font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;gap:0.4rem}
         .tooltip-icon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;background:var(--border-subtle);border-radius:50%;font-size:0.6rem;color:var(--text-secondary);cursor:help;margin-left:0.3rem;position:relative;font-style:normal;font-family:serif}
         .tooltip-icon::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--accent-gold);color:var(--text-primary);padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem;font-family:'Crimson Pro',serif;white-space:nowrap;opacity:0;visibility:hidden;transition:all 0.2s;z-index:100;font-weight:normal;text-transform:none;letter-spacing:normal;pointer-events:none}
         .tooltip-icon:hover::after{opacity:1;visibility:visible}
@@ -480,7 +480,7 @@
         <div class="particle"></div>
     </div>
     <div class="container" id="main">
-        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
             <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         </button>
@@ -519,7 +519,7 @@
             <div class="controls-panel">
                 <div class="control-row">
                     <div class="control-group">
-                        <label>Category <i class="tooltip-icon" data-tip="What type of name to generate">?</i></label>
+                        <label for="category">Category <i class="tooltip-icon" data-tip="What type of name to generate">?</i></label>
                         <select id="category">
                             <option value="characters">Characters</option>
                             <option value="places">Places</option>
@@ -536,7 +536,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Style <i class="tooltip-icon" data-tip="Cultural/aesthetic style for names">?</i></label>
+                        <label for="style">Style <i class="tooltip-icon" data-tip="Cultural/aesthetic style for names">?</i></label>
                         <select id="style">
                             <option value="fantasy">Fantasy</option>
                             <option value="dnd">D&D / High Fantasy</option>
@@ -563,7 +563,7 @@
                 </div>
                 <div class="control-row four-col" id="charOptions">
                     <div class="control-group">
-                        <label>Gender <i class="tooltip-icon" data-tip="Masculine, feminine, or neutral sounding">?</i></label>
+                        <label for="gender">Gender <i class="tooltip-icon" data-tip="Masculine, feminine, or neutral sounding">?</i></label>
                         <select id="gender">
                             <option value="any">Any</option>
                             <option value="masculine">Masculine</option>
@@ -572,7 +572,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Class <i class="tooltip-icon" data-tip="Character class for themed names">?</i></label>
+                        <label for="classType">Class <i class="tooltip-icon" data-tip="Character class for themed names">?</i></label>
                         <select id="classType">
                             <option value="any">Any Class</option>
                             <option value="warrior">Warrior</option>
@@ -590,7 +590,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Length <i class="tooltip-icon" data-tip="Short (1-6), Medium (5-10), Long (9+)">?</i></label>
+                        <label for="length">Length <i class="tooltip-icon" data-tip="Short (1-6), Medium (5-10), Long (9+)">?</i></label>
                         <select id="length">
                             <option value="any">Any</option>
                             <option value="short">Short</option>
@@ -599,7 +599,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Results</label>
+                        <label for="count">Results</label>
                         <select id="count">
                             <option value="5">5</option>
                             <option value="10" selected>10</option>
@@ -610,11 +610,11 @@
                 </div>
                 <div class="control-row">
                     <div class="control-group">
-                        <label>Keywords <i class="tooltip-icon" data-tip="Optional words to influence name generation">?</i></label>
+                        <label for="keywords">Keywords <i class="tooltip-icon" data-tip="Optional words to influence name generation">?</i></label>
                         <input type="text" id="keywords" placeholder='e.g. "Shadow", "Fire", "Ancient"'>
                     </div>
                     <div class="control-group">
-                        <label>Seed <i class="tooltip-icon" data-tip="Same seed and settings always give the same names">?</i></label>
+                        <label for="seed">Seed <i class="tooltip-icon" data-tip="Same seed and settings always give the same names">?</i></label>
                         <input type="text" id="seed" placeholder="Leave blank for random">
                     </div>
                 </div>
@@ -660,7 +660,7 @@
             <div class="controls-panel">
                 <div class="control-row three-col">
                     <div class="control-group">
-                        <label>Party Size</label>
+                        <label for="partySize">Party Size</label>
                         <select id="partySize">
                             <option value="3">Small (3)</option>
                             <option value="4" selected>Standard (4)</option>
@@ -669,7 +669,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Composition</label>
+                        <label for="partyComp">Composition</label>
                         <select id="partyComp">
                             <option value="balanced">Balanced</option>
                             <option value="combat">Combat Heavy</option>
@@ -679,7 +679,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Style</label>
+                        <label for="partyStyle">Style</label>
                         <select id="partyStyle">
                             <option value="fantasy">Fantasy</option>
                             <option value="dnd">D&D</option>
@@ -701,7 +701,7 @@
             <div class="controls-panel">
                 <div class="control-row three-col">
                     <div class="control-group">
-                        <label>Kingdom Type</label>
+                        <label for="worldType">Kingdom Type</label>
                         <select id="worldType">
                             <option value="medieval">Medieval Kingdom</option>
                             <option value="empire">Empire</option>
@@ -712,7 +712,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Size</label>
+                        <label for="worldSize">Size</label>
                         <select id="worldSize">
                             <option value="small">Small (3 cities)</option>
                             <option value="medium" selected>Medium (5 cities)</option>
@@ -720,7 +720,7 @@
                         </select>
                     </div>
                     <div class="control-group">
-                        <label>Conflict Level</label>
+                        <label for="worldConflict">Conflict Level</label>
                         <select id="worldConflict">
                             <option value="peaceful">Peaceful</option>
                             <option value="tense" selected>Tense</option>
@@ -754,9 +754,9 @@
             </div>
             <div class="controls-panel" style="margin-top:1rem;">
                 <div class="control-row three-col">
-                    <div class="control-group"><label>Gender</label><select id="raceGender"><option value="any">Any</option><option value="masculine">Masculine</option><option value="feminine">Feminine</option></select></div>
-                    <div class="control-group"><label>Count</label><select id="raceCount"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option></select></div>
-                    <div class="control-group"><label>&nbsp;</label><button class="generate-btn" id="generateRaceBtn" style="width:100%">Generate</button></div>
+                    <div class="control-group"><label for="raceGender">Gender</label><select id="raceGender"><option value="any">Any</option><option value="masculine">Masculine</option><option value="feminine">Feminine</option></select></div>
+                    <div class="control-group"><label for="raceCount">Count</label><select id="raceCount"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option></select></div>
+                    <div class="control-group"><span class="control-spacer" aria-hidden="true">&nbsp;</span><button class="generate-btn" id="generateRaceBtn" style="width:100%">Generate</button></div>
                 </div>
             </div>
             <p class="dedicated-link" id="dedicatedRaceLink" style="display:none;"></p>
@@ -784,9 +784,9 @@
             <div class="info-box">Create a complete character with name, backstory, relationships, and more.</div>
             <div class="controls-panel">
                 <div class="control-row three-col">
-                    <div class="control-group"><label>Race</label><select id="charRace"><option value="random">Random</option><option value="human">Human</option><option value="elf">Elf</option><option value="dwarf">Dwarf</option><option value="halfling">Halfling</option><option value="gnome">Gnome</option><option value="tiefling">Tiefling</option><option value="dragonborn">Dragonborn</option><option value="orc">Orc</option><option value="vampire">Vampire</option><option value="angel">Angel</option><option value="demon">Demon</option><option value="fairy">Fairy</option></select></div>
-                    <div class="control-group"><label>Class</label><select id="charClass"><option value="random">Random</option><option value="warrior">Warrior</option><option value="mage">Mage</option><option value="rogue">Rogue</option><option value="cleric">Cleric</option><option value="ranger">Ranger</option><option value="paladin">Paladin</option><option value="bard">Bard</option></select></div>
-                    <div class="control-group"><label>Gender</label><select id="charGender"><option value="random">Random</option><option value="masculine">Masculine</option><option value="feminine">Feminine</option></select></div>
+                    <div class="control-group"><label for="charRace">Race</label><select id="charRace"><option value="random">Random</option><option value="human">Human</option><option value="elf">Elf</option><option value="dwarf">Dwarf</option><option value="halfling">Halfling</option><option value="gnome">Gnome</option><option value="tiefling">Tiefling</option><option value="dragonborn">Dragonborn</option><option value="orc">Orc</option><option value="vampire">Vampire</option><option value="angel">Angel</option><option value="demon">Demon</option><option value="fairy">Fairy</option></select></div>
+                    <div class="control-group"><label for="charClass">Class</label><select id="charClass"><option value="random">Random</option><option value="warrior">Warrior</option><option value="mage">Mage</option><option value="rogue">Rogue</option><option value="cleric">Cleric</option><option value="ranger">Ranger</option><option value="paladin">Paladin</option><option value="bard">Bard</option></select></div>
+                    <div class="control-group"><label for="charGender">Gender</label><select id="charGender"><option value="random">Random</option><option value="masculine">Masculine</option><option value="feminine">Feminine</option></select></div>
                 </div>
                 <div class="btn-row">
                     <button class="generate-btn" id="generateCharBtn">Create Character</button>
@@ -814,7 +814,7 @@
                         <input type="text" id="newCampaignName" placeholder="e.g., Dragon's Lair Campaign">
                     </div>
                     <div class="control-group" style="justify-content:flex-end;">
-                        <label>&nbsp;</label>
+                        <span class="control-spacer" aria-hidden="true">&nbsp;</span>
                         <button type="button" class="generate-btn" onclick="createCampaign()" style="width:100%">Create Campaign</button>
                     </div>
                 </div>
@@ -827,7 +827,7 @@
                 <div class="backup-actions">
                     <button type="button" class="secondary-btn" onclick="exportData()">⬇️ Export backup</button>
                     <button type="button" class="secondary-btn" onclick="document.getElementById('importFile').click()">⬆️ Import backup</button>
-                    <input type="file" id="importFile" accept="application/json,.json" class="sr-only" onchange="importData(this)">
+                    <input type="file" id="importFile" accept="application/json,.json" class="sr-only" aria-label="Choose a MythicNames backup file to import" onchange="importData(this)">
                 </div>
             </div>
             <div id="campaignList"></div>
@@ -1201,10 +1201,10 @@
         let html = '';
         if (favoritesList.length) {
             html += '<h3 style="font-family:\'Cinzel\',serif;font-size:0.85rem;color:var(--accent-gold);margin:0 0 0.25rem">❤️ Favorites</h3>';
-            html += favoritesList.map(n => `<div class="name-item history-item"><div class="name-row"><span class="name-text">${esc(n)}</span></div><div style="display:flex;gap:0.3rem"><button class="action-btn favorited" onclick="toggleFavorite(null,'${esc(n).replace(/'/g,"\\'")}')" title="Remove favorite"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><button class="copy-btn" onclick="copyHistoryName(this,'${esc(n).replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></div>`).join('');
+            html += favoritesList.map(n => `<div class="name-item history-item"><div class="name-row"><span class="name-text">${esc(n)}</span></div><div style="display:flex;gap:0.3rem"><button class="action-btn favorited" onclick="toggleFavorite(null,'${esc(n).replace(/'/g,"\\'")}')" title="Remove favorite"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><button class="copy-btn" aria-label="Copy ${esc(n)}" onclick="copyHistoryName(this,'${esc(n).replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></div>`).join('');
             if (nameHistory.length) html += '<h3 style="font-family:\'Cinzel\',serif;font-size:0.85rem;color:var(--text-secondary);margin:0.75rem 0 0.25rem">📜 Recent</h3>';
         }
-        html += nameHistory.map(h => `<div class="name-item history-item"><div class="name-row"><span class="name-text">${esc(h.name)}</span><span style="font-size:0.8rem;color:var(--text-faded)">${new Date(h.time).toLocaleTimeString()}</span></div><button class="copy-btn" onclick="copyHistoryName(this,'${esc(h.name).replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>`).join('');
+        html += nameHistory.map(h => `<div class="name-item history-item"><div class="name-row"><span class="name-text">${esc(h.name)}</span><span style="font-size:0.8rem;color:var(--text-faded)">${new Date(h.time).toLocaleTimeString()}</span></div><button class="copy-btn" aria-label="Copy ${esc(h.name)}" onclick="copyHistoryName(this,'${esc(h.name).replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>`).join('');
         list.innerHTML = html;
     }
     
@@ -1962,7 +1962,7 @@
                     <div class="name-actions">
                         <button class="share-card-btn" onclick="event.stopPropagation();createCardFromList(${i})" title="Create Share Card">🖼️ Card</button>
                         <button class="action-btn ${isFavorite(it.name) ? 'favorited' : ''}" onclick="event.stopPropagation();toggleFavorite(this,'${esc(it.name).replace(/'/g,"\\'")}')" title="Favorite"><svg viewBox="0 0 24 24" fill="${isFavorite(it.name) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                        <button class="copy-btn" onclick="event.stopPropagation();copyN(this,'${esc(it.name).replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+                        <button class="copy-btn" aria-label="Copy ${esc(it.name)}" onclick="event.stopPropagation();copyN(this,'${esc(it.name).replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
                     </div>
                 </div>
                 <div class="name-preview">
