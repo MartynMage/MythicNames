@@ -108,6 +108,12 @@ a:hover{color:var(--accent-amber)}
 .article-content strong{color:var(--text-primary)}
 .article-content blockquote{border-left:3px solid var(--accent-gold);padding:1rem 1.25rem;margin:1.5rem 0;background:var(--bg-card);border-radius:0 6px 6px 0;font-style:italic;color:var(--text-secondary)}
 
+/* Static example names. These lists run long, so they drop the bullets and
+   flow into columns rather than pushing the rest of the page down. */
+.examples-section .example-names{list-style:none;margin:0 0 1.5rem;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.35rem 1.5rem}
+.examples-section .example-names li{margin:0;padding:0.35rem 0;line-height:1.5;font-size:0.95rem;border-bottom:1px solid var(--border-subtle)}
+.examples-section .example-names strong{font-family:'Cinzel',serif;color:var(--accent-gold);font-weight:600}
+
 /* Cards */
 .card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1.25rem;margin-bottom:1rem;transition:all 0.2s}
 .card:hover{border-color:var(--border-glow)}
