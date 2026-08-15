@@ -201,3 +201,48 @@ if (fs.existsSync(searchPath)) {
         console.log('search.html: ' + idx.length + ' indexed pages');
     }
 }
+
+// ---- Generator index: ItemList schema and the generator count -------------
+// The index used to hard-code "27 generators" and a hand-written ItemList, so
+// both drifted every time a generator was added. Both are now derived from the
+// cards actually on the page.
+
+const genIndexPath = path.join(root, 'generators', 'index.html');
+if (fs.existsSync(genIndexPath)) {
+    let gi = fs.readFileSync(genIndexPath, 'utf8');
+
+    const cards = [...gi.matchAll(
+        /<a href="([a-z0-9-]+-name-generator)" class="race-card-link">.*?<div class="race-name">([^<]*)<\/div><\/a>/g
+    )].map(m => ({ href: m[1], label: m[2] }));
+
+    if (cards.length) {
+        const decode = s => s.replace(/&rsquo;/g, '’').replace(/&amp;/g, '&');
+        const itemList = {
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'MythicNames Fantasy Name Generators',
+            numberOfItems: cards.length,
+            itemListElement: cards.map((c, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                name: decode(c.label),
+                url: SITE + '/generators/' + c.href,
+            })),
+        };
+
+        // Swap the ItemList block only; the CollectionPage and BreadcrumbList
+        // blocks on the same page are left alone.
+        gi = gi.replace(
+            /\{"@context":"https:\/\/schema\.org","@type":"ItemList"[\s\S]*?\}\]\}/,
+            JSON.stringify(itemList)
+        );
+
+        const before = gi;
+        gi = gi.replace(/\b\d+ free fantasy name generators\b/g, cards.length + ' free fantasy name generators');
+        gi = gi.replace(/<p class="page-subtitle">\d+ generators/, '<p class="page-subtitle">' + cards.length + ' generators');
+
+        fs.writeFileSync(genIndexPath, gi);
+        console.log('generators/index.html: ItemList of ' + cards.length +
+            (before === gi ? ' (counts already current)' : ', counts refreshed'));
+    }
+}
