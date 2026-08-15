@@ -952,7 +952,7 @@
                 <div class="modal-actions">
                     <button class="secondary-btn" onclick="createCardFromModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Share Card</button>
                     <button class="secondary-btn" onclick="copyBackstory()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
-                    <button class="secondary-btn" onclick="shareTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Tweet</button>
+                    <button class="secondary-btn" onclick="shareCharacterCard(currentBackstoryData)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Tweet</button>
                     <button class="generate-btn" onclick="regenerateBackstory()" style="flex:1">Regenerate</button>
                 </div>
             </div>
@@ -2171,11 +2171,6 @@
         try { await navigator.clipboard.writeText(t); showToast('Backstory copied!'); } catch(e) {}
     }
     
-    function shareTwitter() {
-        const d = currentBackstoryData;
-        const text = `Meet ${d.name}, a ${d.gender.toLowerCase()} ${d.cls.toLowerCase()} who ${d.trait.toLowerCase()}. Created with MythicNames! 🎲`;
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://mythicnames.io')}`, '_blank');
-    }
     
     // Built from the party data rather than scraped from the DOM, so the
     // export keeps the traits, backstories and relationships too.
@@ -2401,7 +2396,14 @@
     // ============ SHARE CARD ============
     let shareCardData = null;
     
+    // Drawing is split from showing so the Tweet button can produce the image
+    // without opening the modal.
     function openShareCard(data) {
+        renderShareCard(data);
+        document.getElementById('shareCardModal').classList.add('show');
+    }
+
+    function renderShareCard(data) {
         shareCardData = data;
         const canvas = document.getElementById('shareCanvas');
         const ctx = canvas.getContext('2d');
@@ -2594,7 +2596,6 @@
         ctx.font = '10px Arial, sans-serif';
         ctx.fillText('Fantasy Name Generator', W - 20, footerY + 16);
         
-        document.getElementById('shareCardModal').classList.add('show');
     }
     
     function closeShareModal() {
@@ -2609,10 +2610,71 @@
         a.click();
     }
     
-    function shareCardTwitter() {
-        const text = `Check out ${shareCardData?.name}, my new ${shareCardData?.cls || 'character'}! Created with MythicNames 🎲`;
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent('https://mythicnames.io')}`, '_blank');
+    // X's web intent takes text and a URL and nothing else — there is no way to
+    // attach an image to it. So the card is handed over by another route:
+    // the native share sheet where it exists (mobile shares the actual file to
+    // the X app), the clipboard otherwise (paste straight into the composer),
+    // and a download as the last resort. The intent window still opens with the
+    // text prefilled in every case.
+    function tweetIntentUrl(data) {
+        // The trait is an adjective ("Noble", "Reckless"), so it reads as an
+        // aside rather than a relative clause — "who noble" was the old bug.
+        const text = `Meet ${data?.name || 'my character'}, a ${(data?.gender || '').toLowerCase()} ${(data?.cls || 'character').toLowerCase()}` +
+            `${data?.trait ? ' — ' + data.trait.toLowerCase() : ''}. Made with MythicNames 🎲`;
+        return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text.replace(/\s+/g, ' ')) +
+            '&url=' + encodeURIComponent('https://mythicnames.io');
     }
+
+    function canvasToBlob(canvas) {
+        return new Promise(res => canvas.toBlob(res, 'image/png'));
+    }
+
+    async function shareCharacterCard(data) {
+        const d = data || shareCardData || currentBackstoryData;
+        if (!d) return;
+        // Draw the card first — the Tweet button on the character sheet can be
+        // pressed without ever opening the card modal.
+        renderShareCard(d);
+        const canvas = document.getElementById('shareCanvas');
+        const blob = await canvasToBlob(canvas);
+        const file = new File([blob], (d.name || 'character') + '-card.png', { type: 'image/png' });
+        const text = `Meet ${d.name}, a ${(d.gender || '').toLowerCase()} ${(d.cls || 'character').toLowerCase()}. Made with MythicNames 🎲`;
+
+        // 1. Native share sheet, which is the only route that attaches the image
+        //    for the user. Mobile hands the file straight to the X app.
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+                await navigator.share({ files: [file], text: text });
+                gaEvent('share_card', { method: 'native' });
+                return;
+            } catch (e) {
+                if (e && e.name === 'AbortError') return; // user cancelled
+            }
+        }
+
+        // 2. Clipboard, so the composer just needs a paste.
+        try {
+            if (navigator.clipboard && window.ClipboardItem) {
+                await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+                showToast('Card copied — paste it into the tweet');
+                gaEvent('share_card', { method: 'clipboard' });
+                window.open(tweetIntentUrl(d), '_blank');
+                return;
+            }
+        } catch (e) {}
+
+        // 3. Download, and say so, so the file can be attached by hand.
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = file.name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        showToast('Card saved — attach it to the tweet');
+        gaEvent('share_card', { method: 'download' });
+        window.open(tweetIntentUrl(d), '_blank');
+    }
+
+    function shareCardTwitter() { shareCharacterCard(shareCardData); }
     
     // ============ CHARACTER PORTRAIT GENERATOR ============
     function generatePortrait(race, cls, gender) {
@@ -3038,7 +3100,7 @@
             const factionHtml = char.faction ? `<div class="stat-item"><div class="stat-label">Faction</div><div class="stat-value">${char.faction.name}</div></div><div class="stat-item"><div class="stat-label">Role</div><div class="stat-value">${char.faction.role}</div></div>` : '';
             const portraitHtml = generatePortrait(char.race.toLowerCase(), char.cls, char.gender);
             const backstoryParagraphs = char.back.split(/\n\n+/).filter(p => p.trim()).map(p => '<p>' + esc(p.trim()) + '</p>').join('');
-            cont.innerHTML = `<div class="character-card">${portraitHtml}<h3>${esc(char.name)}</h3><div class="character-subtitle">${char.gender} ${char.race} ${char.cls}</div><div class="character-stats"><div class="stat-item"><div class="stat-label">Race</div><div class="stat-value">${char.race}</div></div><div class="stat-item"><div class="stat-label">Class</div><div class="stat-value">${char.cls}</div></div><div class="stat-item"><div class="stat-label">Weapon</div><div class="stat-value">${char.wep}</div></div><div class="stat-item"><div class="stat-label">Trait</div><div class="stat-value">${char.trait}</div></div>${factionHtml}</div><div class="character-backstory">${backstoryParagraphs}</div><div class="character-actions"><button class="secondary-btn" onclick="copyCharacter()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button><button class="secondary-btn" onclick="downloadPDF()">📄 PDF</button><button class="secondary-btn" onclick="addToCampaign('character', currentBackstoryData)">📚 Save</button><button class="secondary-btn" onclick="openShareCard(currentBackstoryData)">🖼️ Card</button><button class="share-btn twitter" onclick="shareTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Tweet</button><button class="generate-btn" onclick="document.getElementById('generateCharBtn').click()">Generate Another</button></div></div>`;
+            cont.innerHTML = `<div class="character-card">${portraitHtml}<h3>${esc(char.name)}</h3><div class="character-subtitle">${char.gender} ${char.race} ${char.cls}</div><div class="character-stats"><div class="stat-item"><div class="stat-label">Race</div><div class="stat-value">${char.race}</div></div><div class="stat-item"><div class="stat-label">Class</div><div class="stat-value">${char.cls}</div></div><div class="stat-item"><div class="stat-label">Weapon</div><div class="stat-value">${char.wep}</div></div><div class="stat-item"><div class="stat-label">Trait</div><div class="stat-value">${char.trait}</div></div>${factionHtml}</div><div class="character-backstory">${backstoryParagraphs}</div><div class="character-actions"><button class="secondary-btn" onclick="copyCharacter()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button><button class="secondary-btn" onclick="downloadPDF()">📄 PDF</button><button class="secondary-btn" onclick="addToCampaign('character', currentBackstoryData)">📚 Save</button><button class="secondary-btn" onclick="openShareCard(currentBackstoryData)">🖼️ Card</button><button class="share-btn twitter" onclick="shareCharacterCard(currentBackstoryData)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Tweet</button><button class="generate-btn" onclick="document.getElementById('generateCharBtn').click()">Generate Another</button></div></div>`;
             
             currentBackstoryData = char;
             }, 400); // end setTimeout
