@@ -2728,23 +2728,50 @@
         handleGenerate();
     }
 
+    // ============ TABS ============
+    // The tab lives in the URL hash so a specific tool can be linked directly
+    // (mythicnames.io/#party) and the back button steps through tabs.
+    const TABS = ['generator', 'party', 'world', 'races', 'packs', 'character', 'campaign', 'history'];
+
+    function activateTab(tabName, updateHash) {
+        if (TABS.indexOf(tabName) === -1) return false;
+        const panel = document.getElementById('tab-' + tabName);
+        const btn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+        if (!panel || !btn) return false;
+
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        panel.classList.add('active');
+
+        if (updateHash) {
+            const target = tabName === 'generator' ? ' ' : '#' + tabName;
+            history.replaceState(null, '', tabName === 'generator' ? location.pathname + location.search : target);
+        }
+        gaEvent('select_tab', {tab: tabName});
+        if (tabName === 'history') renderHistory();
+        if (tabName === 'campaign') renderCampaigns();
+        return true;
+    }
+
     // ============ INIT ============
     document.addEventListener('DOMContentLoaded', () => {
         // Tab switching
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const tabName = btn.dataset.tab;
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('tab-' + tabName).classList.add('active');
-                gaEvent('select_tab', {tab: tabName});
-                if (tabName === 'history') renderHistory();
-                if (tabName === 'campaign') renderCampaigns();
+                activateTab(btn.dataset.tab, true);
             });
         });
-        
+
+        // Open the tab named in the hash, and follow back/forward.
+        const fromHash = () => {
+            const name = location.hash.replace('#', '');
+            if (name) activateTab(name, false);
+        };
+        fromHash();
+        window.addEventListener('hashchange', fromHash);
+
         // Main generator
         document.getElementById('generateBtn').addEventListener('click', handleGenerate);
         document.getElementById('copyAllBtn').addEventListener('click', copyAll);
