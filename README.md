@@ -7,12 +7,14 @@ I built this because naming D&D characters meant trawling through the same ten l
 ## What's in here
 
 - `index.html` — the whole app. One file, vanilla JS, no build step. Yes, really.
-- `generators/` — standalone pages for each race (elf, dwarf, orc, tiefling, and so on)
-- `blog/` — articles on fantasy naming
+- `generators/` — 27 standalone generators: races, creatures, places, factions, and magic items
+- `blog/` — 21 articles on fantasy naming
 - `styles.css` — shared styles for the generator and blog pages
 - `consent.js` / `sw.js` — cookie banner and the service worker that makes the site work offline
 - `functions/api/geo.js` — Cloudflare Pages Function; tells the browser whether the visitor needs a cookie banner
-- `tools/generate-sitemaps.js` — rebuilds the sitemaps; run it after adding pages
+- `tools/` — the two build scripts (see Deploying)
+
+`sitemap.html` and the 404 page's suggestion list are both generated, so don't hand-edit the bits between the `AUTO:` markers — they get overwritten.
 
 ## Running it locally
 
@@ -28,7 +30,7 @@ Links are extensionless (`/blog/wizard-names-guide`, not `.html`) because that's
 
 Hosted on Cloudflare Pages, deployed straight from `main` — no build command, output directory `/`. Push and it goes live.
 
-Regenerate the sitemaps whenever you add a page:
+Whenever you add a page, rebuild the sitemaps (this also refreshes `sitemap.html` and the 404 suggestions):
 
 ```bash
 node tools/generate-sitemaps.js
@@ -42,7 +44,9 @@ node tools/generate-feed.js
 
 ## How it works
 
-No frameworks, no dependencies. Names are generated client-side from syllable pools tuned per style — Norse, Celtic, Lovecraftian, and about 17 others. Campaigns, favourites and history are saved to localStorage, so nothing leaves your browser.
+No frameworks, no dependencies. Character names are built from syllable pools tuned per style — Norse, Celtic, Lovecraftian, and about 17 others — while things like weapons and guilds are built from name patterns instead. Meanings are derived from the name itself, so a name always means the same thing.
+
+Campaigns, favourites and history are saved to localStorage, so nothing leaves your browser. There's an export/import in the Campaigns tab for moving them between devices.
 
 Every batch is generated from a seed, so `?seed=ember-4821&cat=taverns&style=norse` gives you the same taverns every time. Handy if you want your party to see the list you saw.
 
