@@ -30,7 +30,7 @@ a:hover{color:var(--accent-amber)}
 .logo-icon{width:40px;height:40px}
 .logo{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:700;color:var(--accent-gold);letter-spacing:0.08em}
 .site-nav{display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap}
-.site-nav a{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
+.site-nav a{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
 .site-nav a:hover{color:var(--accent-gold)}
 
 /* Accessibility */
@@ -49,7 +49,7 @@ a:hover{color:var(--accent-amber)}
 .related-link{display:flex;flex-direction:column;align-items:center;padding:1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;text-decoration:none;transition:all 0.2s}
 .related-link:hover{border-color:var(--accent-gold);transform:translateY(-2px)}
 .related-link .icon{font-size:2rem;margin-bottom:0.5rem}
-.related-link .label{font-family:'Cinzel',serif;color:var(--text-primary);font-size:0.85rem;text-align:center}
+.related-link .label{font-family:'Cinzel',serif;color:var(--text-primary);font-size:0.85rem;font-weight:600;text-align:center}
 
 .feed-link{margin:0.25rem 0 0;font-size:0.85rem}
 .feed-link a{color:var(--text-faded)}
@@ -67,7 +67,7 @@ a:hover{color:var(--accent-amber)}
 
 /* Generator actions */
 .gen-actions{display:flex;justify-content:center;margin-top:0.75rem}
-.gen-copy-all{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.5rem 1rem;background:transparent;border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
+.gen-copy-all{font-family:'Cinzel',serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1rem;background:transparent;border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
 .gen-copy-all:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
 
 .gen-row-actions{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap}
@@ -80,11 +80,11 @@ a:hover{color:var(--accent-amber)}
 
 /* Generator name rows */
 .gen-name-pron{color:var(--accent-blue);font-style:italic;font-size:0.9rem}
-.gen-name-variant{color:var(--text-faded);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em}
+.gen-name-variant{color:var(--text-secondary);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em}
 
 /* Shared name banner (?name= links) */
 .shared-name{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;background:var(--bg-parchment);border:1px solid var(--accent-gold);border-left-width:4px;border-radius:6px;padding:0.9rem 1.1rem;margin:1.5rem 0}
-.shared-name-label{font-family:'Cinzel',serif;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
+.shared-name-label{font-family:'Cinzel',serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
 .shared-name-text{font-family:'Cinzel',serif;font-size:1.25rem;color:var(--accent-gold);flex:1}
 
 /* Breadcrumbs */
@@ -121,13 +121,13 @@ a:hover{color:var(--accent-amber)}
 /* States the game's own naming rules next to the results, so it is clear
    every name shown can actually be registered. */
 .name-rule{font-size:0.85rem;color:var(--text-secondary);background:var(--bg-card);border:1px solid var(--border-subtle);border-left:3px solid var(--accent-gold);border-radius:0 6px 6px 0;padding:0.6rem 0.9rem;margin:0 0 1rem}
-.name-rule strong{color:var(--accent-gold);font-family:'Cinzel',serif;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em}
+.name-rule strong{color:var(--accent-gold);font-family:'Cinzel',serif;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em}
 
 /* Static example names. These lists run long, so they drop the bullets and
    flow into columns rather than pushing the rest of the page down. */
 .examples-section .example-names{list-style:none;margin:0 0 1.5rem;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.35rem 1.5rem}
 .examples-section .example-names li{margin:0;padding:0.35rem 0;line-height:1.5;font-size:0.95rem;border-bottom:1px solid var(--border-subtle)}
-.examples-section .example-names strong{font-family:'Cinzel',serif;color:var(--accent-gold);font-weight:600}
+.examples-section .example-names strong{font-family:'Cinzel',serif;color:var(--accent-gold);font-weight:700}
 
 select option{background:var(--bg-card);color:var(--text-primary)}select option:checked{background:var(--accent-gold);color:var(--bg-deep)}
 /* Cards */

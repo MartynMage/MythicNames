@@ -153,8 +153,8 @@
         .site-nav a:hover,.site-nav a.active{color:var(--accent-gold)}
         .intro-section{text-align:center;margin-bottom:1.25rem}
         .intro-section p{color:var(--text-secondary);font-size:1.05rem;max-width:600px;margin:0 auto;line-height:1.6}
-        .tab-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.75rem;margin-bottom:1.25rem;align-items:start;max-width:720px;margin-left:auto;margin-right:auto}.tab-col{display:flex;flex-direction:column;gap:0.35rem;min-width:0}.tab-col .tab-btn{width:100%;text-align:center}.tab-group{font-family:'Cinzel',serif;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-faded);text-align:center;padding:0 0 0.15rem;border-bottom:1px solid var(--border-subtle);margin-bottom:0.15rem}@media(max-width:640px){.tab-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:0.6rem}.tab-btn{min-height:42px}}
-        .tab-btn{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.5rem 0.85rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;position:relative}
+        .tab-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0.75rem;margin-bottom:1.25rem;align-items:start;max-width:790px;margin-left:auto;margin-right:auto}.tab-col{display:flex;flex-direction:column;gap:0.35rem;min-width:0}.tab-col .tab-btn{width:100%;text-align:center}.tab-group{font-family:'Cinzel',serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-secondary);text-align:center;padding:0 0 0.2rem;border-bottom:1px solid var(--border-subtle);margin-bottom:0.2rem}@media(max-width:640px){.tab-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:0.6rem}.tab-btn{min-height:42px}}
+        .tab-btn{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:600;padding:0.5rem 0.85rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;position:relative}
         .tab-btn:hover{border-color:var(--border-glow);color:var(--text-primary)}
         .tab-btn.active{background:linear-gradient(135deg,var(--accent-gold),var(--accent-amber));color:var(--bg-deep);border-color:var(--accent-gold)}
         .tab-btn .badge{position:absolute;top:-6px;right:-6px;background:var(--accent-ember);color:white;font-size:0.6rem;padding:2px 5px;border-radius:10px}
@@ -185,11 +185,11 @@
         .generate-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 25px var(--shadow-gold)}
         .generate-btn:disabled{opacity:0.6;cursor:not-allowed}
         .generate-btn.loading::after{content:'';position:absolute;top:0;left:-200%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:shimmer 1.5s infinite}
-        .secondary-btn{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.9rem 1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:0.4rem}
+        .secondary-btn{font-family:'Cinzel',serif;font-size:0.8rem;font-weight:600;padding:0.9rem 1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;white-space:nowrap;display:flex;align-items:center;gap:0.4rem}
         .secondary-btn:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
         .secondary-btn svg{width:14px;height:14px}
         .seed-bar{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;padding:0.6rem 0.85rem;margin-bottom:0.75rem}
-        .seed-bar-label{font-family:'Cinzel',serif;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
+        .seed-bar-label{font-family:'Cinzel',serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
         .seed-bar-value{font-family:'Crimson Pro',monospace;font-size:0.9rem;color:var(--accent-gold);background:var(--bg-parchment);padding:0.2rem 0.5rem;border-radius:4px;flex:1;min-width:80px}
         .dedicated-link{margin:0 0 0.75rem;font-size:0.9rem;color:var(--text-secondary)}
         .dedicated-link a{color:var(--accent-gold)}
@@ -198,7 +198,7 @@
         .results-title{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em}
         .results-actions{display:flex;gap:0.5rem;flex-wrap:wrap}
         /* Comparison Mode */
-        .compare-toggle{font-family:'Cinzel',serif;font-size:0.75rem;padding:0.5rem 0.75rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
+        .compare-toggle{font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;padding:0.5rem 0.75rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
         .compare-toggle:hover,.compare-toggle.active{border-color:var(--accent-gold);color:var(--accent-gold)}
         .compare-toggle.active{background:var(--accent-gold);color:var(--bg-deep)}
         .compare-bar{display:none;background:var(--bg-card);border:1px solid var(--accent-gold);border-radius:8px;padding:1rem;margin-bottom:1rem;animation:slideIn 0.3s}
@@ -235,7 +235,7 @@
         .name-actions{display:flex;gap:0.3rem;flex-shrink:0}
         .name-preview{margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border-subtle)}
         .name-preview-text{font-size:0.95rem;color:var(--text-secondary);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-        .name-expand{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.5rem;font-size:0.75rem;color:var(--accent-gold);cursor:pointer;background:none;border:none;padding:0;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:0.05em}
+        .name-expand{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.5rem;font-size:0.78rem;font-weight:600;color:var(--accent-gold);cursor:pointer;background:none;border:none;padding:0;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:0.05em}
         .name-expand:hover{color:var(--accent-amber);text-decoration:underline}
         .copy-btn,.action-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
         .share-card-btn{display:flex;align-items:center;gap:0.3rem;background:var(--bg-parchment);border:1px solid var(--border-glow);padding:0.4rem 0.65rem;cursor:pointer;color:var(--accent-gold);font-size:0.7rem;font-weight:600;border-radius:5px;transition:all 0.2s;font-family:'Cinzel',serif;white-space:nowrap}
@@ -248,7 +248,7 @@
         /* History Panel */
         .history-panel{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;margin-top:1rem;overflow:hidden}
         #tab-history .history-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
-        .history-header h3{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-secondary);display:flex;align-items:center;gap:0.5rem}
+        .history-header h3{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;color:var(--text-secondary);display:flex;align-items:center;gap:0.5rem}
         .history-toggle{color:var(--accent-gold);transition:transform 0.2s}
         .history-panel.open .history-toggle{transform:rotate(180deg)}
         .history-content{max-height:0;overflow:hidden;transition:max-height 0.3s}
@@ -337,7 +337,7 @@
         .race-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:0.75rem;text-align:center;cursor:pointer;transition:all 0.2s}
         .race-card:hover,.race-card.active{border-color:var(--accent-gold);background:rgba(212,168,87,0.08)}
         .race-icon{font-size:1.5rem;margin-bottom:0.3rem}
-        .race-name{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--text-primary)}.race-sub{font-size:0.62rem;color:var(--text-faded);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.15rem}.game-card{display:block;text-decoration:none}.game-card:hover{border-color:var(--accent-gold);background:rgba(212,168,87,0.08);transform:translateY(-2px)}.tab-heading{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--accent-gold);margin-bottom:0.75rem}.games-blurb{margin-top:1rem;font-size:0.9rem;color:var(--text-secondary);line-height:1.7}
+        .race-name{font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;color:var(--text-primary)}.race-sub{font-size:0.66rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.15rem}.game-card{display:block;text-decoration:none}.game-card:hover{border-color:var(--accent-gold);background:rgba(212,168,87,0.08);transform:translateY(-2px)}.tab-heading{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--accent-gold);margin-bottom:0.75rem}.games-blurb{margin-top:1rem;font-size:0.9rem;color:var(--text-secondary);line-height:1.7}
         .info-box{background:rgba(125,168,232,0.12);border:1px solid rgba(125,168,232,0.35);border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.9rem;font-size:0.9rem;color:var(--accent-blue)}
         .empty-state{text-align:center;padding:2.5rem 1.5rem;color:var(--text-faded)}
         .empty-icon{font-size:2.25rem;margin-bottom:0.6rem;opacity:0.5}
@@ -446,7 +446,7 @@
             .logo{font-size:1.5rem}
             .btn-row{flex-direction:column}
             .character-stats,.modal-stats{grid-template-columns:1fr}
-            .tab-btn{font-size:0.65rem;padding:0.5rem 0.6rem}
+            .tab-btn{font-size:0.75rem;font-weight:600;padding:0.5rem 0.6rem}
             .tab-nav{gap:0.25rem;padding:0 0.25rem}
             .modal{max-width:98%;margin:0.5rem;max-height:90vh}
             .modal-header{padding:0.9rem 1rem}
