@@ -2742,6 +2742,25 @@
     // ============ SEED SHARING ============
     let lastSeedLink = '';
 
+    // Set from ?cname= so a name found on a generator page can be turned into a
+    // full character here without retyping it.
+    let pendingCharName = '';
+
+    function openCharacterFromUrl() {
+        const p = new URLSearchParams(location.search);
+        const cname = (p.get('cname') || '').trim().slice(0, 60);
+        if (!cname) return;
+        pendingCharName = cname;
+        const race = p.get('crace');
+        if (race) {
+            const sel = document.getElementById('charRace');
+            if (sel && [...sel.options].some(o => o.value === race)) sel.value = race;
+        }
+        activateTab('character', false);
+        gaEvent('character_from_name');
+        document.getElementById('generateCharBtn').click();
+    }
+
     function showSeedBar(opts) {
         const bar = document.getElementById('seedBar');
         if (!bar) return;
@@ -2910,7 +2929,11 @@
             const gn = document.getElementById('charGender').value === 'random' ? r(['masculine','feminine']) : document.getElementById('charGender').value;
             
             gaEvent('create_character', {race: rc, class_type: cl, gender: gn});
-            const name = raceName(rc, gn) + ' ' + lastName('fantasy');
+            // A name carried in from ?cname= (a generator page or the saved
+            // names list) is used once, then cleared so "Generate Another"
+            // goes back to producing fresh names.
+            const name = pendingCharName || (raceName(rc, gn) + ' ' + lastName('fantasy'));
+            pendingCharName = '';
             const char = genBackstoryForName(name);
             char.race = cap(rc);
             char.cls = cap(cl);
@@ -2941,6 +2964,9 @@
 
         // Rebuild a shared batch if the URL carries a seed
         restoreFromUrl();
+
+        // ...or jump straight to a character built from a name passed in.
+        openCharacterFromUrl();
     });
     
     async function copyCharacter() {
