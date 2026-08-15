@@ -27,11 +27,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
     <style>
-        :root{--bg-deep:#0d0b0e;--bg-card:#211d19;--accent-gold:#d4a857;--accent-amber:#e8c47c;--text-primary:#f5efe6;--text-secondary:#c4b8a8;--shadow-gold:rgba(212,168,87,0.15)}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg-deep);color:var(--text-primary);min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem}
-        .container{max-width:500px}
+        body{display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem}
+        .container{max-width:500px;padding:0}
         .error-icon{font-size:6rem;margin-bottom:1rem;animation:float 3s ease-in-out infinite}
         @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
         h1{font-family:'Cinzel',serif;font-size:2.5rem;color:var(--accent-gold);margin-bottom:0.5rem}
@@ -47,12 +46,13 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
     <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
-    <div class="container">
+    <div class="container" id="main">
         <div class="error-icon">🗺️</div>
         <div class="error-code">404</div>
         <h1>Lost in the Realm</h1>
@@ -60,7 +60,7 @@
         <div class="random-name" onclick="generateName()" id="randomName">Click for a consolation name</div>
         <a href="/" class="cta-btn">Return to Safety</a>
         <div class="links">
-            <a href="/generators/">Race Names</a>
+            <a href="/generators/">All Generators</a>
             <a href="/blog/">Blog</a>
         </div>
     </div>

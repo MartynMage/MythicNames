@@ -427,6 +427,7 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="particles-container">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -456,7 +457,7 @@
         <div class="particle"></div>
         <div class="particle"></div>
     </div>
-    <div class="container">
+    <div class="container" id="main">
         <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
             <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
             <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -844,11 +845,11 @@
         <!-- FAQ Section -->
         <section class="faq-section">
             <h2 class="faq-title">Frequently Asked Questions</h2>
-            <article class="faq-item"><h3 class="faq-question" onclick="this.parentElement.classList.toggle('open')">How does the fantasy name generator work?</h3><div class="faq-answer"><p>MythicNames uses linguistic algorithms combining syllable patterns and style-specific conventions to generate unique names. Each name includes pronunciation, meaning, and optional backstories with factions and relationships.</p></div></article>
-            <article class="faq-item"><h3 class="faq-question" onclick="this.parentElement.classList.toggle('open')">Can I use these names commercially?</h3><div class="faq-answer"><p>Yes! All generated names are free to use for any purpose including D&D campaigns, novels, video games, and commercial projects. Names are procedurally generated and not copyrighted.</p></div></article>
-            <article class="faq-item"><h3 class="faq-question" onclick="this.parentElement.classList.toggle('open')">What is the Party Generator?</h3><div class="faq-answer"><p>The Party Generator creates a balanced adventuring group with names, classes, and inter-party relationships including bonds, rivalries, and romantic interests.</p></div></article>
-            <article class="faq-item"><h3 class="faq-question" onclick="this.parentElement.classList.toggle('open')">What does the World Builder create?</h3><div class="faq-answer"><p>The World Builder generates an entire kingdom with a ruler, cities, factions, key NPCs, and active conflicts—perfect for DMs creating campaign settings.</p></div></article>
-            <article class="faq-item"><h3 class="faq-question" onclick="this.parentElement.classList.toggle('open')">How do I hear name pronunciations?</h3><div class="faq-answer"><p>Click the speaker icon next to any pronunciation guide to hear it spoken aloud using text-to-speech technology.</p></div></article>
+            <article class="faq-item"><h3 class="faq-question" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open');}">How does the fantasy name generator work?</h3><div class="faq-answer"><p>MythicNames uses linguistic algorithms combining syllable patterns and style-specific conventions to generate unique names. Each name includes pronunciation, meaning, and optional backstories with factions and relationships.</p></div></article>
+            <article class="faq-item"><h3 class="faq-question" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open');}">Can I use these names commercially?</h3><div class="faq-answer"><p>Yes! All generated names are free to use for any purpose including D&D campaigns, novels, video games, and commercial projects. Names are procedurally generated and not copyrighted.</p></div></article>
+            <article class="faq-item"><h3 class="faq-question" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open');}">What is the Party Generator?</h3><div class="faq-answer"><p>The Party Generator creates a balanced adventuring group with names, classes, and inter-party relationships including bonds, rivalries, and romantic interests.</p></div></article>
+            <article class="faq-item"><h3 class="faq-question" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open');}">What does the World Builder create?</h3><div class="faq-answer"><p>The World Builder generates an entire kingdom with a ruler, cities, factions, key NPCs, and active conflicts—perfect for DMs creating campaign settings.</p></div></article>
+            <article class="faq-item"><h3 class="faq-question" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open');}">How do I hear name pronunciations?</h3><div class="faq-answer"><p>Click the speaker icon next to any pronunciation guide to hear it spoken aloud using text-to-speech technology.</p></div></article>
         </section>
 
         <footer>

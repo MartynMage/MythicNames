@@ -33,6 +33,14 @@ a:hover{color:var(--accent-amber)}
 .site-nav a{font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
 .site-nav a:hover{color:var(--accent-gold)}
 
+/* Accessibility */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:var(--accent-gold);color:var(--bg-deep);padding:0.75rem 1.25rem;font-family:'Cinzel',serif;border-radius:0 0 6px 0;text-decoration:none}
+.skip-link:focus{left:0}
+:focus-visible{outline:3px solid var(--accent-gold);outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
+
 /* Related posts / generators module */
 .related-generators{margin-top:2rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px}
 .related-generators h3{font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:1rem}

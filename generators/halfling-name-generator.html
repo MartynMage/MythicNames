@@ -88,6 +88,7 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -95,7 +96,7 @@
     <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
-    <div class="container">
+    <div class="container" id="main">
         <header class="site-header">
             <a href="../" class="logo-link"><img src="../logo.png" alt="MythicNames" class="logo-icon"><span class="logo">MythicNames</span></a>
             <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
@@ -113,13 +114,13 @@
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate Halfling Names</button>
-                <div class="gen-results" id="results"></div>
+                <div class="gen-results" id="results" aria-live="polite"></div>
             </div>
             <section class="article-content"><h2>About Halfling Names</h2><p>Halfling names carry the warmth of a hearth fire and comfort of home. They reflect love of <strong>family</strong> and <strong>simple pleasures</strong>.</p><h2>Naming Traditions</h2><ul><li><strong>Warm sounds</strong> — Soft consonants and pleasant vowels</li><li><strong>Nature themes</strong> — Plants, seasons, countryside</li><li><strong>Descriptive surnames</strong> — Goodbarrel, Underbough</li></ul></section>
-            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>How do halfling names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Halflings have a given name and family name, with nicknames being very common.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>What makes halfling names unique?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Halfling names are warm and approachable, often referencing nature or domestic things.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Do halflings use nicknames?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Absolutely! Halflings love nicknames and often go by shortened versions of their names.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>What's the difference between Lightfoot and Stout names?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Stout halflings may have slightly harder sounds from dwarven ancestry.</div></div></section>
+            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do halfling names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Halflings have a given name and family name, with nicknames being very common.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What makes halfling names unique?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Halfling names are warm and approachable, often referencing nature or domestic things.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Do halflings use nicknames?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Absolutely! Halflings love nicknames and often go by shortened versions of their names.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What's the difference between Lightfoot and Stout names?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Stout halflings may have slightly harder sounds from dwarven ancestry.</div></div></section>
             <section class="related-generators"><h3>Related Name Generators</h3><div class="related-grid"><a href="gnome-name-generator" class="related-link"><span class="icon">🎩</span><span class="label">Gnome Names</span></a>
 <a href="human-name-generator" class="related-link"><span class="icon">👤</span><span class="label">Human Names</span></a>
 <a href="elf-name-generator" class="related-link"><span class="icon">🧝</span><span class="label">Elf Names</span></a>

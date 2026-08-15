@@ -81,6 +81,7 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -88,7 +89,7 @@
     <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
-    <div class="container">
+    <div class="container" id="main">
         <header class="site-header">
             <a href="../" class="logo-link"><img src="../logo.png" alt="MythicNames" class="logo-icon"><span class="logo">MythicNames</span></a>
             <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
@@ -108,10 +109,10 @@
                 <div class="gen-results" id="results" aria-live="polite"></div>
             </div>
             <section class="article-content"><h2>About Knight Names</h2><p>Knightly names draw on <strong>real medieval naming</strong> — Norman, Germanic and Frankish roots that already sound weighty to a modern ear. The name itself is usually plain; the grandeur comes from the title and the house attached to it.</p><h2>Naming Traditions</h2><ul><li><strong>Germanic roots</strong> — elements like <em>-bert</em>, <em>-ric</em>, <em>-mund</em> and <em>-hard</em></li><li><strong>Title first</strong> — Ser, Sir or Dame carries more weight than the name</li><li><strong>Landed vs unlanded</strong> — a hedge knight has no estate to be named for</li></ul></section>
-            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>What makes a good knight name?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Real medieval roots. Germanic and Norman elements such as -ric, -bert, -mund and -hard sound authentic because they genuinely were the naming stock of the period.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Should I add a title?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Yes — Sir, Ser or Dame does a lot of work. In many settings the title plus a plain given name reads as more authentic than an elaborate invented name.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>What is a hedge knight?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">A knight with no lands and no lord, travelling between tournaments for prize money. Their names are humbler, without a noble estate attached.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>How do knightly order names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Members of a sworn order are often known by the order rather than a family estate, using formal Germanic names and a rank within the chapter.</div></div></section>
+            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What makes a good knight name?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Real medieval roots. Germanic and Norman elements such as -ric, -bert, -mund and -hard sound authentic because they genuinely were the naming stock of the period.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Should I add a title?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Yes — Sir, Ser or Dame does a lot of work. In many settings the title plus a plain given name reads as more authentic than an elaborate invented name.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What is a hedge knight?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">A knight with no lands and no lord, travelling between tournaments for prize money. Their names are humbler, without a noble estate attached.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do knightly order names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Members of a sworn order are often known by the order rather than a family estate, using formal Germanic names and a rank within the chapter.</div></div></section>
             <section class="related-generators"><h3>Related Name Generators</h3><div class="related-grid"><a href="human-name-generator" class="related-link"><span class="icon">👤</span><span class="label">Human Names</span></a>
 <a href="kingdom-name-generator" class="related-link"><span class="icon">👑</span><span class="label">Kingdom Names</span></a>
 <a href="villain-name-generator" class="related-link"><span class="icon">💀</span><span class="label">Villain Names</span></a>

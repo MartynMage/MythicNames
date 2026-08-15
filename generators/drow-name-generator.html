@@ -81,6 +81,7 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
@@ -88,7 +89,7 @@
     <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
-    <div class="container">
+    <div class="container" id="main">
         <header class="site-header">
             <a href="../" class="logo-link"><img src="../logo.png" alt="MythicNames" class="logo-icon"><span class="logo">MythicNames</span></a>
             <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
@@ -108,10 +109,10 @@
                 <div class="gen-results" id="results" aria-live="polite"></div>
             </div>
             <section class="article-content"><h2>About Drow Names</h2><p>Drow names are <strong>elven phonology turned sharp</strong>. They keep the flowing vowels of surface elves but load them with harder clusters — <em>zz</em>, <em>rl</em>, <em>ss</em>, <em>xt</em> — producing names that sound elegant and dangerous at once.</p><h2>Naming Traditions</h2><ul><li><strong>House is everything</strong> — a drow is defined by the noble house they serve</li><li><strong>Matriarchal</strong> — female names carry the most weight in drow society</li><li><strong>Hard clusters</strong> — doubled consonants give the language its bite</li></ul></section>
-            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>How do drow names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">A drow has a personal name and a house name. The house name signals rank in a rigidly matriarchal society, and losing it through exile is a profound punishment.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>What makes a name sound drow?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Elvish vowel flow combined with hard consonant clusters — doubled letters like zz, ss and rl, plus sounds rare in surface elven names.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Are female drow names different?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Yes. Drow society is matriarchal, so female names tend to be longer and more ornate, particularly among priestesses and noble matrons.</div></div>
-<div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>What are drow house names like?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">House names are compound and formal, evoking spiders, darkness and status. They are used as a surname and spoken with the personal name.</div></div></section>
+            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do drow names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">A drow has a personal name and a house name. The house name signals rank in a rigidly matriarchal society, and losing it through exile is a profound punishment.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What makes a name sound drow?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Elvish vowel flow combined with hard consonant clusters — doubled letters like zz, ss and rl, plus sounds rare in surface elven names.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Are female drow names different?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Yes. Drow society is matriarchal, so female names tend to be longer and more ornate, particularly among priestesses and noble matrons.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What are drow house names like?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">House names are compound and formal, evoking spiders, darkness and status. They are used as a surname and spoken with the personal name.</div></div></section>
             <section class="related-generators"><h3>Related Name Generators</h3><div class="related-grid"><a href="elf-name-generator" class="related-link"><span class="icon">🧝</span><span class="label">Elf Names</span></a>
 <a href="tiefling-name-generator" class="related-link"><span class="icon">😈</span><span class="label">Tiefling Names</span></a>
 <a href="vampire-name-generator" class="related-link"><span class="icon">🧛</span><span class="label">Vampire Names</span></a>
