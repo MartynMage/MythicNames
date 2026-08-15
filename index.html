@@ -42,6 +42,9 @@
     <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MythicNames Fantasy Name Generator","description":"Free fantasy name generator with party generator, world builder, and backstory creator.","url":"https://mythicnames.io","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the fantasy name generator work?","acceptedAnswer":{"@type":"Answer","text":"MythicNames uses linguistic algorithms combining syllable patterns and style-specific conventions to generate unique names. Each name includes pronunciation, meaning, and optional backstories with factions and relationships."}},{"@type":"Question","name":"Can I use these names commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes! All generated names are free to use for any purpose including D&D campaigns, novels, video games, and commercial projects. Names are procedurally generated and not copyrighted."}},{"@type":"Question","name":"What is the Party Generator?","acceptedAnswer":{"@type":"Answer","text":"The Party Generator creates a balanced adventuring group with names, classes, and inter-party relationships including bonds, rivalries, and romantic interests."}},{"@type":"Question","name":"What does the World Builder create?","acceptedAnswer":{"@type":"Answer","text":"The World Builder generates an entire kingdom with a ruler, cities, factions, key NPCs, and active conflicts—perfect for DMs creating campaign settings."}},{"@type":"Question","name":"How do I hear name pronunciations?","acceptedAnswer":{"@type":"Answer","text":"Click the speaker icon next to any pronunciation guide to hear it spoken aloud using text-to-speech technology."}}]}</script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ItemList","name":"Game Name Generators","description":"Character name generators matching the naming conventions of ten game settings.","numberOfItems":10,"itemListElement":[{"@type":"ListItem","position":1,"name":"World of Warcraft Name Generator","url":"https://mythicnames.io/generators/wow-name-generator"},{"@type":"ListItem","position":2,"name":"Elder Scrolls Name Generator","url":"https://mythicnames.io/generators/elderscrolls-name-generator"},{"@type":"ListItem","position":3,"name":"FFXIV Name Generator","url":"https://mythicnames.io/generators/ffxiv-name-generator"},{"@type":"ListItem","position":4,"name":"Baldur’s Gate 3 Name Generator","url":"https://mythicnames.io/generators/bg3-name-generator"},{"@type":"ListItem","position":5,"name":"Guild Wars 2 Name Generator","url":"https://mythicnames.io/generators/gw2-name-generator"},{"@type":"ListItem","position":6,"name":"Elden Ring Name Generator","url":"https://mythicnames.io/generators/eldenring-name-generator"},{"@type":"ListItem","position":7,"name":"RuneScape Name Generator","url":"https://mythicnames.io/generators/runescape-name-generator"},{"@type":"ListItem","position":8,"name":"Warhammer 40K Name Generator","url":"https://mythicnames.io/generators/warhammer40k-name-generator"},{"@type":"ListItem","position":9,"name":"Genshin Impact Name Generator","url":"https://mythicnames.io/generators/genshin-name-generator"},{"@type":"ListItem","position":10,"name":"Star Wars Name Generator","url":"https://mythicnames.io/generators/starwars-name-generator"}]}
+    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6481650173817853"
      crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,7 +291,7 @@
         .race-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:0.75rem;text-align:center;cursor:pointer;transition:all 0.2s}
         .race-card:hover,.race-card.active{border-color:var(--accent-gold);background:rgba(212,168,87,0.08)}
         .race-icon{font-size:1.5rem;margin-bottom:0.3rem}
-        .race-name{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--text-primary)}
+        .race-name{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--text-primary)}.race-sub{font-size:0.62rem;color:var(--text-faded);text-transform:uppercase;letter-spacing:0.06em;margin-top:0.15rem}.game-card{display:block;text-decoration:none}.game-card:hover{border-color:var(--accent-gold);background:rgba(212,168,87,0.08);transform:translateY(-2px)}.tab-heading{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--accent-gold);margin-bottom:0.75rem}.games-blurb{margin-top:1rem;font-size:0.9rem;color:var(--text-secondary);line-height:1.7}
         .info-box{background:rgba(125,168,232,0.12);border:1px solid rgba(125,168,232,0.35);border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.9rem;font-size:0.9rem;color:var(--accent-blue)}
         .empty-state{text-align:center;padding:2.5rem 1.5rem;color:var(--text-faded)}
         .empty-icon{font-size:2.25rem;margin-bottom:0.6rem;opacity:0.5}
@@ -508,6 +511,7 @@
             <button type="button" class="tab-btn" data-tab="party">👥 Party</button>
             <button type="button" class="tab-btn" data-tab="world">🏰 World</button>
             <button type="button" class="tab-btn" data-tab="races">🧝 Races</button>
+            <button type="button" class="tab-btn" data-tab="games">🎮 Games</button>
             <button type="button" class="tab-btn" data-tab="packs">📦 Packs</button>
             <button type="button" class="tab-btn" data-tab="character">🎭 Character</button>
             <button type="button" class="tab-btn" data-tab="campaign">📚 Campaigns</button>
@@ -761,6 +765,28 @@
             </div>
             <p class="dedicated-link" id="dedicatedRaceLink" style="display:none;"></p>
             <div id="raceResults" aria-live="polite"></div>
+        </div>
+
+        <!-- Game Generators Tab -->
+        <!-- These generate on their own pages rather than here, because each game
+             has its own factions, variants and naming notes. So the cards are
+             links out, not in-page generators like the race grid above. -->
+        <div class="tab-content" id="tab-games">
+            <h2 class="tab-heading">Game Name Generators</h2>
+            <div class="info-box">Names built to match how each game actually names its characters. Each one opens its own generator, with every race or faction it uses.</div>
+            <div class="race-grid">
+                <a href="generators/wow-name-generator" class="race-card game-card"><div class="race-icon">🐺</div><div class="race-name">World of Warcraft</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/elderscrolls-name-generator" class="race-card game-card"><div class="race-icon">🐉</div><div class="race-name">Elder Scrolls</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/ffxiv-name-generator" class="race-card game-card"><div class="race-icon">🌙</div><div class="race-name">FFXIV</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/bg3-name-generator" class="race-card game-card"><div class="race-icon">🎲</div><div class="race-name">Baldur&rsquo;s Gate 3</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/gw2-name-generator" class="race-card game-card"><div class="race-icon">🌿</div><div class="race-name">Guild Wars 2</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/eldenring-name-generator" class="race-card game-card"><div class="race-icon">⚱️</div><div class="race-name">Elden Ring</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/runescape-name-generator" class="race-card game-card"><div class="race-icon">🗡️</div><div class="race-name">RuneScape</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/warhammer40k-name-generator" class="race-card game-card"><div class="race-icon">💀</div><div class="race-name">Warhammer 40K</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/genshin-name-generator" class="race-card game-card"><div class="race-icon">⚗️</div><div class="race-name">Genshin Impact</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/starwars-name-generator" class="race-card game-card"><div class="race-icon">🌌</div><div class="race-name">Star Wars</div> <div class="race-sub">Name Generator</div></a>
+            </div>
+            <p class="games-blurb">Every generator here is an independent fan tool, built from the naming conventions each setting uses rather than from any official name list. Pick a game to generate character names by race, faction or nation &mdash; or read <a href="blog/game-naming-conventions">how ten games name their characters</a> for the rules behind each one.</p>
         </div>
         
         <!-- Name Packs Tab -->
@@ -2803,7 +2829,7 @@
     // ============ TABS ============
     // The tab lives in the URL hash so a specific tool can be linked directly
     // (mythicnames.io/#party) and the back button steps through tabs.
-    const TABS = ['generator', 'party', 'world', 'races', 'packs', 'character', 'campaign', 'history'];
+    const TABS = ['generator', 'party', 'world', 'races', 'games', 'packs', 'character', 'campaign', 'history'];
 
     function activateTab(tabName, updateHash) {
         if (TABS.indexOf(tabName) === -1) return false;
