@@ -41,6 +41,11 @@
         .links{margin-top:2rem}
         .links a{color:var(--text-secondary);text-decoration:none;margin:0 1rem;font-size:0.9rem}
         .links a:hover{color:var(--accent-gold)}
+        .suggestions{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1rem 1.25rem;margin:1.5rem 0;text-align:left}
+        .suggestions-title{font-family:'Cinzel',serif;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-faded);margin-bottom:0.6rem}
+        .suggestions ul{list-style:none;margin:0;padding:0}
+        .suggestions li{margin:0.35rem 0}
+        .suggestions a{color:var(--accent-gold);font-size:0.95rem}
         .random-name{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--accent-amber);margin:1.5rem 0;padding:1rem;background:var(--bg-card);border-radius:8px;cursor:pointer;transition:all 0.2s}
         .random-name:hover{transform:scale(1.02)}
     </style>
@@ -57,6 +62,10 @@
         <div class="error-code">404</div>
         <h1>Lost in the Realm</h1>
         <p>The page you seek has vanished into the mists. Perhaps it was claimed by dragons, or maybe it never existed at all.</p>
+        <div class="suggestions" id="suggestions" hidden>
+            <p class="suggestions-title">Were you looking for one of these?</p>
+            <ul id="suggestionList"></ul>
+        </div>
         <div class="random-name" onclick="generateName()" id="randomName">Click for a consolation name</div>
         <a href="/" class="cta-btn">Return to Safety</a>
         <div class="links">
@@ -65,6 +74,42 @@
         </div>
     </div>
     <script>
+        /* AUTO:pages */
+        const PAGES = [{"u":"/generators/elf-name-generator","t":"Elf Name Generator"},{"u":"/generators/dwarf-name-generator","t":"Dwarf Name Generator"},{"u":"/generators/orc-name-generator","t":"Orc Name Generator"},{"u":"/generators/human-name-generator","t":"Human Name Generator"},{"u":"/generators/halfling-name-generator","t":"Halfling Name Generator"},{"u":"/generators/gnome-name-generator","t":"Gnome Name Generator"},{"u":"/generators/tiefling-name-generator","t":"Tiefling Name Generator"},{"u":"/generators/dragonborn-name-generator","t":"Dragonborn Name Generator"},{"u":"/generators/half-elf-name-generator","t":"Half-Elf Name Generator"},{"u":"/generators/drow-name-generator","t":"Drow Name Generator"},{"u":"/generators/goblin-name-generator","t":"Goblin Name Generator"},{"u":"/generators/fairy-name-generator","t":"Fairy Name Generator"},{"u":"/generators/angel-name-generator","t":"Angel Name Generator"},{"u":"/generators/demon-name-generator","t":"Demon Name Generator"},{"u":"/generators/vampire-name-generator","t":"Vampire Name Generator"},{"u":"/generators/tavern-name-generator","t":"Tavern Name Generator"},{"u":"/generators/kingdom-name-generator","t":"Kingdom Name Generator"},{"u":"/generators/ship-name-generator","t":"Ship Name Generator"},{"u":"/generators/dungeon-name-generator","t":"Dungeon Name Generator"},{"u":"/generators/guild-name-generator","t":"Guild Name Generator"},{"u":"/generators/wizard-name-generator","t":"Wizard Name Generator"},{"u":"/generators/knight-name-generator","t":"Knight Name Generator"},{"u":"/generators/villain-name-generator","t":"Villain Name Generator"},{"u":"/generators/monster-name-generator","t":"Monster Name Generator"},{"u":"/generators/weapon-name-generator","t":"Weapon Name Generator"},{"u":"/generators/spell-name-generator","t":"Spell Name Generator"},{"u":"/generators/artifact-name-generator","t":"Artifact Name Generator"},{"u":"/blog/100-best-elf-names","t":"100 Best Elf Names for Your Fantasy Characters"},{"u":"/blog/angel-and-demon-names","t":"Angel & Demon Names: Celestial Suffixes and Infernal Patterns"},{"u":"/blog/creating-memorable-npc-names","t":"Creating Memorable NPC Names: A DM's Guide"},{"u":"/blog/dark-elf-drow-names","t":"Dark Elf & Drow Names: Complete Guide for D&D"},{"u":"/blog/dragonborn-names-guide","t":"Dragonborn Names: Clans, Draconic Sounds & 80+ Examples"},{"u":"/blog/dwarf-naming-conventions","t":"Dwarf Naming Conventions: Clans, Craft-Names & Traditions"},{"u":"/blog/fairy-and-fey-names","t":"Fairy & Fey Names: Seelie, Unseelie and Nature Naming"},{"u":"/blog/fantasy-tavern-names","t":"200 Fantasy Tavern Names Your Players Will Remember"},{"u":"/blog/female-warrior-names","t":"75 Female Warrior Names for Your Fantasy Characters"},{"u":"/blog/funny-fantasy-names","t":"100+ Funny Fantasy Names for D&D Characters & NPCs"},{"u":"/blog/gnome-names-guide","t":"Gnome Names: The Multi-Name Tradition & 80+ Tinker Names"},{"u":"/blog/goblin-names-for-dnd","t":"Goblin Names for D&D: From Silly to Sinister"},{"u":"/blog/half-elf-naming-guide","t":"Half-Elf Names: Blending Human & Elven Traditions"},{"u":"/blog/how-to-name-your-dnd-character","t":"How to Name Your D&D Character: A Complete Guide"},{"u":"/blog/how-to-name-your-fantasy-kingdom","t":"How to Name Your Fantasy Kingdom: A Worldbuilder's Guide"},{"u":"/blog/medieval-knight-names","t":"Medieval Knight Names: Historical & Fantasy Names for Paladins"},{"u":"/blog/ship-names-for-your-campaign","t":"150 Ship Names for D&D & Fantasy Campaigns"},{"u":"/blog/tiefling-names-complete-guide","t":"Tiefling Names: Virtue Names, Infernal Names & Naming Guide"},{"u":"/blog/vampire-names-guide","t":"Vampire Names: Gothic, Slavic & Ancient Names with 70+ Examples"},{"u":"/blog/villain-names-that-inspire-fear","t":"Villain Names That Inspire Fear: A Dark Naming Guide"},{"u":"/blog/wizard-names-guide","t":"Wizard Names: Mystical Names for Mages & Sorcerers"},{"u":"/","t":"Main Name Generator"},{"u":"/generators/","t":"All Name Generators"},{"u":"/blog/","t":"Blog"}];
+        /* /AUTO:pages */
+
+        // Score each known page against the words in the requested path and
+        // offer the best few, so a typo or dead link still lands somewhere.
+        (function suggest() {
+            const raw = decodeURIComponent(location.pathname).toLowerCase();
+            const words = raw.split(/[^a-z0-9]+/).filter(w => w.length > 2 &&
+                !['generators', 'blog', 'html', 'name', 'the', 'www'].includes(w));
+            if (!words.length || !PAGES.length) return;
+
+            // Someone who asked for /generators/... almost certainly wants a
+            // generator, so matches in the same section rank above the rest.
+            const section = raw.split('/').filter(Boolean)[0] || '';
+
+            const scored = PAGES.map(p => {
+                const hay = (p.u + ' ' + p.t).toLowerCase();
+                let score = 0;
+                words.forEach(w => {
+                    if (hay.includes(w)) score += w.length;
+                    else if (w.length > 4 && hay.includes(w.slice(0, -1))) score += w.length - 2;
+                });
+                if (score > 0 && section && p.u.startsWith('/' + section)) score += 6;
+                return {p, score};
+            }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 4);
+
+            if (!scored.length) return;
+            const list = document.getElementById('suggestionList');
+            list.innerHTML = scored.map(x =>
+                '<li><a href="' + x.p.u + '"></a></li>').join('');
+            [].forEach.call(list.querySelectorAll('a'), (a, i) => { a.textContent = scored[i].p.t; });
+            document.getElementById('suggestions').hidden = false;
+            if (typeof gtag === 'function') gtag('event', 'not_found_suggestions', {path: raw, matches: scored.length});
+        })();
+
         const prefixes = ['Ael','Bran','Cor','Drak','Eld','Fae','Grim','Helm','Ir','Kel','Lor','Mor','Nyx','Pyr','Rav','Syl','Thal','Ur','Val','Wyr','Xan','Zeph'];
         const middles = ['an','ar','el','en','ia','il','ir','on','or','ra','ri','th'];
         const suffixes = ['or','us','in','an','ar','ion','ius','orn','ald','ric','a','ia','wen','elle'];

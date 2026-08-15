@@ -121,3 +121,34 @@ if (fs.existsSync(htmlPath)) {
     const count = (page.match(/class="sitemap-link"/g) || []).length;
     console.log(`sitemap.html: ${filled} sections, ${count} links`);
 }
+
+// ---- 404 suggestion index ------------------------------------------------
+// The error page matches the requested path against this list, so a typo or a
+// dead inbound link still lands the visitor somewhere useful.
+
+const notFoundPath = path.join(root, '404.html');
+if (fs.existsSync(notFoundPath)) {
+    const entries = [];
+    for (const s of Object.values(GROUPS).flat()) {
+        const rel = 'generators/' + s + '-name-generator.html';
+        if (fs.existsSync(path.join(root, rel))) {
+            entries.push({u: '/generators/' + s + '-name-generator', t: titleCase(s) + ' Name Generator'});
+        }
+    }
+    for (const f of listHtml('blog').filter(f => !f.endsWith('index.html')).sort()) {
+        entries.push({u: '/' + f.replace(/\.html$/, ''), t: readTitle(f)});
+    }
+    entries.push({u: '/', t: 'Main Name Generator'});
+    entries.push({u: '/generators/', t: 'All Name Generators'});
+    entries.push({u: '/blog/', t: 'Blog'});
+
+    let nf = fs.readFileSync(notFoundPath, 'utf8');
+    const eol = nf.includes('\r\n') ? '\r\n' : '\n';
+    const payload = '        const PAGES = ' + JSON.stringify(entries) + ';';
+    const re = /(\/\* AUTO:pages \*\/)[\s\S]*?(\/\* \/AUTO:pages \*\/)/;
+    if (re.test(nf)) {
+        nf = nf.replace(re, (m, a, b) => a + eol + payload + eol + '        ' + b);
+        fs.writeFileSync(notFoundPath, nf);
+        console.log(`404.html: ${entries.length} suggestable pages`);
+    }
+}
