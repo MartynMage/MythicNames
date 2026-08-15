@@ -57,27 +57,25 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-    </button>
-    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
-    <div class="ambient-glow glow-1"></div>
+    <a class="skip-link" href="#main">Skip to content</a>    <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
-    <div class="container" id="main">
-        <header class="site-header">
-            <a href="../" class="logo-link">
-                <img src="../icon-192.png" alt="MythicNames" class="logo-icon">
-                <span class="logo">MythicNames</span>
-            </a>
-            <nav class="site-nav">
-                <a href="../">Generator</a>
-                <a href="../generators/">All Generators</a>
-                <a href="./">Blog</a>
-                <a href="../favourites">Saved</a>
+    <div class="container" id="main">        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="brand" aria-label="MythicNames home">
+                    <img src="/logo-192.webp" alt="" class="brand-icon" width="32" height="32" decoding="async">
+                    <span class="brand-name">MythicNames</span>
+                </a>
+                <nav class="header-nav" aria-label="Main navigation"><a href="/">Generator</a><a href="/generators/">All Generators</a><a href="/blog/">Blog</a><a href="/favourites">Saved</a><a href="/search">Search</a></nav>
+                <button type="button" class="header-btn theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+                <button type="button" class="header-btn menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" onclick="mythicToggleMenu(this)"><svg class="open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg><svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+                <a href="/">Generator</a>
+                <a href="/generators/">All Generators</a>
+                <a href="/blog/">Blog</a>
+                <a href="/favourites">Saved</a>
+                <a href="/search">Search</a>
             </nav>
-            <script>(function(){try{var f=JSON.parse(localStorage.getItem("mythicFavorites")||"[]");if(!Array.isArray(f)||!f.length)return;var a=document.querySelector('.site-nav a[href$="favourites"]');if(a)a.textContent="Saved ("+f.length+")";}catch(e){}})();</script>
         </header>
 
         <nav class="breadcrumbs">
@@ -248,6 +246,31 @@
     </div>
     <script>
       if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
+    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
+    <script>
+    function mythicToggleMenu(btn) {
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+        document.getElementById('mobile-menu').hidden = open;
+    }
+    // Escape closes the drawer, matching the button's own behaviour.
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        var btn = document.querySelector('.menu-toggle[aria-expanded="true"]');
+        if (btn) mythicToggleMenu(btn);
+    });
+    // Reflect the saved-name count in both the bar and the drawer.
+    (function () {
+        try {
+            var f = JSON.parse(localStorage.getItem('mythicFavorites') || '[]');
+            if (!Array.isArray(f) || !f.length) return;
+            document.querySelectorAll('a[href="/favourites"]').forEach(function (a) {
+                a.textContent = 'Saved (' + f.length + ')';
+            });
+        } catch (e) {}
+    })();
     </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 // Bump on any change to PRECACHE or to a long-cached asset (styles.css,
 // consent.js) — activate deletes every cache that is not on the current
 // version, so returning visitors pick the new files up on their next visit.
-const VERSION = 'v6';
+const VERSION = 'v7';
 const SHELL = 'mythic-shell-' + VERSION;
 const RUNTIME = 'mythic-runtime-' + VERSION;
 
