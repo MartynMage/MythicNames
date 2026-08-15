@@ -74,6 +74,14 @@
         .particle:nth-child(9){left:80%;animation-delay:-3s;animation-duration:21s}
         .particle:nth-child(10){left:90%;animation-delay:-7s;animation-duration:15s}
         @keyframes floatParticle{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:0.4}90%{opacity:0.4}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
+        /* Accessibility — this page has its own stylesheet, so these mirror styles.css */
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+        .skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:var(--accent-gold);color:var(--bg-deep);padding:0.75rem 1.25rem;font-family:'Cinzel',serif;border-radius:0 0 6px 0;text-decoration:none}
+        .skip-link:focus{left:0}
+        :focus-visible{outline:3px solid var(--accent-gold);outline-offset:2px;border-radius:2px}
+        @media (prefers-reduced-motion: reduce){
+            *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+        }
         /* Theme Toggle */
         .theme-toggle{position:absolute;top:1rem;right:1rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:50%;width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10}
         .theme-toggle:hover{border-color:var(--accent-gold);transform:scale(1.1)}
@@ -354,8 +362,12 @@
         .faq-question:hover{background:rgba(212,168,87,0.05)}
         .faq-question::after{content:'+';font-size:1.2rem;color:var(--accent-gold);transition:transform 0.2s}
         .faq-item.open .faq-question::after{transform:rotate(45deg)}
-        .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.3s}
-        .faq-item.open .faq-answer{max-height:200px;padding:0 1rem 0.85rem}
+        /* Was a fixed max-height, which caps how tall an answer can get.
+           Animating grid rows expands to the real content height instead, so
+           long answers and large text settings can never be clipped. */
+        .faq-answer{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.3s ease}
+        .faq-answer > p{overflow:hidden}
+        .faq-item.open .faq-answer{grid-template-rows:1fr;padding:0 1rem 0.85rem}
         .faq-answer p{color:var(--text-secondary);font-size:0.9rem;line-height:1.6}
         /* Tip Jar */
         .tip-jar{text-align:center;padding:2rem 1rem;margin-top:2rem;background:linear-gradient(135deg,var(--bg-card),var(--bg-parchment));border-radius:12px;border:1px solid var(--border-subtle)}
