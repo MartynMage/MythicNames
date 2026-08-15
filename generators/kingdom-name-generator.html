@@ -112,6 +112,7 @@
                     <div class="gen-control"><label>Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate Kingdom Names</button>
+                <div class="gen-actions"><button type="button" class="gen-copy-all" onclick="copyAllNames()">Copy all names</button></div>
                 <div class="gen-results" id="results" aria-live="polite"></div>
             </div>
             <section class="article-content"><h2>About Kingdom Names</h2><p>Kingdom names anchor your world, giving shape to <strong>political geography</strong> and <strong>cultural identity</strong>.</p><h2>Naming Traditions</h2><ul><li><strong>Founding reference</strong> — Founders, events, geography</li><li><strong>Cultural roots</strong> — Consistent linguistic influences</li><li><strong>Scale indication</strong> — Empire, Kingdom, Duchy</li></ul></section>
@@ -147,15 +148,51 @@
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
+        lastNames = [];
         for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
             const nm = generateName(gender);
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
+            lastNames.push(nm.name);
             i++;
             html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-pron">${nm.pron}</span><span class="gen-name-meaning">${nm.meaning}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${nm.name}')">Copy</button><button class="share-btn" onclick="shareName('${nm.name}')">Share</button></div></div>`;
         }
         gaEvent('generate_names', {variant: gender, count: count});
+        syncUrl();
         results.innerHTML = html;
+    }
+    let lastNames = [];
+    async function copyAllNames() {
+        if (!lastNames.length) return;
+        try {
+            await navigator.clipboard.writeText(lastNames.join("\n"));
+            gaEvent('copy_all_names', {count: lastNames.length});
+            const btn = document.querySelector('.gen-copy-all');
+            const original = btn.textContent;
+            btn.textContent = 'Copied ' + lastNames.length + ' names';
+            setTimeout(() => { btn.textContent = original; }, 1600);
+        } catch (e) {}
+    }
+    // Keep the controls in the URL so a configured generator can be shared.
+    function settingIds() {
+        return ['variant', 'subrace', 'gender', 'count'].filter(id => document.getElementById(id));
+    }
+    function applyUrlSettings() {
+        let p;
+        try { p = new URLSearchParams(location.search); } catch (e) { return; }
+        settingIds().forEach(id => {
+            const val = p.get(id);
+            if (!val) return;
+            const el = document.getElementById(id);
+            if (Array.prototype.some.call(el.options, o => o.value === val)) el.value = val;
+        });
+    }
+    function syncUrl() {
+        try {
+            const p = new URLSearchParams(location.search);
+            settingIds().forEach(id => p.set(id, document.getElementById(id).value));
+            history.replaceState(null, '', location.pathname + '?' + p.toString());
+        } catch (e) {}
     }
     function gaEvent(name, params) {
         if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'kingdom'}, params || {}));
@@ -183,6 +220,7 @@
         results.parentNode.insertBefore(box, results);
         gaEvent('view_shared_name');
     }
+    applyUrlSettings();
     showSharedName();
     generateNames();
     </script>

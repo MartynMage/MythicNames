@@ -50,6 +50,11 @@ a:hover{color:var(--accent-amber)}
 .related-link .icon{font-size:2rem;margin-bottom:0.5rem}
 .related-link .label{font-family:'Cinzel',serif;color:var(--text-primary);font-size:0.85rem;text-align:center}
 
+/* Generator actions */
+.gen-actions{display:flex;justify-content:center;margin-top:0.75rem}
+.gen-copy-all{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.5rem 1rem;background:transparent;border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
+.gen-copy-all:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
+
 /* Generator name rows */
 .gen-name-pron{color:var(--accent-blue);font-style:italic;font-size:0.9rem}
 .gen-name-variant{color:var(--text-faded);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em}
