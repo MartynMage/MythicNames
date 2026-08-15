@@ -102,6 +102,7 @@
             <div class="generator-box">
                 <div class="gen-controls">
                     <div class="gen-control"><label for="variant">Type</label><select id="variant"><option value="any">Any Weapon</option><option value="blade">Blades</option><option value="blunt">Hammers & Axes</option><option value="ranged">Bows & Ranged</option></select></div>
+                    <div class="gen-control"><label for="length">Length</label><select id="length"><option value="any">Any</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></select></div>
                     <div class="gen-control"><label for="count">Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate Weapon Names</button>
@@ -153,18 +154,21 @@
     function generateNames() {
         const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
+        const lengthWant = (document.getElementById('length') || {}).value;
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
         lastNames = [];
-        for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
+        for (let i = 0, tries = 0; i < count && tries < count * 60; tries++) {
             const nm = generateName(variant);
+            if (!matchesLength(nm.name, lengthWant)) continue;
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             lastNames.push(nm.name);
             i++;
             const safe = nm.name.replace(/'/g, "\\'");
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
+            const safeName = nm.name.replace(/'/g, "\\'");
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div class="gen-row-actions"><button class="gen-icon-btn fav-btn ${isFavourite(nm.name) ? 'on' : ''}" aria-pressed="${isFavourite(nm.name)}" aria-label="Save ${nm.name} to favourites" onclick="toggleFavourite(this,'${safeName}')">♥</button><button class="gen-icon-btn" aria-label="Hear ${nm.name} pronounced" onclick="speakName('${safeName}')">🔊</button><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
         }
         gaEvent('generate_names', {variant: variant, count: count});
         syncUrl();
@@ -183,7 +187,7 @@
         } catch (e) {}
     }
 
-    function settingIds() { return ['variant', 'count'].filter(id => document.getElementById(id)); }
+    function settingIds() { return ['variant', 'length', 'count'].filter(id => document.getElementById(id)); }
     function applyUrlSettings() {
         let p;
         try { p = new URLSearchParams(location.search); } catch (e) { return; }
@@ -202,6 +206,37 @@
         } catch (e) {}
     }
 
+    // ---- Pronunciation, favourites and length filtering ----
+    function speakName(text) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const spoken = text.replace(/-/g, ' ').replace(/([a-z])([A-Z])/g, '    function gaEvent(name, params) { $2').replace(/'/g, '');
+        const u = new SpeechSynthesisUtterance(spoken);
+        u.rate = 0.85; u.pitch = 1;
+        speechSynthesis.speak(u);
+        gaEvent('speak_name');
+    }
+
+    // Shares the homepage favourites list, so a name starred here shows up there.
+    let favourites = [];
+    try { favourites = JSON.parse(localStorage.getItem('mythicFavorites') || '[]'); } catch (e) {}
+    function isFavourite(name) { return favourites.indexOf(name) > -1; }
+    function toggleFavourite(btn, name) {
+        const i = favourites.indexOf(name);
+        if (i > -1) { favourites.splice(i, 1); btn.classList.remove("on"); btn.setAttribute("aria-pressed", "false"); }
+        else { favourites.push(name); btn.classList.add("on"); btn.setAttribute("aria-pressed", "true"); }
+        try { localStorage.setItem('mythicFavorites', JSON.stringify(favourites)); } catch (e) {}
+        gaEvent(i > -1 ? 'unfavorite_name' : 'favorite_name');
+    }
+
+    // Length buckets match the homepage: short 1-6, medium 5-10, long 9+.
+    function matchesLength(name, want) {
+        if (!want || want === 'any') return true;
+        const n = name.replace(/[^A-Za-z]/g, '').length;
+        if (want === 'short') return n <= 6;
+        if (want === 'medium') return n >= 5 && n <= 10;
+        return n >= 9;
+    }
     function gaEvent(name, params) {
         if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'weapon'}, params || {}));
     }
