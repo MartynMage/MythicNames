@@ -39,7 +39,7 @@ function listHtml(dir) {
 }
 
 const sections = {
-    'sitemap-pages.xml': ['index.html', 'generators/index.html', 'blog/index.html', 'sitemap.html', 'privacy.html'],
+    'sitemap-pages.xml': ['index.html', 'generators/index.html', 'blog/index.html', 'sitemap.html', 'privacy.html', 'search.html'],
     'sitemap-generators.xml': listHtml('generators').filter(f => !f.endsWith('index.html')),
     'sitemap-blog.xml': listHtml('blog').filter(f => !f.endsWith('index.html')),
 };
@@ -150,5 +150,53 @@ if (fs.existsSync(notFoundPath)) {
         nf = nf.replace(re, (m, a, b) => a + eol + payload + eol + '        ' + b);
         fs.writeFileSync(notFoundPath, nf);
         console.log(`404.html: ${entries.length} suggestable pages`);
+    }
+}
+
+// ---- Search index --------------------------------------------------------
+// /search reads this list. Titles and descriptions are pulled from each page's
+// own head, so the index cannot drift from the pages themselves.
+
+function readDesc(rel) {
+    const m = fs.readFileSync(path.join(root, rel), 'utf8')
+        .match(/<meta name="description" content="([^"]*)"/);
+    return m ? m[1] : '';
+}
+
+const searchPath = path.join(root, 'search.html');
+if (fs.existsSync(searchPath)) {
+    const CATEGORY = {
+        races: 'Race Generator', creatures: 'Creature Generator', world: 'World Generator',
+        archetypes: 'Character Generator', items: 'Item Generator'
+    };
+    const idx = [];
+    for (const [key, slugs] of Object.entries(GROUPS)) {
+        for (const sg of slugs) {
+            const rel = 'generators/' + sg + '-name-generator.html';
+            if (!fs.existsSync(path.join(root, rel))) continue;
+            idx.push({
+                u: '/generators/' + sg + '-name-generator',
+                t: titleCase(sg) + ' Name Generator',
+                d: readDesc(rel),
+                c: CATEGORY[key] || 'Generator',
+                k: sg
+            });
+        }
+    }
+    for (const rel of listHtml('blog').filter(x => !x.endsWith('index.html')).sort()) {
+        idx.push({u: '/' + rel.replace(/\.html$/, ''), t: readTitle(rel), d: readDesc(rel), c: 'Article', k: ''});
+    }
+    idx.push({u: '/', t: 'Main Name Generator', d: readDesc('index.html'), c: 'Tool', k: 'character party world campaign seed'});
+    idx.push({u: '/generators/', t: 'All Name Generators', d: readDesc('generators/index.html'), c: 'Index', k: ''});
+    idx.push({u: '/blog/', t: 'Blog', d: readDesc('blog/index.html'), c: 'Index', k: ''});
+
+    let sp = fs.readFileSync(searchPath, 'utf8');
+    const seol = sp.includes('\r\n') ? '\r\n' : '\n';
+    const sre = /(\/\* AUTO:index \*\/)[\s\S]*?(\/\* \/AUTO:index \*\/)/;
+    if (sre.test(sp)) {
+        sp = sp.replace(sre, (m, a, b) =>
+            a + seol + '    const INDEX = ' + JSON.stringify(idx) + ';' + seol + '    ' + b);
+        fs.writeFileSync(searchPath, sp);
+        console.log('search.html: ' + idx.length + ' indexed pages');
     }
 }
