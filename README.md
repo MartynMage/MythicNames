@@ -16,13 +16,13 @@ I built this because naming D&D characters meant trawling through the same ten l
 
 ## Running it locally
 
-It's a static site, so just open `index.html` in a browser, or serve the folder with whatever you like (`npx http-server` works fine). The `/api/geo` endpoint won't exist locally — that's fine, the cookie banner falls back to showing itself.
-
-To run the Cloudflare bits locally too:
+Use wrangler — it matches what Cloudflare actually serves:
 
 ```bash
 npx wrangler pages dev .
 ```
+
+Links are extensionless (`/blog/wizard-names-guide`, not `.html`) because that's the form Cloudflare serves, so a plain static server will 404 on them. Wrangler also runs `/api/geo`, which the cookie banner uses to decide whether to show itself.
 
 ## Deploying
 

@@ -24,10 +24,12 @@ function lastmod(rel) {
     } catch (e) { return today; }
 }
 
+// Cloudflare Pages serves extensionless URLs (/foo.html 308s to /foo), so the
+// sitemap must list the form it actually serves or every entry is a redirect.
 function urlFor(rel) {
     if (rel === 'index.html') return SITE + '/';
     if (rel.endsWith('/index.html')) return SITE + '/' + rel.slice(0, -'index.html'.length);
-    return SITE + '/' + rel.replace(/\\/g, '/');
+    return SITE + '/' + rel.replace(/\\/g, '/').replace(/\.html$/, '');
 }
 
 function listHtml(dir) {
