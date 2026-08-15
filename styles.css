@@ -34,6 +34,7 @@ a:hover{color:var(--accent-amber)}
 .site-nav a:hover{color:var(--accent-gold)}
 
 /* Accessibility */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:9999;background:var(--accent-gold);color:var(--bg-deep);padding:0.75rem 1.25rem;font-family:'Cinzel',serif;border-radius:0 0 6px 0;text-decoration:none}
 .skip-link:focus{left:0}
 :focus-visible{outline:3px solid var(--accent-gold);outline-offset:2px;border-radius:2px}
@@ -49,6 +50,14 @@ a:hover{color:var(--accent-amber)}
 .related-link:hover{border-color:var(--accent-gold);transform:translateY(-2px)}
 .related-link .icon{font-size:2rem;margin-bottom:0.5rem}
 .related-link .label{font-family:'Cinzel',serif;color:var(--text-primary);font-size:0.85rem;text-align:center}
+
+/* Filter box on index pages */
+.filter-box{margin:1.5rem 0 0.5rem}
+.filter-box input{width:100%;padding:0.75rem 1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-primary);font-family:'Crimson Pro',Georgia,serif;font-size:1rem}
+.filter-box input:focus{outline:none;border-color:var(--accent-gold);box-shadow:0 0 0 3px var(--shadow-gold)}
+.filter-count{display:block;margin-top:0.5rem;font-size:0.85rem;color:var(--text-faded)}
+.filter-empty{padding:2rem 1rem;text-align:center;color:var(--text-faded);font-style:italic}
+[hidden]{display:none!important}
 
 /* Generator actions */
 .gen-actions{display:flex;justify-content:center;margin-top:0.75rem}

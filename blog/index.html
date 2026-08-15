@@ -74,6 +74,13 @@
         <h1 class="page-title">Fantasy Naming Blog</h1>
         <p class="page-subtitle">Guides, tips, and inspiration for naming your characters, places, and worlds</p>
 
+        <div class="filter-box">
+            <label for="postFilter" class="sr-only">Filter articles</label>
+            <input type="search" id="postFilter" placeholder="Filter articles — try &quot;elf&quot;, &quot;tavern&quot;, &quot;villain&quot;" autocomplete="off">
+            <span class="filter-count" id="filterCount" aria-live="polite"></span>
+        </div>
+        <div class="filter-empty" id="filterEmpty" hidden>No articles match that. Try a different word.</div>
+
         <div class="blog-grid">
             <a href="how-to-name-your-dnd-character" class="blog-card">
                 <h2 class="blog-card-title">How to Name Your D&D Character: A Complete Guide</h2>
@@ -219,6 +226,33 @@
             </div>
         </footer>
     </div>
+    <script>
+    // Client-side filter. Progressive enhancement: with JS off every card is
+    // still rendered and linked, so nothing is hidden from crawlers.
+    (function () {
+        var input = document.getElementById('postFilter');
+        var count = document.getElementById('filterCount');
+        var empty = document.getElementById('filterEmpty');
+        var cards = [].slice.call(document.querySelectorAll('.blog-grid .blog-card'));
+        if (!input || !cards.length) return;
+
+        var total = cards.length;
+        count.textContent = total + ' articles';
+
+        function apply() {
+            var q = input.value.trim().toLowerCase();
+            var shown = 0;
+            cards.forEach(function (card) {
+                var match = !q || card.textContent.toLowerCase().indexOf(q) > -1;
+                card.hidden = !match;
+                if (match) shown++;
+            });
+            empty.hidden = shown !== 0;
+            count.textContent = q ? shown + ' of ' + total + ' articles' : total + ' articles';
+        }
+        input.addEventListener('input', apply);
+    })();
+    </script>
     <script>
       if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
     </script>

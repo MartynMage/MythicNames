@@ -83,6 +83,13 @@
         <h1 class="page-title">Fantasy Name Generators</h1>
         <p class="page-subtitle">Generate authentic names for any fantasy race, creature, or location with pronunciations, meanings, and backstories</p>
 
+        <div class="filter-box">
+            <label for="genFilter" class="sr-only">Filter generators</label>
+            <input type="search" id="genFilter" placeholder="Filter generators — try &quot;elf&quot;, &quot;tavern&quot;, &quot;wizard&quot;" autocomplete="off">
+            <span class="filter-count" id="filterCount" aria-live="polite"></span>
+        </div>
+        <div class="filter-empty" id="filterEmpty" hidden>No generators match that. Try a different word.</div>
+
         <h2 class="category-title">🧝 Playable Race Names</h2>
         <div class="race-grid-page">
             <a href="elf-name-generator" class="race-card-link"><div class="race-icon">🧝</div><div class="race-name">Elf Names</div></a>
@@ -159,6 +166,44 @@
             </div>
         </footer>
     </div>
+    <script>
+    // Client-side filter. Category headings hide when they empty out.
+    (function () {
+        var input = document.getElementById('genFilter');
+        var count = document.getElementById('filterCount');
+        var empty = document.getElementById('filterEmpty');
+        var cards = [].slice.call(document.querySelectorAll('.race-card-link'));
+        var grids = [].slice.call(document.querySelectorAll('.race-grid-page'));
+        if (!input || !cards.length) return;
+
+        var total = cards.length;
+        count.textContent = total + ' generators';
+
+        function headingFor(grid) {
+            var el = grid.previousElementSibling;
+            return (el && el.classList.contains('category-title')) ? el : null;
+        }
+
+        function apply() {
+            var q = input.value.trim().toLowerCase();
+            var shown = 0;
+            cards.forEach(function (card) {
+                var match = !q || card.textContent.toLowerCase().indexOf(q) > -1;
+                card.hidden = !match;
+                if (match) shown++;
+            });
+            grids.forEach(function (grid) {
+                var any = [].slice.call(grid.querySelectorAll('.race-card-link')).some(function (c) { return !c.hidden; });
+                grid.hidden = !any;
+                var h = headingFor(grid);
+                if (h) h.hidden = !any;
+            });
+            empty.hidden = shown !== 0;
+            count.textContent = q ? shown + ' of ' + total + ' generators' : total + ' generators';
+        }
+        input.addEventListener('input', apply);
+    })();
+    </script>
     <script>
       if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
     </script>
