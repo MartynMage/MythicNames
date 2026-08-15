@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      (function(){try{var t=localStorage.getItem('mythicTheme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
+      gtag('js', new Date());
+      gtag('config', 'G-9C2LDVSHZZ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surname Generator | Fantasy Family &amp; Last Names | MythicNames</title>
+    <meta name="description" content="Generate fantasy surnames and family names — occupational, place-based and noble house names for D&amp;D and fiction.">
+    <meta name="keywords" content="surname generator, fantasy last names, family name generator, dnd surnames, house names">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mythicnames.io/generators/family-name-generator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mythicnames.io/generators/family-name-generator">
+    <meta property="og:title" content="Surname Generator | Fantasy Family &amp; Last Names | MythicNames">
+    <meta property="og:description" content="Generate fantasy surnames and family names — occupational, place-based and noble house names for D&amp;D and fiction.">
+    <meta property="og:image" content="https://mythicnames.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Surname Generator | Fantasy Family &amp; Last Names | MythicNames">
+    <meta name="twitter:description" content="Generate fantasy surnames and family names — occupational, place-based and noble house names for D&amp;D and fiction.">
+    <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"Surname Name Generator","description":"Generate fantasy surnames and family names — occupational, place-based and noble house names for D&D and fiction.","url":"https://mythicnames.io/generators/family-name-generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mythicnames.io/"},{"@type":"ListItem","position":2,"name":"Name Generators","item":"https://mythicnames.io/generators/"},{"@type":"ListItem","position":3,"name":"Surname Name Generator","item":"https://mythicnames.io/generators/family-name-generator"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where do surnames come from?","acceptedAnswer":{"@type":"Answer","text":"Historically from four sources: your trade, your home, your father, or a nickname. Picking one source and staying consistent makes a family or culture feel real."}},{"@type":"Question","name":"Should fantasy races use surnames?","acceptedAnswer":{"@type":"Answer","text":"It varies by setting. Dwarves and humans commonly do; elves often use house or lineage names instead; orcs and goblins frequently use earned epithets rather than inherited names."}},{"@type":"Question","name":"How do noble house names differ?","acceptedAnswer":{"@type":"Answer","text":"They are usually locational or invented, rarely occupational — a noble house is named for land it holds, not work it does. That contrast is useful for signalling class."}},{"@type":"Question","name":"Can I mix surname styles in one setting?","acceptedAnswer":{"@type":"Answer","text":"Yes, and you should. Different regions using different surname traditions is realistic and quietly communicates that the world is big."}}]}
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6481650173817853"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .generator-box{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+        .gen-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1rem}
+        .gen-control label{display:block;font-family:'Cinzel',serif;font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem}
+        .gen-control select{width:100%;padding:0.6rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-primary);font-family:'Crimson Pro',serif;font-size:1rem}
+        .gen-btn{width:100%;padding:1rem;font-family:'Cinzel',serif;font-size:1rem;font-weight:600;background:linear-gradient(135deg,var(--accent-gold),var(--accent-amber));color:var(--bg-deep);border:none;border-radius:6px;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.2s}
+        .gen-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--shadow-gold)}
+        .gen-results{margin-top:1.5rem}
+        .gen-name{background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+        .gen-name-text{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--text-primary)}
+        .gen-name-details{display:flex;gap:1rem;flex-wrap:wrap}
+        .gen-name-meaning{color:var(--accent-purple);font-size:0.9rem}
+        .gen-copy{padding:0.4rem 0.8rem;background:transparent;border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-secondary);cursor:pointer;font-size:0.8rem;transition:all 0.2s}
+        .gen-copy:hover{background:var(--accent-gold);border-color:var(--accent-gold);color:var(--bg-deep)}
+        .race-icon-large{font-size:4rem;text-align:center;margin-bottom:1rem}
+        .share-btn{padding:0.4rem 0.8rem;background:transparent;border:1px solid var(--accent-blue);border-radius:4px;color:var(--accent-blue);cursor:pointer;font-size:0.8rem;transition:all 0.2s;margin-left:0.5rem}
+        .share-btn:hover{background:var(--accent-blue);color:white}
+        .faq-section{margin-top:2rem}
+        .faq-item{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;margin-bottom:1rem;overflow:hidden}
+        .faq-question{padding:1rem;font-family:'Cinzel',serif;color:var(--accent-gold);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-question:hover{background:var(--bg-parchment)}
+        .faq-answer{padding:0 1rem 1rem;color:var(--text-secondary);display:none}
+        .faq-item.open .faq-answer{display:block}
+        .faq-toggle{transition:transform 0.3s}
+        .faq-item.open .faq-toggle{transform:rotate(180deg)}
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="container" id="main">
+        <header class="site-header">
+            <a href="../" class="logo-link"><img src="../logo.png" alt="MythicNames" class="logo-icon"><span class="logo">MythicNames</span></a>
+            <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
+        </header>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span>›</span> <a href="./">Name Generators</a> <span>›</span> <span>Surname Names</span></nav>
+        <article>
+            <div class="race-icon-large">📜</div>
+            <h1 class="page-title">Surname Name Generator</h1>
+            <p class="page-subtitle">Family names, house names and last names</p>
+            <div class="generator-box">
+                <div class="gen-controls">
+                    <div class="gen-control"><label for="variant">Origin</label><select id="variant"><option value="any">Any Surname</option><option value="occupational">Occupational</option><option value="locational">Place-Based</option><option value="noble">Noble House</option></select></div>
+                    <div class="gen-control"><label for="count">Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
+                </div>
+                <button class="gen-btn" onclick="generateNames()">Generate Surname Names</button>
+                <div class="gen-actions"><button type="button" class="gen-copy-all" onclick="copyAllNames()">Copy all names</button></div>
+                <div class="gen-results" id="results" aria-live="polite"></div>
+            </div>
+            <section class="article-content"><h2>About Surnames</h2><p>Surnames answer one of four questions: <strong>what you did, where you were from, who your father was, or what you looked like</strong>. Every real surname tradition is some mix of those four, which is why they feel grounded in a way invented names often do not.</p><h2>The Four Sources</h2><ul><li><strong>Occupational</strong> — Smith, Fletcher, Chandler</li><li><strong>Locational</strong> — Ashford, Underhill, Weston</li><li><strong>Patronymic</strong> — Aldricson, Mac Rian</li><li><strong>Descriptive</strong> — Strong, Blackwood, Swift</li></ul></section>
+            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Where do surnames come from?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Historically from four sources: your trade, your home, your father, or a nickname. Picking one source and staying consistent makes a family or culture feel real.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Should fantasy races use surnames?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">It varies by setting. Dwarves and humans commonly do; elves often use house or lineage names instead; orcs and goblins frequently use earned epithets rather than inherited names.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do noble house names differ?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">They are usually locational or invented, rarely occupational — a noble house is named for land it holds, not work it does. That contrast is useful for signalling class.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Can I mix surname styles in one setting?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Yes, and you should. Different regions using different surname traditions is realistic and quietly communicates that the world is big.</div></div></section>
+            <section class="related-generators"><h3>Related Name Generators</h3><div class="related-grid"><a href="human-name-generator" class="related-link"><span class="icon">👤</span><span class="label">Human Names</span></a>
+<a href="npc-name-generator" class="related-link"><span class="icon">🧑‍🌾</span><span class="label">NPC Names</span></a>
+<a href="knight-name-generator" class="related-link"><span class="icon">🛡️</span><span class="label">Knight Names</span></a>
+<a href="guild-name-generator" class="related-link"><span class="icon">🏛️</span><span class="label">Guild Names</span></a></div></section>
+        </article>
+        <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Names for Everything Else?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">The main generator handles characters, parties and whole kingdoms in one place.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
+        <footer class="site-footer"><p>© 2026 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap">Sitemap</a><a href="/privacy">Privacy</a></div></footer>
+    </div>
+    <script>
+    const D = {"occupational":{"patterns":["{trade}","{prefix}{trade2}","{trade}wright"],"pools":{"trade":["Cooper","Fletcher","Chandler","Tanner","Weaver","Mason","Thatcher","Salter","Dyer","Fowler","Brewer","Turner","Wainwright","Sawyer","Collier","Currier"],"prefix":["Iron","Wool","Silver","Copper","Stone","Glass","Leather","Amber"],"trade2":["smith","monger","wright","binder","worker","cutter","setter"]},"meanings":["the trade is three generations deep","nobody in the family does it now","they still own the workshop","the guild remembers the name","a hard trade, honestly kept","the name outlasted the craft","they were the best in the county","the tools are heirlooms","a family known for fair prices","they trained half the town"]},"locational":{"patterns":["{place}{ending}","{prep}{place}","{place}"],"pools":{"place":["Ash","Weston","Marsh","Thorn","Bram","Holt","Rye","Fen","Crag","Barrow","Hollow","Bridge","Green","Stone","North","Dun"],"ending":["ford","wood","field","hill","brook","moor","combe","ley","thwaite","worth"],"prep":["Under","Over","At","By"]},"meanings":["they left that place long ago","the village still bears the name","the land was lost to debt","they were the family there","named for a farm, not a manor","two branches, one feud","the place no longer exists","they returned after three generations","the name is older than the deed","nobody remembers why"]},"noble":{"patterns":["{root}{tail}","de {root}{tail}","{root}{tail} of {seat}"],"pools":{"root":["Vane","Ashcroft","Belham","Marlow","Thornbur","Ostr","Cald","Wexl","Peler","Drumm","Ravensc","Aldern","Falc","Mor"],"tail":["e","y","ay","oft","and","ith","ourne","ain"],"seat":["Greymarch","Ashfell","the Vale","Highwater","Duncrag","Thornhold"]},"meanings":["ennobled within living memory","the oldest house in the province","the line nearly ended twice","more debt than land","they married upward, repeatedly","a scandal is still spoken of","the seat is a ruin now","they hold a hereditary office","the crest predates the kingdom","quietly the wealthiest in the region"]}};
+    const r = a => a[Math.floor(Math.random() * a.length)];
+    const VARIANT_NAMES = {"occupational":"Occupational","locational":"Place-Based","noble":"Noble House"};
+
+    // Same name always yields the same meaning, so a name keeps its identity.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) { return pool[nameHash(name.toLowerCase()) % pool.length]; }
+
+    function generateName(variant) {
+        const v = variant === 'any' ? r(["occupational","locational","noble"]) : variant;
+        const data = D[v];
+        const pattern = r(data.patterns);
+        // Fill {slot} placeholders from that variant's pools.
+        const name = pattern.replace(/\{(\w+)\}/g, (m, key) => {
+            const pool = data.pools[key];
+            return pool && pool.length ? r(pool) : m;
+        });
+        // A pool entry can start lowercase ("the Thing Below"), so lift the
+        // first letter without touching the rest of the name.
+        const finalName = name.charAt(0).toUpperCase() + name.slice(1);
+        return { name: finalName, meaning: '"' + meaningFor(finalName, data.meanings) + '"', variant: VARIANT_NAMES[v] };
+    }
+
+    let lastNames = [];
+    function generateNames() {
+        const variant = document.getElementById('variant').value;
+        const count = parseInt(document.getElementById('count').value);
+        const results = document.getElementById('results');
+        let html = '';
+        const seen = new Set();
+        lastNames = [];
+        for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
+            const nm = generateName(variant);
+            if (seen.has(nm.name)) continue;
+            seen.add(nm.name);
+            lastNames.push(nm.name);
+            i++;
+            const safe = nm.name.replace(/'/g, "\\'");
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
+        }
+        gaEvent('generate_names', {variant: variant, count: count});
+        syncUrl();
+        results.innerHTML = html;
+    }
+
+    async function copyAllNames() {
+        if (!lastNames.length) return;
+        try {
+            await navigator.clipboard.writeText(lastNames.join("\n"));
+            gaEvent('copy_all_names', {count: lastNames.length});
+            const btn = document.querySelector('.gen-copy-all');
+            const original = btn.textContent;
+            btn.textContent = 'Copied ' + lastNames.length + ' names';
+            setTimeout(() => { btn.textContent = original; }, 1600);
+        } catch (e) {}
+    }
+
+    function settingIds() { return ['variant', 'count'].filter(id => document.getElementById(id)); }
+    function applyUrlSettings() {
+        let p;
+        try { p = new URLSearchParams(location.search); } catch (e) { return; }
+        settingIds().forEach(id => {
+            const val = p.get(id);
+            if (!val) return;
+            const el = document.getElementById(id);
+            if (Array.prototype.some.call(el.options, o => o.value === val)) el.value = val;
+        });
+    }
+    function syncUrl() {
+        try {
+            const p = new URLSearchParams(location.search);
+            settingIds().forEach(id => p.set(id, document.getElementById(id).value));
+            history.replaceState(null, '', location.pathname + '?' + p.toString());
+        } catch (e) {}
+    }
+
+    function gaEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'family'}, params || {}));
+    }
+    async function copyName(btn, name) { try { await navigator.clipboard.writeText(name); gaEvent('copy_name'); btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); } catch (e) {} }
+    function shareName(name) {
+        gaEvent('share_name');
+        const url = window.location.href.split('?')[0] + '?name=' + encodeURIComponent(name);
+        if (navigator.share) { navigator.share({ title: name + ' - Surname Name', text: 'Check out this name I generated: ' + name, url: url }); }
+        else { navigator.clipboard.writeText(url).then(() => alert('Link copied to clipboard!')); }
+    }
+    function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+    function showSharedName() {
+        var shared = null;
+        try { shared = new URLSearchParams(location.search).get('name'); } catch (e) {}
+        if (!shared) return;
+        var box = document.createElement('div');
+        box.className = 'shared-name';
+        box.innerHTML = '<span class="shared-name-label">Shared with you</span>' +
+            '<span class="shared-name-text"></span>' +
+            '<button class="gen-copy" type="button">Copy</button>';
+        box.querySelector('.shared-name-text').textContent = shared;
+        box.querySelector('button').addEventListener('click', function (e) { copyName(e.target, shared); });
+        var results = document.getElementById('results');
+        results.parentNode.insertBefore(box, results);
+        gaEvent('view_shared_name');
+    }
+    applyUrlSettings();
+    showSharedName();
+    generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
+</body>
+</html>

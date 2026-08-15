@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      (function(){try{var t=localStorage.getItem('mythicTheme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
+      gtag('js', new Date());
+      gtag('config', 'G-9C2LDVSHZZ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPC Name Generator | D&amp;D Commoner &amp; Shopkeeper Names | MythicNames</title>
+    <meta name="description" content="Generate D&amp;D NPC names on the spot — commoners, shopkeepers, guards and nobles, each with a one-line hook.">
+    <meta name="keywords" content="npc name generator, dnd npc names, commoner names, shopkeeper names, random npc generator">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mythicnames.io/generators/npc-name-generator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mythicnames.io/generators/npc-name-generator">
+    <meta property="og:title" content="NPC Name Generator | D&amp;D Commoner &amp; Shopkeeper Names | MythicNames">
+    <meta property="og:description" content="Generate D&amp;D NPC names on the spot — commoners, shopkeepers, guards and nobles, each with a one-line hook.">
+    <meta property="og:image" content="https://mythicnames.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NPC Name Generator | D&amp;D Commoner &amp; Shopkeeper Names | MythicNames">
+    <meta name="twitter:description" content="Generate D&amp;D NPC names on the spot — commoners, shopkeepers, guards and nobles, each with a one-line hook.">
+    <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"NPC Name Generator","description":"Generate D&D NPC names on the spot — commoners, shopkeepers, guards and nobles, each with a one-line hook.","url":"https://mythicnames.io/generators/npc-name-generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mythicnames.io/"},{"@type":"ListItem","position":2,"name":"Name Generators","item":"https://mythicnames.io/generators/"},{"@type":"ListItem","position":3,"name":"NPC Name Generator","item":"https://mythicnames.io/generators/npc-name-generator"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I name an NPC quickly?","acceptedAnswer":{"@type":"Answer","text":"Pair a short given name with an occupational surname. It is instantly pronounceable, tells the players what the NPC does, and takes no thought at the table."}},{"@type":"Question","name":"Why do occupational surnames work so well?","acceptedAnswer":{"@type":"Answer","text":"Because that is where real surnames came from. Smith, Cooper, Fletcher and Baker were jobs first, so they carry an automatic ring of authenticity."}},{"@type":"Question","name":"Should every NPC have a full name?","acceptedAnswer":{"@type":"Answer","text":"No. A shopkeeper the party will meet once can just be Old Meg. Save full names for people who will recur."}},{"@type":"Question","name":"How do I make an NPC memorable?","acceptedAnswer":{"@type":"Answer","text":"Attach one concrete detail to the name — a habit, a grudge, a physical tic. Players remember the detail and the name comes with it."}}]}
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6481650173817853"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .generator-box{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+        .gen-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1rem}
+        .gen-control label{display:block;font-family:'Cinzel',serif;font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem}
+        .gen-control select{width:100%;padding:0.6rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-primary);font-family:'Crimson Pro',serif;font-size:1rem}
+        .gen-btn{width:100%;padding:1rem;font-family:'Cinzel',serif;font-size:1rem;font-weight:600;background:linear-gradient(135deg,var(--accent-gold),var(--accent-amber));color:var(--bg-deep);border:none;border-radius:6px;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.2s}
+        .gen-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--shadow-gold)}
+        .gen-results{margin-top:1.5rem}
+        .gen-name{background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+        .gen-name-text{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--text-primary)}
+        .gen-name-details{display:flex;gap:1rem;flex-wrap:wrap}
+        .gen-name-meaning{color:var(--accent-purple);font-size:0.9rem}
+        .gen-copy{padding:0.4rem 0.8rem;background:transparent;border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-secondary);cursor:pointer;font-size:0.8rem;transition:all 0.2s}
+        .gen-copy:hover{background:var(--accent-gold);border-color:var(--accent-gold);color:var(--bg-deep)}
+        .race-icon-large{font-size:4rem;text-align:center;margin-bottom:1rem}
+        .share-btn{padding:0.4rem 0.8rem;background:transparent;border:1px solid var(--accent-blue);border-radius:4px;color:var(--accent-blue);cursor:pointer;font-size:0.8rem;transition:all 0.2s;margin-left:0.5rem}
+        .share-btn:hover{background:var(--accent-blue);color:white}
+        .faq-section{margin-top:2rem}
+        .faq-item{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;margin-bottom:1rem;overflow:hidden}
+        .faq-question{padding:1rem;font-family:'Cinzel',serif;color:var(--accent-gold);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-question:hover{background:var(--bg-parchment)}
+        .faq-answer{padding:0 1rem 1rem;color:var(--text-secondary);display:none}
+        .faq-item.open .faq-answer{display:block}
+        .faq-toggle{transition:transform 0.3s}
+        .faq-item.open .faq-toggle{transform:rotate(180deg)}
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="container" id="main">
+        <header class="site-header">
+            <a href="../" class="logo-link"><img src="../logo.png" alt="MythicNames" class="logo-icon"><span class="logo">MythicNames</span></a>
+            <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
+        </header>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span>›</span> <a href="./">Name Generators</a> <span>›</span> <span>NPC Names</span></nav>
+        <article>
+            <div class="race-icon-large">🧑‍🌾</div>
+            <h1 class="page-title">NPC Name Generator</h1>
+            <p class="page-subtitle">Instant names for commoners, traders and nobles</p>
+            <div class="generator-box">
+                <div class="gen-controls">
+                    <div class="gen-control"><label for="variant">Station</label><select id="variant"><option value="any">Any NPC</option><option value="commoner">Commoner & Trader</option><option value="guard">Guard & Soldier</option><option value="noble">Noble & Official</option></select></div>
+                    <div class="gen-control"><label for="count">Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
+                </div>
+                <button class="gen-btn" onclick="generateNames()">Generate NPC Names</button>
+                <div class="gen-actions"><button type="button" class="gen-copy-all" onclick="copyAllNames()">Copy all names</button></div>
+                <div class="gen-results" id="results" aria-live="polite"></div>
+            </div>
+            <section class="article-content"><h2>About NPC Names</h2><p>NPC names have one job: <strong>be sayable and memorable the first time</strong>. A player will hear it once, across a table, over dice noise. Two syllables and a trade beats an elaborate invented name every time.</p><h2>Naming Patterns</h2><ul><li><strong>Name plus trade</strong> — Bram Cooper, Hal Fletcher</li><li><strong>Name plus quirk</strong> — how the village describes them</li><li><strong>Keep it short</strong> — you will improvise this one under pressure</li></ul></section>
+            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do I name an NPC quickly?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Pair a short given name with an occupational surname. It is instantly pronounceable, tells the players what the NPC does, and takes no thought at the table.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Why do occupational surnames work so well?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Because that is where real surnames came from. Smith, Cooper, Fletcher and Baker were jobs first, so they carry an automatic ring of authenticity.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Should every NPC have a full name?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">No. A shopkeeper the party will meet once can just be Old Meg. Save full names for people who will recur.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do I make an NPC memorable?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Attach one concrete detail to the name — a habit, a grudge, a physical tic. Players remember the detail and the name comes with it.</div></div></section>
+            <section class="related-generators"><h3>Related Name Generators</h3><div class="related-grid"><a href="human-name-generator" class="related-link"><span class="icon">👤</span><span class="label">Human Names</span></a>
+<a href="town-name-generator" class="related-link"><span class="icon">🏘️</span><span class="label">Town Names</span></a>
+<a href="tavern-name-generator" class="related-link"><span class="icon">🍺</span><span class="label">Tavern Names</span></a>
+<a href="guild-name-generator" class="related-link"><span class="icon">🏛️</span><span class="label">Guild Names</span></a></div></section>
+        </article>
+        <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Names for Everything Else?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">The main generator handles characters, parties and whole kingdoms in one place.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
+        <footer class="site-footer"><p>© 2026 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap">Sitemap</a><a href="/privacy">Privacy</a></div></footer>
+    </div>
+    <script>
+    const D = {"commoner":{"patterns":["{given} {trade}","{adj} {given}","{given} the {quirk}"],"pools":{"given":["Bram","Hal","Meg","Tam","Josa","Nell","Wat","Sera","Rob","Ida","Ned","Cass","Perrin","Mattie","Osric","Beth","Corin","Dilla"],"trade":["Cooper","Fletcher","Baker","Tanner","Smith","Miller","Weaver","Chandler","Mason","Potter","Thatcher","Carter","Salter","Dyer"],"adj":["Old","Young","Long","Little","Fat","Quiet"],"quirk":["Elder","Younger","Widow","Limp","Whistler","Quick","Slow","Kind"]},"meanings":["knows everyone's business","overcharges strangers by habit","owes money in the next town","genuinely helpful, rare here","talks constantly while working","has a son in the militia","lost the shop once, bought it back","suspicious of anyone armed","will trade information for drink","the best in three villages, they say"]},"guard":{"patterns":["{rank} {given} {surname}","{given} {surname}","{given} the {quirk}"],"pools":{"rank":["Sergeant","Corporal","Captain","Watchman","Sentry"],"given":["Dav","Rurik","Talia","Bren","Ollan","Mira","Garrick","Wynn","Kess","Roderic","Halvard","Ines"],"surname":["Stone","Hale","Marsh","Blackwood","Ford","Ironside","Vale","Harrow","Grange","Thorne"],"quirk":["Steady","Sour","Sleepless","Straight","Unbribed","Tired"]},"meanings":["twelve years on the same gate","takes bribes, but honestly","passed over for promotion twice","genuinely cannot be bought","counting down to a pension","served in a war nobody mentions","knows every smuggler by name","writes everything in a little book","hates the captain openly","first through the door, always"]},"noble":{"patterns":["{title} {given} {house}","{given} of {house}","{title} {given}"],"pools":{"title":["Lord","Lady","Baron","Baroness","Magistrate","Steward","Reeve","Chancellor"],"given":["Aldric","Rosamund","Emeric","Isolde","Corwin","Aveline","Percival","Marguerite","Everard","Cecily"],"house":["Vane","Ashcroft","Belhame","Marlow","Thornbury","Ostry","Calder","Wexley","Peleran","Drummond"]},"meanings":["third in line, resents it","the title is newer than the money","the money is gone, the title is not","married into everything","genuinely competent, oddly","holds a grudge from a wedding","collects something expensive","has not visited the estate in years","the servants run the household","owes a favour to someone dangerous"]}};
+    const r = a => a[Math.floor(Math.random() * a.length)];
+    const VARIANT_NAMES = {"commoner":"Commoner & Trader","guard":"Guard & Soldier","noble":"Noble & Official"};
+
+    // Same name always yields the same meaning, so a name keeps its identity.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) { return pool[nameHash(name.toLowerCase()) % pool.length]; }
+
+    function generateName(variant) {
+        const v = variant === 'any' ? r(["commoner","guard","noble"]) : variant;
+        const data = D[v];
+        const pattern = r(data.patterns);
+        // Fill {slot} placeholders from that variant's pools.
+        const name = pattern.replace(/\{(\w+)\}/g, (m, key) => {
+            const pool = data.pools[key];
+            return pool && pool.length ? r(pool) : m;
+        });
+        // A pool entry can start lowercase ("the Thing Below"), so lift the
+        // first letter without touching the rest of the name.
+        const finalName = name.charAt(0).toUpperCase() + name.slice(1);
+        return { name: finalName, meaning: '"' + meaningFor(finalName, data.meanings) + '"', variant: VARIANT_NAMES[v] };
+    }
+
+    let lastNames = [];
+    function generateNames() {
+        const variant = document.getElementById('variant').value;
+        const count = parseInt(document.getElementById('count').value);
+        const results = document.getElementById('results');
+        let html = '';
+        const seen = new Set();
+        lastNames = [];
+        for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
+            const nm = generateName(variant);
+            if (seen.has(nm.name)) continue;
+            seen.add(nm.name);
+            lastNames.push(nm.name);
+            i++;
+            const safe = nm.name.replace(/'/g, "\\'");
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
+        }
+        gaEvent('generate_names', {variant: variant, count: count});
+        syncUrl();
+        results.innerHTML = html;
+    }
+
+    async function copyAllNames() {
+        if (!lastNames.length) return;
+        try {
+            await navigator.clipboard.writeText(lastNames.join("\n"));
+            gaEvent('copy_all_names', {count: lastNames.length});
+            const btn = document.querySelector('.gen-copy-all');
+            const original = btn.textContent;
+            btn.textContent = 'Copied ' + lastNames.length + ' names';
+            setTimeout(() => { btn.textContent = original; }, 1600);
+        } catch (e) {}
+    }
+
+    function settingIds() { return ['variant', 'count'].filter(id => document.getElementById(id)); }
+    function applyUrlSettings() {
+        let p;
+        try { p = new URLSearchParams(location.search); } catch (e) { return; }
+        settingIds().forEach(id => {
+            const val = p.get(id);
+            if (!val) return;
+            const el = document.getElementById(id);
+            if (Array.prototype.some.call(el.options, o => o.value === val)) el.value = val;
+        });
+    }
+    function syncUrl() {
+        try {
+            const p = new URLSearchParams(location.search);
+            settingIds().forEach(id => p.set(id, document.getElementById(id).value));
+            history.replaceState(null, '', location.pathname + '?' + p.toString());
+        } catch (e) {}
+    }
+
+    function gaEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'npc'}, params || {}));
+    }
+    async function copyName(btn, name) { try { await navigator.clipboard.writeText(name); gaEvent('copy_name'); btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); } catch (e) {} }
+    function shareName(name) {
+        gaEvent('share_name');
+        const url = window.location.href.split('?')[0] + '?name=' + encodeURIComponent(name);
+        if (navigator.share) { navigator.share({ title: name + ' - NPC Name', text: 'Check out this name I generated: ' + name, url: url }); }
+        else { navigator.clipboard.writeText(url).then(() => alert('Link copied to clipboard!')); }
+    }
+    function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+    function showSharedName() {
+        var shared = null;
+        try { shared = new URLSearchParams(location.search).get('name'); } catch (e) {}
+        if (!shared) return;
+        var box = document.createElement('div');
+        box.className = 'shared-name';
+        box.innerHTML = '<span class="shared-name-label">Shared with you</span>' +
+            '<span class="shared-name-text"></span>' +
+            '<button class="gen-copy" type="button">Copy</button>';
+        box.querySelector('.shared-name-text').textContent = shared;
+        box.querySelector('button').addEventListener('click', function (e) { copyName(e.target, shared); });
+        var results = document.getElementById('results');
+        results.parentNode.insertBefore(box, results);
+        gaEvent('view_shared_name');
+    }
+    applyUrlSettings();
+    showSharedName();
+    generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
+</body>
+</html>
