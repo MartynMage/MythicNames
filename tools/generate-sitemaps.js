@@ -64,3 +64,59 @@ const indexXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
     indexEntries.join('\n') + '\n</sitemapindex>\n';
 fs.writeFileSync(path.join(root, 'sitemap.xml'), indexXml);
 console.log('sitemap.xml: index of ' + indexEntries.length + ' sitemaps');
+
+// ---- The human-readable sitemap.html -------------------------------------
+// Its link lists live between <!-- AUTO:key --> markers and are rebuilt here,
+// so the page can never drift from what is actually on disk.
+
+const GROUPS = {
+    races: ['elf', 'dwarf', 'orc', 'human', 'halfling', 'gnome', 'tiefling', 'dragonborn', 'half-elf', 'drow', 'goblin'],
+    creatures: ['fairy', 'angel', 'demon', 'vampire'],
+    world: ['tavern', 'kingdom', 'ship'],
+    archetypes: ['wizard', 'knight', 'villain'],
+};
+const ICONS = {
+    elf: '🧝', dwarf: '⛏️', orc: '⚔️', human: '👤', halfling: '🧑‍🌾', gnome: '🎩',
+    tiefling: '😈', dragonborn: '🐲', 'half-elf': '🌗', drow: '🕷️', goblin: '👹',
+    fairy: '🧚', angel: '👼', demon: '👿', vampire: '🧛',
+    tavern: '🍺', kingdom: '👑', ship: '⛵',
+    wizard: '🧙', knight: '🛡️', villain: '💀',
+};
+const titleCase = s => s.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('-');
+
+function readTitle(rel) {
+    const m = fs.readFileSync(path.join(root, rel), 'utf8').match(/<title>([^<]*)<\/title>/);
+    return m ? m[1].replace(/\s*\|\s*MythicNames.*$/, '').trim() : rel;
+}
+
+const htmlPath = path.join(root, 'sitemap.html');
+if (fs.existsSync(htmlPath)) {
+    let page = fs.readFileSync(htmlPath, 'utf8');
+    const eol = page.includes('\r\n') ? '\r\n' : '\n';
+    const link = (href, icon, label) =>
+        `                <a href="${href}" class="sitemap-link"><span class="icon">${icon}</span><span class="label">${label}</span></a>`;
+
+    const blocks = {};
+    for (const [key, slugs] of Object.entries(GROUPS)) {
+        blocks[key] = slugs
+            .filter(s => fs.existsSync(path.join(root, 'generators', s + '-name-generator.html')))
+            .map(s => link(`generators/${s}-name-generator`, ICONS[s] || '📄', titleCase(s) + ' Name Generator'))
+            .join(eol);
+    }
+    blocks.blog = listHtml('blog')
+        .filter(f => !f.endsWith('index.html'))
+        .sort()
+        .map(f => link(f.replace(/\.html$/, ''), '📝', readTitle(f)))
+        .join(eol);
+
+    let filled = 0;
+    for (const [key, body] of Object.entries(blocks)) {
+        const re = new RegExp('(<!-- AUTO:' + key + ' -->)[\\s\\S]*?(<!-- /AUTO:' + key + ' -->)');
+        if (!re.test(page)) continue;
+        page = page.replace(re, (m, a, b) => a + eol + body + eol + '                ' + b);
+        filled++;
+    }
+    fs.writeFileSync(htmlPath, page);
+    const count = (page.match(/class="sitemap-link"/g) || []).length;
+    console.log(`sitemap.html: ${filled} sections, ${count} links`);
+}
