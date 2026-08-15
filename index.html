@@ -310,6 +310,12 @@
         .modal-stat-label{font-size:0.65rem;color:var(--text-faded);text-transform:uppercase;letter-spacing:0.1em}
         .modal-stat-value{font-family:'Cinzel',serif;font-size:0.95rem;color:var(--text-primary)}
         .modal-actions{display:flex;gap:0.75rem;padding:1.1rem 1.35rem;border-top:1px solid var(--border-subtle);flex-wrap:wrap}
+        /* Backup panel */
+        .backup-panel{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1rem 1.15rem;margin-bottom:1rem}
+        .backup-text{display:flex;flex-direction:column;gap:0.2rem;flex:1 1 260px}
+        .backup-text strong{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--accent-gold)}
+        .backup-text span{font-size:0.85rem;color:var(--text-secondary);line-height:1.5}
+        .backup-actions{display:flex;gap:0.5rem;flex-wrap:wrap}
         /* Campaign Manager */
         .campaign-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1rem;margin-bottom:0.75rem}
         .campaign-card.active{border-color:var(--accent-gold)}
@@ -793,17 +799,28 @@
         
         <!-- Campaign Manager Tab -->
         <div class="tab-content" id="tab-campaign">
-            <div class="info-box">Save parties, characters, and worlds to campaigns. Data is stored locally in your browser.</div>
+            <div class="info-box">Save parties, characters, and worlds to campaigns. Everything is stored in this browser only — back it up below.</div>
             <div class="controls-panel">
                 <div class="control-row">
                     <div class="control-group">
-                        <label>Campaign Name</label>
+                        <label for="newCampaignName">Campaign Name</label>
                         <input type="text" id="newCampaignName" placeholder="e.g., Dragon's Lair Campaign">
                     </div>
                     <div class="control-group" style="justify-content:flex-end;">
                         <label>&nbsp;</label>
                         <button type="button" class="generate-btn" onclick="createCampaign()" style="width:100%">Create Campaign</button>
                     </div>
+                </div>
+            </div>
+            <div class="backup-panel">
+                <div class="backup-text">
+                    <strong>Back up your data</strong>
+                    <span>Campaigns, favourites and history live in this browser. Clearing your browsing data wipes them, and they don't follow you to another device.</span>
+                </div>
+                <div class="backup-actions">
+                    <button type="button" class="secondary-btn" onclick="exportData()">⬇️ Export backup</button>
+                    <button type="button" class="secondary-btn" onclick="document.getElementById('importFile').click()">⬆️ Import backup</button>
+                    <input type="file" id="importFile" accept="application/json,.json" class="sr-only" onchange="importData(this)">
                 </div>
             </div>
             <div id="campaignList"></div>
@@ -2061,10 +2078,70 @@
         try { await navigator.clipboard.writeText(names); showToast('All names copied!'); } catch(e) {}
     }
     
+    // ============ BACKUP / RESTORE ============
+    // Everything the app knows lives in localStorage, so give people a way to
+    // get it out and back in again.
+    const BACKUP_KEYS = ['mythicCampaigns', 'mythicActiveCampaign', 'mythicFavorites', 'mythicHistory'];
+
+    function exportData() {
+        const payload = {format: 'mythicnames-backup', version: 1, exported: new Date().toISOString(), data: {}};
+        BACKUP_KEYS.forEach(k => {
+            const v = localStorage.getItem(k);
+            if (v !== null) payload.data[k] = v;
+        });
+        const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mythicnames-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        gaEvent('export_backup');
+        showToast('Backup downloaded');
+    }
+
+    function importData(input) {
+        const file = input.files && input.files[0];
+        input.value = ''; // let the same file be picked again later
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            let payload;
+            try { payload = JSON.parse(reader.result); }
+            catch (e) { showToast('That file is not valid JSON'); return; }
+            if (!payload || payload.format !== 'mythicnames-backup' || !payload.data) {
+                showToast('That does not look like a MythicNames backup');
+                return;
+            }
+            const counts = summariseBackup(payload.data);
+            if (!confirm('Restore this backup?\n\n' + counts + '\n\nThis replaces what is currently in this browser.')) return;
+            BACKUP_KEYS.forEach(k => {
+                if (typeof payload.data[k] === 'string') localStorage.setItem(k, payload.data[k]);
+            });
+            gaEvent('import_backup');
+            showToast('Backup restored — reloading');
+            setTimeout(() => location.reload(), 800);
+        };
+        reader.onerror = () => showToast('Could not read that file');
+        reader.readAsText(file);
+    }
+
+    function summariseBackup(data) {
+        const count = (key) => {
+            try { const v = JSON.parse(data[key] || '[]'); return Array.isArray(v) ? v.length : 0; }
+            catch (e) { return 0; }
+        };
+        return count('mythicCampaigns') + ' campaigns, ' +
+               count('mythicFavorites') + ' favourites, ' +
+               count('mythicHistory') + ' names in history';
+    }
+
     // ============ CAMPAIGN MANAGER ============
     let campaigns = JSON.parse(localStorage.getItem('mythicCampaigns') || '[]');
     let activeCampaignId = localStorage.getItem('mythicActiveCampaign') || null;
-    
+
     function createCampaign() {
         const nameInput = document.getElementById('newCampaignName');
         const name = nameInput.value.trim();
