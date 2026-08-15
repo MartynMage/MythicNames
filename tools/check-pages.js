@@ -80,6 +80,15 @@ for (const p of walk(root)) {
         if (desc) descs.set(desc, (descs.get(desc) || []).concat(rel));
     }
 
+    // ---- inline CSS must balance ----
+    // An unclosed brace kills every rule after it and fails silently, which
+    // once left the homepage completely unstyled.
+    for (const m of raw.matchAll(/<style>([\s\S]*?)<\/style>/g)) {
+        const open = (m[1].match(/\{/g) || []).length;
+        const close = (m[1].match(/\}/g) || []).length;
+        if (open !== close) add(`inline CSS unbalanced: ${open} { vs ${close} }`);
+    }
+
     // ---- structured data must parse, or Google silently drops it ----
     for (const m of raw.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
         try { JSON.parse(m[1].trim()); }
