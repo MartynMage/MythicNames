@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      (function(){try{var t=localStorage.getItem('mythicTheme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
+      gtag('js', new Date());
+      gtag('config', 'G-9C2LDVSHZZ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&amp;D NPC Names: The Name + Trade Formula &amp; 60+ Table-Ready Names | MythicNames Blog</title>
+    <meta name="description" content="How to name an NPC in five seconds without breaking the scene: the name-plus-trade formula, why occupational surnames work, sayability, and the phone-book method.">
+    <meta name="keywords" content="dnd npc names, npc name generator, quick npc names, dm npc naming, tavern keeper names, fantasy npc names">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mythicnames.io/blog/dnd-npc-names">
+    <link rel="alternate" type="application/rss+xml" title="MythicNames Blog" href="/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mythicnames.io/blog/dnd-npc-names">
+    <meta property="og:title" content="D&amp;D NPC Names: The Name + Trade Formula &amp; 60+ Table-Ready Names | MythicNames Blog">
+    <meta property="og:description" content="How to name an NPC in five seconds without breaking the scene: the name-plus-trade formula, why occupational surnames work, sayability, and the phone-book method.">
+    <meta property="og:image" content="https://mythicnames.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="D&amp;D NPC Names: The Name + Trade Formula &amp; 60+ Table-Ready Names | MythicNames Blog">
+    <meta name="twitter:description" content="How to name an NPC in five seconds without breaking the scene: the name-plus-trade formula, why occupational surnames work, sayability, and the phone-book method.">
+    <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"D&D NPC Names: The Name + Trade Formula and 60+ Table-Ready Names","description":"How to name an NPC in five seconds without breaking the scene: the name-plus-trade formula, why occupational surnames work, sayability, and the phone-book method.","url":"https://mythicnames.io/blog/dnd-npc-names","datePublished":"2026-08-15","dateModified":"2026-08-15","image":"https://mythicnames.io/og-image.png","author":{"@type":"Organization","name":"MythicNames"},"publisher":{"@type":"Organization","name":"MythicNames"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://mythicnames.io/blog/dnd-npc-names"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mythicnames.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://mythicnames.io/blog/"},{"@type":"ListItem","position":3,"name":"D&D NPC Names: The Name + Trade Formula and 60+ Table-Ready Names","item":"https://mythicnames.io/blog/dnd-npc-names"}]}
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6481650173817853"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .article-content h2{font-family:'Cinzel',serif;color:var(--accent-gold);font-size:1.4rem;margin:2rem 0 1rem}
+        .article-content h3{font-family:'Cinzel',serif;color:var(--text-primary);font-size:1.1rem;margin:1.5rem 0 0.75rem}
+        .article-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:1rem}
+        .article-content ul,.article-content ol{color:var(--text-secondary);margin:1rem 0;padding-left:1.5rem}
+        .article-content li{margin-bottom:0.5rem;line-height:1.6}
+        .article-content a{text-decoration:underline}
+        .name-examples{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0}
+        .name-example{background:var(--bg-card);border:1px solid var(--border-subtle);padding:0.5rem 1rem;border-radius:6px;font-family:'Cinzel',serif;color:var(--text-primary)}
+        .related-posts{margin-top:2.5rem}
+        .related-posts h2{font-family:'Cinzel',serif;color:var(--accent-gold);font-size:1.4rem;margin:2rem 0 1rem}
+        .faq-section{margin-top:2rem}
+        .faq-item{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;margin-bottom:1rem;overflow:hidden}
+        .faq-question{padding:1rem;font-family:'Cinzel',serif;color:var(--accent-gold);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-question:hover{background:var(--bg-parchment)}
+        .faq-answer{padding:0 1rem 1rem;color:var(--text-secondary);display:none}
+        .faq-item.open .faq-answer{display:block}
+        .faq-toggle{transition:transform 0.3s}
+        .faq-item.open .faq-toggle{transform:rotate(180deg)}
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="container" id="main">
+        <header class="site-header">
+            <a href="../" class="logo-link"><img src="../logo.webp" alt="MythicNames" class="logo-icon" width="56" height="56" decoding="async"><span class="logo">MythicNames</span></a>
+            <nav class="site-nav"><a href="../">Generator</a><a href="../generators/">All Generators</a><a href="./">Blog</a></nav>
+        </header>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span>›</span> <a href="./">Blog</a> <span>›</span> <span>D&amp;D NPC Names: Naming Fast at the Table</span></nav>
+        <article>
+            <div style="font-size:3rem;text-align:center;margin-bottom:1rem">🎭</div>
+            <h1 class="page-title">D&amp;D NPC Names: How to Name Anyone in Five Seconds</h1>
+            <p class="post-meta"><time datetime="2026-08-15">Published 15 August 2026</time></p>
+            <p class="page-subtitle">The name-plus-trade formula, why occupational surnames sound instantly real, and a phone-book method that means you never freeze mid-scene again.</p>
+            <nav class="toc" aria-labelledby="toc-title">
+                <p class="toc-title" id="toc-title">On this page</p>
+                <ul>
+                    <li><a href="#the-five-second-problem">The Five-Second Problem</a></li>
+                    <li><a href="#the-name-plus-trade-formula">The Name + Trade Formula</a></li>
+                    <li><a href="#why-occupational-surnames-feel-authentic">Why Occupational Surnames Feel Authentic</a></li>
+                    <li><a href="#keeping-names-sayable">Keeping Names Sayable</a></li>
+                    <li><a href="#the-phone-book-method">The Phone-Book Method</a></li>
+                    <li><a href="#a-name-grid-you-can-steal">A Name Grid You Can Steal</a></li>
+                    <li><a href="#tavern-and-inn-staff">Tavern and Inn Staff</a></li>
+                    <li><a href="#guards-soldiers-and-watchmen">Guards, Soldiers and Watchmen</a></li>
+                    <li><a href="#merchants-and-craftsfolk">Merchants and Craftsfolk</a></li>
+                    <li><a href="#nobles-clerks-and-clergy">Nobles, Clerks and Clergy</a></li>
+                    <li><a href="#thieves-and-the-desperate">Thieves and the Desperate</a></li>
+                    <li><a href="#recurring-npcs-deserve-fuller-names">Recurring NPCs Deserve Fuller Names</a></li>
+                    <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+                </ul>
+            </nav>
+            <section class="article-content">
+        <p>A player asks the stablehand his name. You have about five seconds before the pause becomes a joke, and whatever comes out of your mouth is now canon. Most of the bad NPC names in the history of the hobby were produced in exactly this moment — the panicked syllable, the accidental anagram of the last thing you ate, the third consecutive man in this village called Bran.</p>
+        <p>The fix is not a better imagination. It is a system light enough to run while you are also holding a rules question, an initiative order and a passive Perception check in your head. What follows is that system: one formula, one habit, and a prepped list you can read off without looking like you are reading.</p>
+
+        <h2 id="the-five-second-problem">The Five-Second Problem</h2>
+        <p>Improvised NPC names fail in three predictable ways, and knowing the failure modes is most of the cure.</p>
+        <ul>
+            <li><strong>The blank.</strong> You reach for a name and get nothing, so you stall — "uh, he's… Bob" — and the NPC is dead on arrival. A named character your table laughed at cannot later be a serious quest-giver.</li>
+            <li><strong>The collision.</strong> You produce a perfectly good name that begins with the same sound as three others already in play. Your players now think Maren the smith, Marta the priest and Merrick the guard are the same person, and they are not wrong to.</li>
+            <li><strong>The overreach.</strong> You panic in the other direction and produce something enormous — <em>Xanthelorien Vasparthe</em> — for a woman who sells turnips. Now everyone assumes she matters. She does not. You have just spent your table's attention on a turnip.</li>
+        </ul>
+        <p>Every technique below is aimed at one of those three.</p>
+
+        <h2 id="the-name-plus-trade-formula">The Name + Trade Formula</h2>
+        <p>The formula is this: <strong>one short given name plus what they do</strong>. Not a surname — a job, said as though it were a surname.</p>
+        <p><em>Hal the Cooper. Bess Fletcher. Odo, who keeps the ferry. Winna Baker.</em></p>
+        <p>This works because it solves the naming problem and the characterisation problem in the same breath. The moment you say "Bess Fletcher", your players know there is a woman, she makes arrows, and the arrows are probably for sale. You have delivered a name, an occupation, a plot hook and an inventory in three syllables, and you did not have to invent anything — you looked around the room the NPC was standing in and named them after it.</p>
+        <p>Three rules keep it clean:</p>
+        <ol>
+            <li><strong>Given name first, short and blunt.</strong> One or two syllables. Hal, Bess, Odo, Winna, Garr, Tibb, Ana, Kel, Mott, Ferrin.</li>
+            <li><strong>Trade second, from what is physically present.</strong> If they are behind a bar, they are a Tapp or a Brewer. If they are holding a hammer, a Smith or a Wright. The scene has already done the work.</li>
+            <li><strong>Do not decorate.</strong> No epithets, no titles, no clan. Save all of that — it is your signal for the NPCs who matter.</li>
+        </ol>
+
+        <h2 id="why-occupational-surnames-feel-authentic">Why Occupational Surnames Feel Authentic</h2>
+        <p>They feel authentic because they are. A large share of familiar English surnames began as job descriptions in the medieval period, when a village needed to tell one John from another and reached for the most obvious distinguishing fact available. The vocabulary is genuinely old, and it is genuinely full of jobs that no longer exist — which is precisely why it sounds like the past.</p>
+        <ul>
+            <li><strong>Smith</strong> — Old English <em>smiþ</em>, a metalworker. The commonest surname in England, because every settlement needed one.</li>
+            <li><strong>Wright</strong> — Old English <em>wyrhta</em>, "worker, maker". Survives compounded: wheelwright, cartwright, shipwright, playwright.</li>
+            <li><strong>Fletcher</strong> — from Old French <em>flechier</em>, an arrow-maker (<em>flèche</em>, arrow).</li>
+            <li><strong>Cooper</strong> — a maker of barrels and casks.</li>
+            <li><strong>Chandler</strong> — a candle-maker, later a general dealer in supplies; a ship's chandler still is.</li>
+            <li><strong>Fuller</strong> — one who fulled cloth, cleaning and thickening it. The same job gives the surnames Walker and Tucker in different regions of England, which is a lovely detail for regional flavour.</li>
+            <li><strong>Webster</strong> — a weaver; the <em>-ster</em> ending was originally a feminine agent suffix in Old English.</li>
+            <li><strong>Chapman</strong> — Old English <em>cēapmann</em>, a merchant or peddler; the same root gives "cheap" and Cheapside.</li>
+            <li><strong>Tanner</strong> and <strong>Barker</strong> — leather workers; a barker stripped the tree bark used in tanning.</li>
+            <li><strong>Collier</strong> — a charcoal burner, later a coal miner or coal merchant.</li>
+            <li><strong>Thatcher</strong>, <strong>Turner</strong>, <strong>Sawyer</strong>, <strong>Mason</strong>, <strong>Miller</strong>, <strong>Carter</strong>, <strong>Baxter</strong> (a baker) — all what they say on the tin.</li>
+        </ul>
+        <p>Two practical consequences. First, you can invent new ones freely as long as you follow the pattern of noun-plus-agent: <em>Nettler, Salter, Bowyer, Limner, Hooper, Reeve, Roper, Ostler, Skinner, Warrener</em>. Second, in a fantasy setting you can build a whole occupational layer for jobs that only exist in your world — <em>Wardstone, Glasser, Runner, Toller, Gravewatch</em> — and it will sound native immediately, because the grammar is right. The <a href="fantasy-surnames-guide">full surname guide</a> takes this apart in more detail, including the three other sources surnames come from.</p>
+
+        <h2 id="keeping-names-sayable">Keeping Names Sayable</h2>
+        <p>A name that you cannot say twice the same way is not a name; it is an obstacle. Sayability matters more for NPCs than for player characters, because you will pronounce this name aloud thirty times and your players have to repeat it back to you.</p>
+        <ul>
+            <li><strong>Two syllables, maximum three.</strong> Anything longer gets abbreviated by the table within one session, and their abbreviation will be worse than the name you would have chosen.</li>
+            <li><strong>No apostrophes.</strong> Nobody agrees on how to say them, so every player pronounces the name differently and the NPC quietly fragments into several people.</li>
+            <li><strong>Distinct first sounds.</strong> Keep a mental tally of the initial letters in play. If you already have a Garr and a Gundry, your next NPC starts with a vowel or an S.</li>
+            <li><strong>Distinct vowel shapes.</strong> Even different letters collide: <em>Merrick</em>, <em>Derrick</em> and <em>Kerrin</em> are three names but one sound.</li>
+            <li><strong>Say it out loud before you commit.</strong> If your own tongue trips, cut a syllable. The test takes one second and saves an hour.</li>
+        </ul>
+
+        <h2 id="the-phone-book-method">The Phone-Book Method</h2>
+        <p>Here is the practical trick, and it is older than the hobby: <strong>keep a list of real names somewhere you can see it, and read off it.</strong> Old game masters used a phone book. You can use anything with a lot of names in one place — a film's closing credits, a sports team roster, a book's acknowledgements page, a list of parishes, the index of a history book, the contacts in your own phone.</p>
+        <p>The method, in full:</p>
+        <ol>
+            <li><strong>Before the session</strong>, open your source and copy twenty given names and twenty surnames into two columns on an index card. Twenty is enough for three sessions.</li>
+            <li><strong>Filter as you copy.</strong> Cross out anything unpronounceable, anything with a modern flavour, and anything beginning with a letter already used by a major NPC.</li>
+            <li><strong>Mix the columns freely.</strong> A given name from row three and a surname from row eleven is a person nobody has ever met. Combining across a list is what keeps you from accidentally naming a shopkeeper after your actual dentist.</li>
+            <li><strong>Bend one sound per name.</strong> Swap a vowel, drop a consonant, move the stress. <em>Marlow</em> becomes <em>Marlo</em> or <em>Merlow</em>; <em>Hendry</em> becomes <em>Hendric</em> or <em>Hendra</em>. One small change is enough to strip the real-world association while keeping the plausibility a real name has.</li>
+            <li><strong>Strike each name as you spend it</strong> and write the NPC beside it. That column is now your session's cast list, which solves the other half of the problem — remembering who you named last week.</li>
+        </ol>
+        <p>The reason this beats invention is that real name lists have a texture you cannot fake under pressure: uneven lengths, unfashionable sounds, boring entries next to striking ones. Made-up lists are too uniform, because a tired brain reaches for the same shapes all evening.</p>
+
+        <h2 id="a-name-grid-you-can-steal">A Name Grid You Can Steal</h2>
+        <p>If you would rather not build your own card tonight, take this one. Read down the left for a given name, across for a trade, and combine at random.</p>
+        <div class="name-examples">
+            <div class="name-example">Hal</div>
+            <div class="name-example">Bess</div>
+            <div class="name-example">Odo</div>
+            <div class="name-example">Winna</div>
+            <div class="name-example">Garr</div>
+            <div class="name-example">Tibb</div>
+            <div class="name-example">Ana</div>
+            <div class="name-example">Kel</div>
+            <div class="name-example">Mott</div>
+            <div class="name-example">Ferrin</div>
+            <div class="name-example">Sela</div>
+            <div class="name-example">Bram</div>
+        </div>
+
+        <h2 id="tavern-and-inn-staff">Tavern and Inn Staff</h2>
+        <p>The people your party will speak to most and remember least. Warm, short, slightly worn.</p>
+        <div class="name-examples">
+            <div class="name-example">Bess Tapp</div>
+            <div class="name-example">Odo Brewer</div>
+            <div class="name-example">Winna Baxter</div>
+            <div class="name-example">Hal Cooper</div>
+            <div class="name-example">Marda Pothook</div>
+            <div class="name-example">Tibb Ostler</div>
+            <div class="name-example">Nan Kettle</div>
+            <div class="name-example">Pell Scullion</div>
+            <div class="name-example">Rowan Malt</div>
+            <div class="name-example">Gilly Spit</div>
+        </div>
+        <p>Name the inn before you name the innkeeper and half of them write themselves — there are two hundred to borrow in the <a href="fantasy-tavern-names">tavern names guide</a>.</p>
+
+        <h2 id="guards-soldiers-and-watchmen">Guards, Soldiers and Watchmen</h2>
+        <p>Hard consonants, clipped shapes, surnames that sound like equipment or discipline. Rank does the rest.</p>
+        <div class="name-examples">
+            <div class="name-example">Serjeant Gorm Halloway</div>
+            <div class="name-example">Kel Bracken</div>
+            <div class="name-example">Vesh Ironhand</div>
+            <div class="name-example">Corwin Stave</div>
+            <div class="name-example">Mira Gatewood</div>
+            <div class="name-example">Dunn Palisade</div>
+            <div class="name-example">Orric Blackgate</div>
+            <div class="name-example">Hessa Warden</div>
+            <div class="name-example">Tarn Mallet</div>
+            <div class="name-example">Bralt Cudgel</div>
+        </div>
+
+        <h2 id="merchants-and-craftsfolk">Merchants and Craftsfolk</h2>
+        <p>Pure name-plus-trade territory. Every one of these tells a player what is for sale.</p>
+        <div class="name-examples">
+            <div class="name-example">Ferrin Fletcher</div>
+            <div class="name-example">Sela Chandler</div>
+            <div class="name-example">Bram Tanner</div>
+            <div class="name-example">Ana Webster</div>
+            <div class="name-example">Mott Chapman</div>
+            <div class="name-example">Garr Wheelwright</div>
+            <div class="name-example">Ilsa Salter</div>
+            <div class="name-example">Perrin Bowyer</div>
+            <div class="name-example">Doria Limner</div>
+            <div class="name-example">Yorick Roper</div>
+            <div class="name-example">Nessa Glasser</div>
+            <div class="name-example">Tobb Hooper</div>
+        </div>
+
+        <h2 id="nobles-clerks-and-clergy">Nobles, Clerks and Clergy</h2>
+        <p>Here you are allowed a third syllable and a location. Landed families take their names from land; clerks take theirs from the office; clergy take theirs from virtues or saints.</p>
+        <div class="name-examples">
+            <div class="name-example">Lady Aveline Marchmont</div>
+            <div class="name-example">Ser Rendric of Waye</div>
+            <div class="name-example">Provost Emmet Quill</div>
+            <div class="name-example">Canon Alder Wren</div>
+            <div class="name-example">Baroness Ilva Corveth</div>
+            <div class="name-example">Reeve Hollis Tallow</div>
+            <div class="name-example">Sister Mercy Wend</div>
+            <div class="name-example">Magister Ovid Kane</div>
+            <div class="name-example">Deacon Thelo Brand</div>
+            <div class="name-example">Lord Casper Ashfen</div>
+        </div>
+
+        <h2 id="thieves-and-the-desperate">Thieves and the Desperate</h2>
+        <p>Criminal names are use-names, not birth names, so the rules invert: one word is plenty, and the word should describe a method or a wound.</p>
+        <div class="name-examples">
+            <div class="name-example">Nine-Fingers</div>
+            <div class="name-example">Quiet Mal</div>
+            <div class="name-example">Sparrow</div>
+            <div class="name-example">Old Chalk</div>
+            <div class="name-example">Ratcher</div>
+            <div class="name-example">The Bell</div>
+            <div class="name-example">Dree</div>
+            <div class="name-example">Coffin Kate</div>
+            <div class="name-example">Blink Tavish</div>
+            <div class="name-example">Mother Sootley</div>
+        </div>
+
+        <h2 id="recurring-npcs-deserve-fuller-names">Recurring NPCs Deserve Fuller Names</h2>
+        <p>Everything above is deliberately thin, because most NPCs are furniture. The moment one of them survives a second appearance, upgrade them — and let the upgrade be visible, because a lengthening name is a signal players read without being told.</p>
+        <p>The upgrade has three stages:</p>
+        <ol>
+            <li><strong>Add a real surname.</strong> The stablehand who was "Tibb" becomes <em>Tibb Ostler</em>, then <em>Tibb Harrowgate</em> once you decide his family came from somewhere.</li>
+            <li><strong>Add an epithet or a title.</strong> Something the world calls them, not something they chose: <em>Tibb Harrowgate, called Longshanks</em>. Earned epithets are the cheapest characterisation in the game.</li>
+            <li><strong>Add a fact the name reveals.</strong> The best recurring names contain a small mystery — a surname from the wrong region, a title nobody uses any more, a patronymic naming a father the party has heard of.</li>
+        </ol>
+        <div class="name-examples">
+            <div class="name-example">Tibb Harrowgate, called Longshanks</div>
+            <div class="name-example">Bess Fletcher of Nine Elms</div>
+            <div class="name-example">Serjeant Gorm Halloway, the Gate-Keeper</div>
+            <div class="name-example">Marda Pothook, once of Corveth</div>
+            <div class="name-example">Magister Ovid Kane, third of that name</div>
+            <div class="name-example">Sela Chandler, widow of Ash Row</div>
+            <div class="name-example">Old Chalk, who was Callum Dree</div>
+            <div class="name-example">Lady Aveline Marchmont the Younger</div>
+        </div>
+        <p>If you want a longer treatment of making NPCs stick in players' memories rather than just naming them quickly, the <a href="creating-memorable-npc-names">memorable NPC names guide</a> is the companion piece to this one. And when the card runs dry mid-session, the <a href="../generators/npc-name-generator">NPC name generator</a> will hand you a batch built on the same formula.</p>
+
+        <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+        <div class="faq-section">
+            <div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How many NPC names should I prep before a session?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Twenty given names and twenty surnames on one index card will cover three sessions comfortably. Prep more than that and you will not read them; prep fewer and you will run out during the first market scene.</div></div>
+            <div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Is it lazy to name every NPC after their job?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">It is historically accurate, which is a better defence than most naming methods have. Vary it by giving roughly a third of your NPCs a locational or descriptive surname instead, so the occupational ones do not become a tell.</div></div>
+            <div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What do I do when I have already used a name and forgotten?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Keep the duplicate and make it deliberate — they are cousins, or the village genuinely has three men called Bran and that is a running joke the locals are tired of. Retconning a name mid-campaign confuses players far more than a repeat does.</div></div>
+            <div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Should important NPCs have longer names than minor ones?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Yes, and players pick this up unconsciously within a session or two. Keep walk-on parts to one or two syllables and save the full name, title and epithet for characters you intend to bring back. Length is a spotlight, so point it carefully.</div></div>
+        </div>
+        </section>
+        </article>
+        <section class="related-posts">
+            <h2 id="related-guides">Related Guides</h2>
+            <div class="blog-grid">
+                <a href="creating-memorable-npc-names" class="blog-card">
+                    <h2 id="creating-memorable-npc-names-a-dm-s-guide" class="blog-card-title">Creating Memorable NPC Names: A DM's Guide</h2>
+                    <p class="blog-card-excerpt">Techniques for naming NPCs your players will actually remember, plus 50+ ready-to-use names.</p>
+                    <p class="blog-card-meta">9 min read • DM Resources</p>
+                </a>
+                <a href="fantasy-tavern-names" class="blog-card">
+                    <h2 id="200-fantasy-tavern-names-your-players-will-remember" class="blog-card-title">200 Fantasy Tavern Names Your Players Will Remember</h2>
+                    <p class="blog-card-excerpt">A formula for inn and tavern names, plus 200 ready-to-use examples for every kind of settlement.</p>
+                    <p class="blog-card-meta">7 min read • Worldbuilding</p>
+                </a>
+                <a href="funny-fantasy-names" class="blog-card">
+                    <h2 id="100-funny-fantasy-names-for-d-d-characters-npcs" class="blog-card-title">100+ Funny Fantasy Names for D&amp;D Characters &amp; NPCs</h2>
+                    <p class="blog-card-excerpt">Hilarious names for comedic campaigns. Punny characters, silly taverns, and goofy goblins.</p>
+                    <p class="blog-card-meta">6 min read • Name Lists</p>
+                </a>
+            </div>
+        </section>
+        <div class="cta-section"><h2 id="generate-npc-names" style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Generate NPC Names</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">Table-ready NPCs with given names, trades and enough hook to run with.</p><a href="../generators/npc-name-generator" class="cta-btn">Open NPC Generator</a></div>
+        <footer class="site-footer"><p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="../generators/">All Generators</a><a href="./">Blog</a><a href="../search">Search</a><a href="../sitemap">Sitemap</a><a href="/privacy">Privacy</a></div></footer>
+    </div>
+    <script>function toggleFaq(el){el.parentElement.classList.toggle('open');}</script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
+</body>
+</html>

@@ -5,8 +5,29 @@
     <link>https://mythicnames.io/blog/</link>
     <description>Guides, tips and inspiration for naming characters, places and worlds.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Aug 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 09:00:00 GMT</lastBuildDate>
     <atom:link href="https://mythicnames.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>D&amp;D NPC Names: The Name + Trade Formula &amp; 60+ Table-Ready Names</title>
+      <link>https://mythicnames.io/blog/dnd-npc-names</link>
+      <guid isPermaLink="true">https://mythicnames.io/blog/dnd-npc-names</guid>
+      <pubDate>Sat, 15 Aug 2026 09:00:00 GMT</pubDate>
+      <description>How to name an NPC in five seconds without breaking the scene: the name-plus-trade formula, why occupational surnames work, sayability, and the phone-book method.</description>
+    </item>
+    <item>
+      <title>Fantasy Surnames: The Four Sources &amp; 75+ Family Names</title>
+      <link>https://mythicnames.io/blog/fantasy-surnames-guide</link>
+      <guid isPermaLink="true">https://mythicnames.io/blog/fantasy-surnames-guide</guid>
+      <pubDate>Sat, 15 Aug 2026 09:00:00 GMT</pubDate>
+      <description>Occupational, locational, patronymic and descriptive surnames — where each really came from, how each reads on the page, and how to signal class, region and race.</description>
+    </item>
+    <item>
+      <title>Fantasy Town Names: Real Place-Name Etymology &amp; 70+ Examples</title>
+      <link>https://mythicnames.io/blog/fantasy-town-names</link>
+      <guid isPermaLink="true">https://mythicnames.io/blog/fantasy-town-names</guid>
+      <pubDate>Sat, 15 Aug 2026 09:00:00 GMT</pubDate>
+      <description>What -ton, -wick, -ford, -bury, -combe, -thorpe and -mere actually meant, how settlement size changes a name, and how to keep a map regionally consistent. 70+ examples.</description>
+    </item>
     <item>
       <title>Angel &amp; Demon Names: Celestial Suffixes and Infernal Patterns</title>
       <link>https://mythicnames.io/blog/angel-and-demon-names</link>
@@ -43,32 +64,18 @@
       <description>Build vampire names that fit the century your vampire died in. Gothic and Victorian names, Slavic and Romanian roots, ancient bloodlines and modern aliases.</description>
     </item>
     <item>
-      <title>150 Ship Names for D&amp;D &amp; Fantasy Campaigns</title>
-      <link>https://mythicnames.io/blog/ship-names-for-your-campaign</link>
-      <guid isPermaLink="true">https://mythicnames.io/blog/ship-names-for-your-campaign</guid>
-      <pubDate>Thu, 01 Jan 2026 09:00:00 GMT</pubDate>
-      <description>Generate memorable ship names for your seafaring campaign. Pirate vessels, naval warships, merchant galleons, and ghost ships with naming formulas and examples.</description>
-    </item>
-    <item>
-      <title>How to Name Your Fantasy Kingdom: A Worldbuilder's Guide</title>
-      <link>https://mythicnames.io/blog/how-to-name-your-fantasy-kingdom</link>
-      <guid isPermaLink="true">https://mythicnames.io/blog/how-to-name-your-fantasy-kingdom</guid>
-      <pubDate>Thu, 01 Jan 2026 09:00:00 GMT</pubDate>
-      <description>Create memorable kingdom, empire, and nation names for your fantasy world. Linguistic patterns, cultural influences, and 100 example names for worldbuilding.</description>
-    </item>
-    <item>
-      <title>Tiefling Names: Virtue Names, Infernal Names &amp; Naming Guide</title>
-      <link>https://mythicnames.io/blog/tiefling-names-complete-guide</link>
-      <guid isPermaLink="true">https://mythicnames.io/blog/tiefling-names-complete-guide</guid>
-      <pubDate>Thu, 01 Jan 2026 09:00:00 GMT</pubDate>
-      <description>Complete guide to tiefling naming conventions. Virtue names, infernal names, and cultural naming traditions for your D&amp;D tiefling character.</description>
-    </item>
-    <item>
       <title>100 Best Elf Names for Your Fantasy Characters</title>
       <link>https://mythicnames.io/blog/100-best-elf-names</link>
       <guid isPermaLink="true">https://mythicnames.io/blog/100-best-elf-names</guid>
       <pubDate>Tue, 14 Jan 2025 09:00:00 GMT</pubDate>
       <description>Discover 100 beautiful elven names with meanings and pronunciations. Perfect for D&amp;D elves, fantasy novels, and RPG characters. Male, female, and gender-neutral options.</description>
+    </item>
+    <item>
+      <title>150 Ship Names for D&amp;D &amp; Fantasy Campaigns</title>
+      <link>https://mythicnames.io/blog/ship-names-for-your-campaign</link>
+      <guid isPermaLink="true">https://mythicnames.io/blog/ship-names-for-your-campaign</guid>
+      <pubDate>Tue, 14 Jan 2025 09:00:00 GMT</pubDate>
+      <description>Generate memorable ship names for your seafaring campaign. Pirate vessels, naval warships, merchant galleons, and ghost ships with naming formulas and examples.</description>
     </item>
     <item>
       <title>200 Fantasy Tavern Names Your Players Will Remember</title>
@@ -90,6 +97,20 @@
       <guid isPermaLink="true">https://mythicnames.io/blog/how-to-name-your-dnd-character</guid>
       <pubDate>Tue, 14 Jan 2025 09:00:00 GMT</pubDate>
       <description>Learn how to create the perfect name for your D&amp;D character. Expert tips on matching names to race, class, and backstory, plus common mistakes to avoid.</description>
+    </item>
+    <item>
+      <title>How to Name Your Fantasy Kingdom: A Worldbuilder's Guide</title>
+      <link>https://mythicnames.io/blog/how-to-name-your-fantasy-kingdom</link>
+      <guid isPermaLink="true">https://mythicnames.io/blog/how-to-name-your-fantasy-kingdom</guid>
+      <pubDate>Tue, 14 Jan 2025 09:00:00 GMT</pubDate>
+      <description>Create memorable kingdom, empire, and nation names for your fantasy world. Linguistic patterns, cultural influences, and 100 example names for worldbuilding.</description>
+    </item>
+    <item>
+      <title>Tiefling Names: Virtue Names, Infernal Names &amp; Naming Guide</title>
+      <link>https://mythicnames.io/blog/tiefling-names-complete-guide</link>
+      <guid isPermaLink="true">https://mythicnames.io/blog/tiefling-names-complete-guide</guid>
+      <pubDate>Tue, 14 Jan 2025 09:00:00 GMT</pubDate>
+      <description>Complete guide to tiefling naming conventions. Virtue names, infernal names, and cultural naming traditions for your D&amp;D tiefling character.</description>
     </item>
     <item>
       <title>Villain Names That Inspire Fear: A Dark Naming Guide</title>
