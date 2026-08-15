@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      (function(){try{var t=localStorage.getItem('mythicTheme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
+      gtag('js', new Date());
+      gtag('config', 'G-9C2LDVSHZZ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warhammer 40K Name Generator | Space Marine &amp; Imperium Names | MythicNames</title>
+    <meta name="description" content="Generate Warhammer 40,000 style names — Space Marines, Imperial Guard, Inquisitors, Eldar, Orks, Necrons and Chaos.">
+    <meta name="keywords" content="warhammer 40k name generator, space marine names, ork name generator, eldar names, inquisitor names, imperial guard names">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mythicnames.io/generators/warhammer40k-name-generator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mythicnames.io/generators/warhammer40k-name-generator">
+    <meta property="og:title" content="Warhammer 40K Name Generator | Space Marine &amp; Imperium Names | MythicNames">
+    <meta property="og:description" content="Generate Warhammer 40,000 style names — Space Marines, Imperial Guard, Inquisitors, Eldar, Orks, Necrons and Chaos.">
+    <meta property="og:image" content="https://mythicnames.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Warhammer 40K Name Generator | Space Marine &amp; Imperium Names | MythicNames">
+    <meta name="twitter:description" content="Generate Warhammer 40,000 style names — Space Marines, Imperial Guard, Inquisitors, Eldar, Orks, Necrons and Chaos.">
+    <meta name="twitter:image" content="https://mythicnames.io/og-image.png">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"Warhammer 40K Name Generator","description":"Generate Warhammer 40,000 style names — Space Marines, Imperial Guard, Inquisitors, Eldar, Orks, Necrons and Chaos.","url":"https://mythicnames.io/generators/warhammer40k-name-generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mythicnames.io/"},{"@type":"ListItem","position":2,"name":"Name Generators","item":"https://mythicnames.io/generators/"},{"@type":"ListItem","position":3,"name":"Warhammer 40K Name Generator","item":"https://mythicnames.io/generators/warhammer40k-name-generator"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are these official Warhammer 40K names?","acceptedAnswer":{"@type":"Answer","text":"No. This is an independent fan tool with no connection to Games Workshop. It generates original names in the style each faction uses rather than reusing named characters."}},{"@type":"Question","name":"Why do Space Marine names sound Roman?","acceptedAnswer":{"@type":"Answer","text":"The Imperium is built on deliberately Roman imagery, so its naming draws on Latin and Greek roots. Chapter culture shifts this — some chapters use Norse, Slavic or Japanese-influenced naming instead."}},{"@type":"Question","name":"How do Ork names work?","acceptedAnswer":{"@type":"Answer","text":"Phonetically. Ork names are short, blunt and spelled the way an Ork would say them, usually paired with a title describing what they do to people. Simplicity is the point."}},{"@type":"Question","name":"What makes Eldar names distinctive?","acceptedAnswer":{"@type":"Answer","text":"Length and flow. Eldar names run long, often with several components and a title, reflecting a species that lives for millennia and takes naming seriously."}}]}
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6481650173817853"
+     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .generator-box{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+        .gen-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1rem}
+        .gen-control label{display:block;font-family:'Cinzel',serif;font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem}
+        .gen-control select{width:100%;padding:0.6rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-primary);font-family:'Crimson Pro',serif;font-size:1rem}
+        .gen-btn{width:100%;padding:1rem;font-family:'Cinzel',serif;font-size:1rem;font-weight:600;background:linear-gradient(135deg,var(--accent-gold),var(--accent-amber));color:var(--bg-deep);border:none;border-radius:6px;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.2s}
+        .gen-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--shadow-gold)}
+        .gen-results{margin-top:1.5rem}
+        .gen-name{background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+        .gen-name-text{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--text-primary)}
+        .gen-name-details{display:flex;gap:1rem;flex-wrap:wrap}
+        .gen-name-meaning{color:var(--accent-purple);font-size:0.9rem}
+        .gen-copy{padding:0.4rem 0.8rem;background:transparent;border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-secondary);cursor:pointer;font-size:0.8rem;transition:all 0.2s}
+        .gen-copy:hover{background:var(--accent-gold);border-color:var(--accent-gold);color:var(--bg-deep)}
+        .race-icon-large{font-size:4rem;text-align:center;margin-bottom:1rem}
+        .share-btn{padding:0.4rem 0.8rem;background:transparent;border:1px solid var(--accent-blue);border-radius:4px;color:var(--accent-blue);cursor:pointer;font-size:0.8rem;transition:all 0.2s;margin-left:0.5rem}
+        .share-btn:hover{background:var(--accent-blue);color:white}
+        .faq-section{margin-top:2rem}
+        .faq-item{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;margin-bottom:1rem;overflow:hidden}
+        .faq-question{padding:1rem;font-family:'Cinzel',serif;color:var(--accent-gold);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq-question:hover{background:var(--bg-parchment)}
+        .faq-answer{padding:0 1rem 1rem;color:var(--text-secondary);display:none}
+        .faq-item.open .faq-answer{display:block}
+        .faq-toggle{transition:transform 0.3s}
+        .faq-item.open .faq-toggle{transform:rotate(180deg)}
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="container" id="main">
+        <header class="site-header">
+            <a href="../" class="logo-link"><img src="../logo.webp" alt="MythicNames" class="logo-icon" width="56" height="56" decoding="async"><span class="logo">MythicNames</span></a>
+            <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
+        </header>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span>›</span> <a href="./">Name Generators</a> <span>›</span> <span>Warhammer 40K Names</span></nav>
+        <article>
+            <div class="race-icon-large">💀</div>
+            <h1 class="page-title">Warhammer 40K Name Generator</h1>
+            <p class="page-subtitle">Names for the Imperium and everything hunting it</p>
+            <div class="generator-box">
+                <div class="gen-controls">
+                    <div class="gen-control"><label for="variant">Faction</label><select id="variant"><option value="any">Any Warhammer 40K</option><option value="spacemarine">Space Marine</option><option value="guard">Imperial Guard</option><option value="inquisitor">Inquisitor</option><option value="ork">Ork</option><option value="eldar">Aeldari</option><option value="necron">Necron</option><option value="chaos">Chaos</option></select></div>
+                    <div class="gen-control"><label for="length">Length</label><select id="length"><option value="any">Any</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></select></div>
+                    <div class="gen-control"><label for="count">Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
+                </div>
+                <button class="gen-btn" onclick="generateNames()">Generate Warhammer 40K Names</button>
+                <div class="gen-actions"><button type="button" class="gen-copy-all" onclick="copyAllNames()">Copy all names</button></div>
+                <div class="gen-results" id="results" aria-live="polite"></div>
+            </div>
+            <section class="article-content"><h2>About Imperial Naming</h2><p>Warhammer 40,000 naming is <strong>gothic Latin filtered through forty thousand years of decay</strong>. Space Marine names lean heavily on Roman and Greek roots because the Imperium is Rome in space, and the further from Terra you go the stranger the corruption gets.</p><p>The xenos factions invert this deliberately. Ork names are blunt, phonetic and comedic. Eldar names are long, flowing and layered with titles. Necron nobility take dynastic throne-names.</p><h2>The Patterns By Faction</h2><ul><li><strong>Space Marine</strong> — Roman and Greek roots, one name plus rank</li><li><strong>Ork</strong> — short, phonetic, spelled the way it sounds</li><li><strong>Eldar</strong> — flowing, multi-part, heavy with titles</li><li><strong>Inquisitor</strong> — grand Imperial Gothic with ordo affiliation</li></ul><p class="disclaimer-note">MythicNames is an independent fan tool and is not affiliated with, endorsed by, or associated with Games Workshop. Names are procedurally generated and free to use.</p></section>
+            <section class="faq-section"><h2>Frequently Asked Questions</h2><div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Are these official Warhammer 40K names?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">No. This is an independent fan tool with no connection to Games Workshop. It generates original names in the style each faction uses rather than reusing named characters.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>Why do Space Marine names sound Roman?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">The Imperium is built on deliberately Roman imagery, so its naming draws on Latin and Greek roots. Chapter culture shifts this — some chapters use Norse, Slavic or Japanese-influenced naming instead.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>How do Ork names work?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Phonetically. Ork names are short, blunt and spelled the way an Ork would say them, usually paired with a title describing what they do to people. Simplicity is the point.</div></div>
+<div class="faq-item"><div class="faq-question" role="button" tabindex="0" onclick="toggleFaq(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(this);}"><span>What makes Eldar names distinctive?</span><span class="faq-toggle">▼</span></div><div class="faq-answer">Length and flow. Eldar names run long, often with several components and a title, reflecting a species that lives for millennia and takes naming seriously.</div></div></section>
+            <section class="related-generators"><h3>Related Name Generators</h3><div class="related-grid"><a href="villain-name-generator" class="related-link"><span class="icon">💀</span><span class="label">Villain Names</span></a>
+<a href="knight-name-generator" class="related-link"><span class="icon">🛡️</span><span class="label">Knight Names</span></a>
+<a href="ship-name-generator" class="related-link"><span class="icon">⛵</span><span class="label">Ship Names</span></a>
+<a href="demon-name-generator" class="related-link"><span class="icon">👿</span><span class="label">Demon Names</span></a></div></section>
+        </article>
+        <div class="cta-section"><h2 style="font-family:'Cinzel',serif;color:var(--accent-gold);margin-bottom:0.5rem;">Need Names for Everything Else?</h2><p style="color:var(--text-secondary);margin-bottom:1rem;">The main generator handles characters, parties and whole kingdoms in one place.</p><a href="../" class="cta-btn">Open Full Generator</a></div>
+        <footer class="site-footer"><p>© 2026 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap">Sitemap</a><a href="/privacy">Privacy</a></div></footer>
+    </div>
+    <script>
+    const D = {"spacemarine":{"patterns":["{rank} {name}","{name}","{name} of the {chapter}"],"pools":{"name":["Corvian","Tiberius","Lucian","Kaeleth","Marnex","Severian","Cassian","Ortan","Valerian","Decimus","Aurelian","Gaius","Titus","Antonius","Varro","Quintan"],"rank":["Brother","Sergeant","Captain","Chaplain","Librarian","Apothecary","Lieutenant"],"chapter":["Iron Sons","Argent Blades","Void Wardens","Ashen Fists","Sable Guard","Crimson Vigil","Storm Wardens"]},"meanings":["four hundred years in service","gene-seed of a lost chapter","the armour is older than the wearer","a veteran of the Long Crusade","took the black carapace at fourteen","the chapter keeps its own records","has not removed the helm in a decade","named for a fallen brother","first company, first through the breach","the Emperor protects, allegedly"]},"guard":{"patterns":["{rank} {given} {sur}","{given} {sur}","{rank} {sur}"],"pools":{"given":["Anselm","Katya","Dmitri","Ilsa","Roderyk","Mira","Gunther","Nadia","Tomas","Vera","Aleks","Bela"],"sur":["Vostrenko","Kaminski","Halloran","Drusk","Veren","Mordaunt","Straker","Bael","Corwyn","Ferrus"],"rank":["Sergeant","Commissar","Trooper","Lieutenant","Colonel","Corporal"]},"meanings":["one of a billion, statistically","lasgun, flak armour, faith","the regiment came from a death world","has survived three deployments","the commissar is watching","conscripted, not volunteered","writes home, rarely gets replies","the trench is the whole world","promoted because everyone above died","expendable, and knows it"]},"inquisitor":{"patterns":["Inquisitor {given} {sur}","{given} {sur}, Ordo {ordo}","{given} {sur}"],"pools":{"given":["Anselus","Theodric","Solomon","Ariadne","Malachai","Ignatia","Helena","Absalom","Ysolde","Cassiel"],"sur":["Thorne","Vail","Grimm","Kadmon","Sabbatine","Vex","Harrower","Blackwood","Ossius","Verrick"],"ordo":["Hereticus","Malleus","Xenos","Sepulturum","Chronos","Sicarius"]},"meanings":["carries an Inquisitorial rosette","answerable to nobody, technically","radical, or so the puritans say","has burned a world before","a retinue of dubious characters","the authority is functionally absolute","investigating something unspeakable","puritan, and humourless with it","the paperwork alone kills planets","few live long enough to retire"]},"ork":{"patterns":["{name} {title}","{name}","{name} da {title2}"],"pools":{"name":["Gorzag","Snikgob","Badgruk","Grukk","Zagthrakk","Urgrot","Mogrok","Wazgrukka","Skarfang","Nazgruk","Ugbad","Krumpa"],"title":["Skullkrusha","Facebiter","da Green","Bonegrinda","Toofsnatcha","Gitstompa","Eadbanga"],"title2":["Warboss","Mekboy","Painboy","Nob","Kommando","Weirdboy","Flash Git"]},"meanings":["biggest, therefore in charge","the spelling is deliberate","krumpin is the whole strategy","red wunz go fasta, obviously","a Mek with untested ideas","the teef are currency","grew larger after the last fight","a Waaagh! is forming nearby","the shoota works most of the time","unbothered by casualties, including own"]},"eldar":{"patterns":["{pre}{mid}{suf}","{pre}{suf} the {title}","{pre}{mid}{suf} of {craft}"],"pools":{"pre":["Elda","Yrra","Nuath","Cael","Vyr","Ithra","Aur","Mael","Sylan","Thae","Lira","Ael"],"mid":["ri","me","la","ne","si","va"],"suf":["iel","anir","esh","wyn","ath","ien","oras","ynne"],"title":["Farseer","Autarch","Warlock","Exarch","Bonesinger","Spiritseer"],"craft":["Alaitoc","Iyanden","Saim-Vale","Ulthara","Biel-Ryn","Yme-Tor"]},"meanings":["a farseer treading the paths","walks the Path of the Warrior","the craftworld remembers everything","sees a future it will not explain","has lived a dozen lifetimes","the soulstone is not optional","Slaanesh waits, patiently","considers humans a brief nuisance","an Exarch who cannot step off the Path","grieving a dead empire still"]},"necron":{"patterns":["{title} {name}","{name} of the {dynasty}","{name}"],"pools":{"name":["Ankharis","Sethrekh","Obryax","Tazrekh","Menkath","Setekh","Amonkar","Nefereth","Khepresh","Sennakh","Ozykar","Zarathus"],"title":["Overlord","Phaeron","Cryptek","Lord","Nemesor","Destroyer Lord"],"dynasty":["Sautekh Dynasty","Nihilakh Dynasty","Mephrit Dynasty","Novokh Dynasty","Ogdobekh Dynasty"]},"meanings":["sixty million years asleep","the flesh was traded away","a dynasty reawakening, slowly","protocols are still running","remembers being alive, barely","the tomb world is waking","collects things, obsessively","reanimation protocols engaged","considers the galaxy stolen property","patient beyond all reason"]},"chaos":{"patterns":["{name} the {epithet}","{name}, {rank} of the {legion}","{name}"],"pools":{"name":["Abaddex","Kharnath","Vexius","Tyrphos","Azrimen","Fabricus","Zhurkhar","Varekh","Malkoth","Sevrin","Drakhus","Cyrene"],"epithet":["Thrice-Damned","Everchosen","Flayed","Undying","Faithless","Blighted","Gilded"],"rank":["Champion","Sorcerer","Warsmith","Lord","Dark Apostle"],"legion":["Black Legion","Iron Warriors","Word Bearers","Night Lords","Emperor's Children","Death Guard"]},"meanings":["ten thousand years of grudge","the warp changed something","a champion of a fickle god","spawnhood is always one step away","was loyal, once","the Long War continues","blessed, in the worst sense","trades in souls, unprofitably","the armour has fused to the body","gifts are rarely what was asked for"]}};
+    const r = a => a[Math.floor(Math.random() * a.length)];
+    const VARIANT_NAMES = {"spacemarine":"Space Marine","guard":"Imperial Guard","inquisitor":"Inquisitor","ork":"Ork","eldar":"Aeldari","necron":"Necron","chaos":"Chaos"};
+
+    // Same name always yields the same meaning, so a name keeps its identity.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) { return pool[nameHash(name.toLowerCase()) % pool.length]; }
+
+    function generateName(variant) {
+        const v = variant === 'any' ? r(["spacemarine","guard","inquisitor","ork","eldar","necron","chaos"]) : variant;
+        const data = D[v];
+        const pattern = r(data.patterns);
+        // Fill {slot} placeholders from that variant's pools.
+        const name = pattern.replace(/\{(\w+)\}/g, (m, key) => {
+            const pool = data.pools[key];
+            return pool && pool.length ? r(pool) : m;
+        });
+        // A pool entry can start lowercase ("the Thing Below"), so lift the
+        // first letter without touching the rest of the name.
+        const finalName = name.charAt(0).toUpperCase() + name.slice(1);
+        return { name: finalName, meaning: '"' + meaningFor(finalName, data.meanings) + '"', variant: VARIANT_NAMES[v] };
+    }
+
+    let lastNames = [];
+    function generateNames() {
+        const variant = document.getElementById('variant').value;
+        const count = parseInt(document.getElementById('count').value);
+        const lengthWant = (document.getElementById('length') || {}).value;
+        const results = document.getElementById('results');
+        let html = '';
+        const seen = new Set();
+        lastNames = [];
+        for (let i = 0, tries = 0; i < count && tries < count * 60; tries++) {
+            const nm = generateName(variant);
+            if (!matchesLength(nm.name, lengthWant)) continue;
+            if (seen.has(nm.name)) continue;
+            seen.add(nm.name);
+            lastNames.push(nm.name);
+            i++;
+            const safe = nm.name.replace(/'/g, "\\'");
+            const safeName = nm.name.replace(/'/g, "\\'");
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div class="gen-row-actions"><button class="gen-icon-btn fav-btn ${isFavourite(nm.name) ? 'on' : ''}" aria-pressed="${isFavourite(nm.name)}" aria-label="Save ${nm.name} to favourites" onclick="toggleFavourite(this,'${safeName}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><button class="gen-icon-btn" aria-label="Hear ${nm.name} pronounced" onclick="speakName('${safeName}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
+        }
+        gaEvent('generate_names', {variant: variant, count: count});
+        syncUrl();
+        results.innerHTML = html;
+    }
+
+    async function copyAllNames() {
+        if (!lastNames.length) return;
+        try {
+            await navigator.clipboard.writeText(lastNames.join("\n"));
+            gaEvent('copy_all_names', {count: lastNames.length});
+            const btn = document.querySelector('.gen-copy-all');
+            const original = btn.textContent;
+            btn.textContent = 'Copied ' + lastNames.length + ' names';
+            setTimeout(() => { btn.textContent = original; }, 1600);
+        } catch (e) {}
+    }
+
+    function settingIds() { return ['variant', 'count'].filter(id => document.getElementById(id)); }
+    function applyUrlSettings() {
+        let p;
+        try { p = new URLSearchParams(location.search); } catch (e) { return; }
+        settingIds().forEach(id => {
+            const val = p.get(id);
+            if (!val) return;
+            const el = document.getElementById(id);
+            if (Array.prototype.some.call(el.options, o => o.value === val)) el.value = val;
+        });
+    }
+    function syncUrl() {
+        try {
+            const p = new URLSearchParams(location.search);
+            settingIds().forEach(id => p.set(id, document.getElementById(id).value));
+            history.replaceState(null, '', location.pathname + '?' + p.toString());
+        } catch (e) {}
+    }
+
+    // ---- Pronunciation, favourites and length filtering ----
+    function speakName(text) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const spoken = text.replace(/-/g, ' ').replace(/([a-z])([A-Z])/g, '    function gaEvent(name, params) { $2').replace(/'/g, '');
+        const u = new SpeechSynthesisUtterance(spoken);
+        u.rate = 0.85; u.pitch = 1;
+        speechSynthesis.speak(u);
+        gaEvent('speak_name');
+    }
+
+    // Shares the homepage favourites list, so a name starred here shows up there.
+    let favourites = [];
+    try { favourites = JSON.parse(localStorage.getItem('mythicFavorites') || '[]'); } catch (e) {}
+    function isFavourite(name) { return favourites.indexOf(name) > -1; }
+    function toggleFavourite(btn, name) {
+        const i = favourites.indexOf(name);
+        if (i > -1) { favourites.splice(i, 1); btn.classList.remove("on"); btn.setAttribute("aria-pressed", "false"); }
+        else { favourites.push(name); btn.classList.add("on"); btn.setAttribute("aria-pressed", "true"); }
+        try { localStorage.setItem('mythicFavorites', JSON.stringify(favourites)); } catch (e) {}
+        gaEvent(i > -1 ? 'unfavorite_name' : 'favorite_name');
+    }
+
+    // Length buckets match the homepage: short 1-6, medium 5-10, long 9+.
+    function matchesLength(name, want) {
+        if (!want || want === 'any') return true;
+        const n = name.replace(/[^A-Za-z]/g, '').length;
+        if (want === 'short') return n <= 6;
+        if (want === 'medium') return n >= 5 && n <= 10;
+        return n >= 9;
+    }
+    function gaEvent(name, params) {
+        if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'warhammer40k'}, params || {}));
+    }
+    async function copyName(btn, name) { try { await navigator.clipboard.writeText(name); gaEvent('copy_name'); btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); } catch (e) {} }
+    function shareName(name) {
+        gaEvent('share_name');
+        const url = window.location.href.split('?')[0] + '?name=' + encodeURIComponent(name);
+        if (navigator.share) { navigator.share({ title: name + ' - Warhammer 40K Name', text: 'Check out this name I generated: ' + name, url: url }); }
+        else { navigator.clipboard.writeText(url).then(() => alert('Link copied to clipboard!')); }
+    }
+    function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+    function showSharedName() {
+        var shared = null;
+        try { shared = new URLSearchParams(location.search).get('name'); } catch (e) {}
+        if (!shared) return;
+        var box = document.createElement('div');
+        box.className = 'shared-name';
+        box.innerHTML = '<span class="shared-name-label">Shared with you</span>' +
+            '<span class="shared-name-text"></span>' +
+            '<button class="gen-copy" type="button">Copy</button>';
+        box.querySelector('.shared-name-text').textContent = shared;
+        box.querySelector('button').addEventListener('click', function (e) { copyName(e.target, shared); });
+        var results = document.getElementById('results');
+        results.parentNode.insertBefore(box, results);
+        gaEvent('view_shared_name');
+    }
+    applyUrlSettings();
+    showSharedName();
+    generateNames();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
+</body>
+</html>
