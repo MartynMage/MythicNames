@@ -1140,6 +1140,12 @@
     const r = a => a[Math.floor(rnd() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
     const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    // Backstory fragments are stored without trailing punctuation so they can
+    // be reused mid-sentence; terminate them when they end one.
+    const endSentence = s => /[.!?…]$/.test(s.trim()) ? s.trim() : s.trim() + '.';
+    // Only drop the first letter's case — blanket toLowerCase() would flatten
+    // proper nouns inside the fragment.
+    const lowerFirst = s => s.charAt(0).toLowerCase() + s.slice(1);
     
     // History storage
     let nameHistory = JSON.parse(localStorage.getItem('mythicHistory') || '[]');
@@ -1542,7 +1548,7 @@
         if (hasFaction) {
             back += 'As a ' + factionRole + ' of ' + faction.name + ', ' + faction.desc + ', ' + pronoun + ' has resources but also obligations. ';
         }
-        back += '\n\n' + r(bd.secret) + ' Those who know ' + pObj + ' have noticed that ' + r(bd.flaw).toLowerCase() + ' ';
+        back += '\n\n' + endSentence(r(bd.secret)) + ' Those who know ' + pObj + ' have noticed that ' + endSentence(lowerFirst(r(bd.flaw))) + ' ';
         back += '\n\n' + r(bd.motive) + ' ' + r(bd.goal);
         
         return {name, cls: cap(cl), gender: cap(gn), wep: cap(r(cd.wep)), trait: cap(r(cd.tr)), faction: hasFaction ? {name: faction.name, role: cap(factionRole)} : null, back};
@@ -1696,8 +1702,8 @@
             });
             
             // Personal secret/flaw
-            back += `\n\n${r(bd.secret)} `;
-            back += r(bd.flaw) + ' ';
+            back += `\n\n${endSentence(r(bd.secret))} `;
+            back += endSentence(r(bd.flaw)) + ' ';
             
             // Party-connected goal
             const partyGoals = [
