@@ -56,7 +56,7 @@
         [data-theme="light"] .tab-btn.active,[data-theme="light"] .generate-btn,[data-theme="light"] .cta-btn{color:#fffdf8}
         [data-theme="light"] body::before{opacity:0.02}
         [data-theme="light"] .ambient-glow{opacity:0.12}
-        html{scroll-padding-top:76px}*{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-padding-top:76px}*{margin:0;padding:0;box-sizing:border-box}a{color:var(--accent-gold);text-decoration:none;transition:color 0.2s}a:hover{color:var(--accent-amber)}
         body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg-deep);color:var(--text-primary);min-height:100vh;line-height:1.6}
         body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.03;pointer-events:none;z-index:0}
         .ambient-glow{position:fixed;width:800px;height:800px;border-radius:50%;filter:blur(200px);opacity:0.07;pointer-events:none;z-index:0;animation:glowPulse 8s ease-in-out infinite}
@@ -95,7 +95,8 @@
         .theme-toggle .moon-icon{display:block}
         [data-theme="light"] .theme-toggle .sun-icon{display:block}
         [data-theme="light"] .theme-toggle .moon-icon{display:none}
-        .container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+        select option{background:var(--bg-card);color:var(--text-primary)}select option:checked{background:var(--accent-gold);color:var(--bg-deep)}
+.container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
         header{text-align:center;padding:1.5rem 0}
         .logo-wrapper{display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-bottom:0.5rem}
         /* Sticky header — mirrored from styles.css, which this page does not load. */
@@ -108,20 +109,20 @@
 .brand-icon{width:32px;height:32px;flex-shrink:0}
 .brand-name{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:700;color:var(--accent-gold);letter-spacing:0.06em;white-space:nowrap}
 .header-nav{display:none;align-items:center;gap:0.15rem}
-.header-nav a{font-family:'Cinzel',serif;font-size:0.78rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;padding:0.6rem 0.7rem;border-radius:5px;transition:all 0.2s;white-space:nowrap}
+.header-nav a{font-family:'Cinzel',serif;font-size:0.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;padding:0.6rem 0.7rem;border-radius:5px;transition:all 0.2s;white-space:nowrap;text-decoration:none}
 .header-nav a:hover{background:var(--bg-card);color:var(--accent-gold)}
 .header-nav a.active{color:var(--accent-gold)}
 
 /* Both header buttons share a 44px touch target. */
 .header-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;background:transparent;border:1px solid var(--border-subtle);border-radius:6px;color:var(--accent-gold);cursor:pointer;transition:all 0.2s}
 .header-btn:hover{border-color:var(--accent-gold);background:var(--bg-card)}
-.header-btn svg{width:19px;height:19px}
+.header-btn svg{width:19px;height:19px;display:block;flex:0 0 auto}.header-btn.theme-toggle svg{width:19px;height:19px}
 .menu-toggle .close-icon{display:none}
 .menu-toggle[aria-expanded="true"] .open-icon{display:none}
 .menu-toggle[aria-expanded="true"] .close-icon{display:block}
 
 .mobile-menu{border-top:1px solid var(--border-subtle);background:var(--bg-parchment)}
-.mobile-menu a{display:block;min-height:48px;padding:0.85rem 1.25rem;font-family:'Cinzel',serif;font-size:0.95rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--border-subtle)}
+.mobile-menu a{display:block;min-height:48px;padding:0.85rem 1.25rem;font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid var(--border-subtle);text-decoration:none}
 .mobile-menu a:last-child{border-bottom:0}
 .mobile-menu a:hover,.mobile-menu a:focus{background:var(--bg-card);color:var(--accent-gold)}
 
@@ -144,7 +145,7 @@
         .site-nav a:hover,.site-nav a.active{color:var(--accent-gold)}
         .intro-section{text-align:center;margin-bottom:1.25rem}
         .intro-section p{color:var(--text-secondary);font-size:1.05rem;max-width:600px;margin:0 auto;line-height:1.6}
-        .tab-nav{display:flex;gap:0.35rem;margin-bottom:1.25rem;flex-wrap:wrap;justify-content:center;align-items:center}.tab-group{font-family:'Cinzel',serif;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-faded);padding:0 0.35rem 0 0.6rem;border-left:1px solid var(--border-subtle);align-self:center}.tab-group:first-child{border-left:0;padding-left:0}@media(max-width:860px){.tab-nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:0.4rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}.tab-nav::-webkit-scrollbar{height:3px}.tab-nav::-webkit-scrollbar-thumb{background:var(--border-subtle);border-radius:3px}.tab-btn{flex:0 0 auto;scroll-snap-align:start;min-height:40px}.tab-group{flex:0 0 auto}}
+        .tab-nav{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.25rem;align-items:center}.tab-row{display:flex;gap:0.35rem;align-items:center;flex-wrap:wrap;justify-content:center}.tab-group{font-family:'Cinzel',serif;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-faded);padding:0 0.35rem 0 0.6rem;border-left:1px solid var(--border-subtle);align-self:center}.tab-group:first-child{border-left:0;padding-left:0}@media(max-width:860px){.tab-nav{align-items:stretch}.tab-row{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:0.3rem;scrollbar-width:thin;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}.tab-row::-webkit-scrollbar{height:3px}.tab-row::-webkit-scrollbar-thumb{background:var(--border-subtle);border-radius:3px}.tab-btn{flex:0 0 auto;scroll-snap-align:start;min-height:40px}.tab-group{flex:0 0 auto}}
         .tab-btn{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.5rem 0.85rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;position:relative}
         .tab-btn:hover{border-color:var(--border-glow);color:var(--text-primary)}
         .tab-btn.active{background:linear-gradient(135deg,var(--accent-gold),var(--accent-amber));color:var(--bg-deep);border-color:var(--accent-gold)}
@@ -556,18 +557,24 @@
         </section>
         
         <nav class="tab-nav" aria-label="Tools">
-                <span class="tab-group" role="presentation">Generate</span>
-                <button type="button" class="tab-btn active" data-tab="generator">⚔️ Names</button>
-                <button type="button" class="tab-btn" data-tab="races">🧝 Races</button>
-                <button type="button" class="tab-btn" data-tab="games">🎮 Games</button>
-                <span class="tab-group" role="presentation">Build</span>
-                <button type="button" class="tab-btn" data-tab="character">🎭 Character</button>
-                <button type="button" class="tab-btn" data-tab="party">👥 Party</button>
-                <button type="button" class="tab-btn" data-tab="world">🏰 World</button>
-                <span class="tab-group" role="presentation">Keep</span>
-                <button type="button" class="tab-btn" data-tab="packs">📦 Packs</button>
-                <button type="button" class="tab-btn" data-tab="campaign">📚 Campaigns</button>
-                <button type="button" class="tab-btn" data-tab="history">📜 History<span class="badge" id="historyBadge" style="display:none">0</span></button>
+                <div class="tab-row">
+                    <span class="tab-group" role="presentation">Generate</span>
+                    <button type="button" class="tab-btn active" data-tab="generator">⚔️ Names</button>
+                    <button type="button" class="tab-btn" data-tab="races">🧝 Races</button>
+                    <button type="button" class="tab-btn" data-tab="games">🎮 Games</button>
+                </div>
+                <div class="tab-row">
+                    <span class="tab-group" role="presentation">Build</span>
+                    <button type="button" class="tab-btn" data-tab="character">🎭 Character</button>
+                    <button type="button" class="tab-btn" data-tab="party">👥 Party</button>
+                    <button type="button" class="tab-btn" data-tab="world">🏰 World</button>
+                </div>
+                <div class="tab-row">
+                    <span class="tab-group" role="presentation">Keep</span>
+                    <button type="button" class="tab-btn" data-tab="packs">📦 Packs</button>
+                    <button type="button" class="tab-btn" data-tab="campaign">📚 Campaigns</button>
+                    <button type="button" class="tab-btn" data-tab="history">📜 History<span class="badge" id="historyBadge" style="display:none">0</span></button>
+                </div>
             </nav>
         
         <!-- Generator Tab -->
@@ -824,29 +831,29 @@
              has its own factions, variants and naming notes. So the cards are
              links out, not in-page generators like the race grid above. -->
         <div class="tab-content" id="tab-games">
-            <h2 class="tab-heading">Game Name Generators</h2>
+            <h2 class="tab-heading">Pick your game</h2>
             <div class="info-box">Names built to match how each game actually names its characters. Each one opens its own generator, with every race or faction it uses.</div>
             <div class="race-grid">
-                <a href="generators/wow-name-generator" class="race-card game-card"><div class="race-icon">🐺</div><div class="race-name">World of Warcraft</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/elderscrolls-name-generator" class="race-card game-card"><div class="race-icon">🐉</div><div class="race-name">Elder Scrolls</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/ffxiv-name-generator" class="race-card game-card"><div class="race-icon">🌙</div><div class="race-name">FFXIV</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/bg3-name-generator" class="race-card game-card"><div class="race-icon">🎲</div><div class="race-name">Baldur&rsquo;s Gate 3</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/gw2-name-generator" class="race-card game-card"><div class="race-icon">🌿</div><div class="race-name">Guild Wars 2</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/eldenring-name-generator" class="race-card game-card"><div class="race-icon">⚱️</div><div class="race-name">Elden Ring</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/runescape-name-generator" class="race-card game-card"><div class="race-icon">🗡️</div><div class="race-name">RuneScape</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/warhammer40k-name-generator" class="race-card game-card"><div class="race-icon">💀</div><div class="race-name">Warhammer 40K</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/genshin-name-generator" class="race-card game-card"><div class="race-icon">⚗️</div><div class="race-name">Genshin Impact</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/starwars-name-generator" class="race-card game-card"><div class="race-icon">🌌</div><div class="race-name">Star Wars</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/minecraft-name-generator" class="race-card game-card"><div class="race-icon">⛏️</div><div class="race-name">Minecraft</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/roblox-name-generator" class="race-card game-card"><div class="race-icon">🧱</div><div class="race-name">Roblox</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/fortnite-name-generator" class="race-card game-card"><div class="race-icon">🪂</div><div class="race-name">Fortnite</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/valorant-name-generator" class="race-card game-card"><div class="race-icon">🎯</div><div class="race-name">Valorant</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/diablo4-name-generator" class="race-card game-card"><div class="race-icon">🔥</div><div class="race-name">Diablo IV</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/eso-name-generator" class="race-card game-card"><div class="race-icon">🗡️</div><div class="race-name">Elder Scrolls Online</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/newworld-name-generator" class="race-card game-card"><div class="race-icon">⚓</div><div class="race-name">New World</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/lostark-name-generator" class="race-card game-card"><div class="race-icon">⚔️</div><div class="race-name">Lost Ark</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/eveonline-name-generator" class="race-card game-card"><div class="race-icon">🚀</div><div class="race-name">EVE Online</div> <div class="race-sub">Name Generator</div></a>
-                <a href="generators/overwatch-name-generator" class="race-card game-card"><div class="race-icon">🛡️</div><div class="race-name">Overwatch</div> <div class="race-sub">Name Generator</div></a>
+                <a href="generators/wow-name-generator" class="race-card game-card"><div class="race-icon">🐺</div><div class="race-name">World of Warcraft</div></a>
+                <a href="generators/elderscrolls-name-generator" class="race-card game-card"><div class="race-icon">🐉</div><div class="race-name">Elder Scrolls</div></a>
+                <a href="generators/ffxiv-name-generator" class="race-card game-card"><div class="race-icon">🌙</div><div class="race-name">FFXIV</div></a>
+                <a href="generators/bg3-name-generator" class="race-card game-card"><div class="race-icon">🎲</div><div class="race-name">Baldur&rsquo;s Gate 3</div></a>
+                <a href="generators/gw2-name-generator" class="race-card game-card"><div class="race-icon">🌿</div><div class="race-name">Guild Wars 2</div></a>
+                <a href="generators/eldenring-name-generator" class="race-card game-card"><div class="race-icon">⚱️</div><div class="race-name">Elden Ring</div></a>
+                <a href="generators/runescape-name-generator" class="race-card game-card"><div class="race-icon">🗡️</div><div class="race-name">RuneScape</div></a>
+                <a href="generators/warhammer40k-name-generator" class="race-card game-card"><div class="race-icon">💀</div><div class="race-name">Warhammer 40K</div></a>
+                <a href="generators/genshin-name-generator" class="race-card game-card"><div class="race-icon">⚗️</div><div class="race-name">Genshin Impact</div></a>
+                <a href="generators/starwars-name-generator" class="race-card game-card"><div class="race-icon">🌌</div><div class="race-name">Star Wars</div></a>
+                <a href="generators/minecraft-name-generator" class="race-card game-card"><div class="race-icon">⛏️</div><div class="race-name">Minecraft</div></a>
+                <a href="generators/roblox-name-generator" class="race-card game-card"><div class="race-icon">🧱</div><div class="race-name">Roblox</div></a>
+                <a href="generators/fortnite-name-generator" class="race-card game-card"><div class="race-icon">🪂</div><div class="race-name">Fortnite</div></a>
+                <a href="generators/valorant-name-generator" class="race-card game-card"><div class="race-icon">🎯</div><div class="race-name">Valorant</div></a>
+                <a href="generators/diablo4-name-generator" class="race-card game-card"><div class="race-icon">🔥</div><div class="race-name">Diablo IV</div></a>
+                <a href="generators/eso-name-generator" class="race-card game-card"><div class="race-icon">🗡️</div><div class="race-name">Elder Scrolls Online</div></a>
+                <a href="generators/newworld-name-generator" class="race-card game-card"><div class="race-icon">⚓</div><div class="race-name">New World</div></a>
+                <a href="generators/lostark-name-generator" class="race-card game-card"><div class="race-icon">⚔️</div><div class="race-name">Lost Ark</div></a>
+                <a href="generators/eveonline-name-generator" class="race-card game-card"><div class="race-icon">🚀</div><div class="race-name">EVE Online</div></a>
+                <a href="generators/overwatch-name-generator" class="race-card game-card"><div class="race-icon">🛡️</div><div class="race-name">Overwatch</div></a>
             </div>
             <p class="games-blurb">Every generator here is an independent fan tool, built from the naming conventions each setting uses rather than from any official name list. Pick a game to generate character names by race, faction or nation &mdash; or read <a href="blog/game-naming-conventions">how ten games name their characters</a> for the rules behind each one.</p>
         </div>
