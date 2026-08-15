@@ -14,7 +14,7 @@ const PRECACHE = [
     '/404.html',
     '/generators/',
     '/blog/',
-    '/logo.png',
+    '/logo.webp',
     '/favicon.ico',
     '/icon-192.png',
     '/icon-512.png',
