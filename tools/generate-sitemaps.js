@@ -75,14 +75,14 @@ const GROUPS = {
     world: ['tavern', 'town', 'kingdom', 'ship', 'dungeon', 'guild'],
     archetypes: ['wizard', 'knight', 'villain', 'monster', 'npc', 'family'],
     items: ['weapon', 'spell', 'artifact'],
-    games: ['wow', 'elderscrolls', 'ffxiv', 'bg3', 'gw2'],
+    games: ['wow', 'elderscrolls', 'ffxiv', 'bg3', 'gw2', 'eldenring', 'runescape'],
 };
 const ICONS = {
     elf: '🧝', dwarf: '⛏️', orc: '⚔️', human: '👤', halfling: '🧑‍🌾', gnome: '🎩',
     tiefling: '😈', dragonborn: '🐲', 'half-elf': '🌗', drow: '🕷️', goblin: '👹',
     fairy: '🧚', angel: '👼', demon: '👿', vampire: '🧛',
     tavern: '🍺', kingdom: '👑', ship: '⛵',
-    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', town: '🏘️', npc: '🧑‍🌾', family: '📜', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺', wow: '🐺', elderscrolls: '🐉', ffxiv: '🌙', bg3: '🎲', gw2: '🌿',
+    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', town: '🏘️', npc: '🧑‍🌾', family: '📜', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺', wow: '🐺', elderscrolls: '🐉', ffxiv: '🌙', bg3: '🎲', gw2: '🌿', eldenring: '⚱️', runescape: '🗡️',
 };
 const titleCase = s => s.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('-');
 
