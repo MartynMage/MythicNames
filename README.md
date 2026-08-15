@@ -34,6 +34,12 @@ Regenerate the sitemaps whenever you add a page:
 node tools/generate-sitemaps.js
 ```
 
+And the RSS feed whenever you add or edit a blog post:
+
+```bash
+node tools/generate-feed.js
+```
+
 ## How it works
 
 No frameworks, no dependencies. Names are generated client-side from syllable pools tuned per style — Norse, Celtic, Lovecraftian, and about 17 others. Campaigns, favourites and history are saved to localStorage, so nothing leaves your browser.

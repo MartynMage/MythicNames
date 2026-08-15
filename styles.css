@@ -51,6 +51,10 @@ a:hover{color:var(--accent-amber)}
 .related-link .icon{font-size:2rem;margin-bottom:0.5rem}
 .related-link .label{font-family:'Cinzel',serif;color:var(--text-primary);font-size:0.85rem;text-align:center}
 
+.feed-link{margin:0.25rem 0 0;font-size:0.85rem}
+.feed-link a{color:var(--text-faded)}
+.feed-link a:hover{color:var(--accent-gold)}
+
 /* Filter box on index pages */
 .filter-box{margin:1.5rem 0 0.5rem}
 .filter-box input{width:100%;padding:0.75rem 1rem;background:var(--bg-parchment);border:1px solid var(--border-subtle);border-radius:6px;color:var(--text-primary);font-family:'Crimson Pro',Georgia,serif;font-size:1rem}

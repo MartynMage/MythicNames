@@ -9,3 +9,6 @@ Sitemap: https://mythicnames.io/sitemap.xml
 
 # Crawl-delay (optional, be nice to servers)
 Crawl-delay: 1
+
+# Blog feed
+Sitemap: https://mythicnames.io/feed.xml
