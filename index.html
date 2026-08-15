@@ -141,6 +141,8 @@
         .seed-bar{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;padding:0.6rem 0.85rem;margin-bottom:0.75rem}
         .seed-bar-label{font-family:'Cinzel',serif;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faded)}
         .seed-bar-value{font-family:'Crimson Pro',monospace;font-size:0.9rem;color:var(--accent-gold);background:var(--bg-parchment);padding:0.2rem 0.5rem;border-radius:4px;flex:1;min-width:80px}
+        .dedicated-link{margin:0 0 0.75rem;font-size:0.9rem;color:var(--text-secondary)}
+        .dedicated-link a{color:var(--accent-gold)}
         .results-section{margin-top:1.25rem}
         .results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem}
         .results-title{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em}
@@ -642,6 +644,7 @@
                     <code class="seed-bar-value" id="seedValue"></code>
                     <button class="secondary-btn" onclick="copySeedLink()">🔗 Copy link to these names</button>
                 </div>
+                <p class="dedicated-link" id="dedicatedLink" style="display:none;"></p>
                 <div id="resultsContainer" aria-live="polite">
                     <div class="empty-state"><div class="empty-icon">📜</div><p>Choose your preferences and generate names</p></div>
                 </div>
@@ -753,6 +756,7 @@
                     <div class="control-group"><label>&nbsp;</label><button class="generate-btn" id="generateRaceBtn" style="width:100%">Generate</button></div>
                 </div>
             </div>
+            <p class="dedicated-link" id="dedicatedRaceLink" style="display:none;"></p>
             <div id="raceResults" aria-live="polite"></div>
         </div>
         
@@ -884,7 +888,7 @@
 
         <footer>
             <p>© 2025 <strong>MythicNames</strong> — Free Fantasy Name Generator for D&D, Pathfinder & Writers</p>
-            <p style="margin-top:0.5rem;"><a href="generators/elf-name-generator">Elf Names</a> • <a href="generators/dwarf-name-generator">Dwarf Names</a> • <a href="generators/orc-name-generator">Orc Names</a> • <a href="generators/tiefling-name-generator">Tiefling Names</a> • <a href="generators/">All Races</a> • <a href="blog/">Blog</a> • <a href="sitemap">Sitemap</a> • <a href="privacy">Privacy</a></p>
+            <p style="margin-top:0.5rem;"><a href="generators/elf-name-generator">Elf Names</a> • <a href="generators/dwarf-name-generator">Dwarf Names</a> • <a href="generators/drow-name-generator">Drow Names</a> • <a href="generators/tiefling-name-generator">Tiefling Names</a> • <a href="generators/weapon-name-generator">Weapon Names</a> • <a href="generators/spell-name-generator">Spell Names</a> • <a href="generators/">All 27 Generators</a> • <a href="blog/">Blog</a> • <a href="sitemap">Sitemap</a> • <a href="privacy">Privacy</a></p>
         </footer>
     </div>
 
@@ -2647,11 +2651,40 @@
             });
             const names = genNames(opts);
             displayNames(names);
+            showDedicatedLink(opts.cat);
             showSeedBar(opts);
             setSeed(null); // back to unseeded for anything generated outside this batch
             btn.classList.remove('loading');
             btn.disabled = false;
         }, 300);
+    }
+
+    // ============ DEDICATED GENERATOR LINKS ============
+    // Several categories here have a fuller standalone page (more variants,
+    // pronunciations, naming notes). Point people at it when it exists.
+    const DEDICATED = {
+        kingdoms: ['kingdom', 'Kingdom'], ships: ['ship', 'Ship'], taverns: ['tavern', 'Tavern'],
+        weapons: ['weapon', 'Weapon'], spells: ['spell', 'Spell'], guilds: ['guild', 'Guild'],
+        artifacts: ['artifact', 'Artifact'], dungeons: ['dungeon', 'Dungeon'], creatures: ['monster', 'Monster']
+    };
+    const DEDICATED_RACES = ['elf','dwarf','orc','human','halfling','gnome','tiefling','dragonborn','vampire','angel','demon','fairy','drow','goblin','half-elf'];
+
+    function renderDedicated(el, slug, label) {
+        if (!el) return;
+        if (!slug) { el.style.display = 'none'; return; }
+        el.innerHTML = '→ <a href="generators/' + slug + '-name-generator">Open the full ' + label +
+            ' name generator</a> for more variants and naming notes';
+        el.style.display = 'block';
+    }
+
+    function showDedicatedLink(cat) {
+        const match = DEDICATED[cat];
+        renderDedicated(document.getElementById('dedicatedLink'), match && match[0], match && match[1]);
+    }
+
+    function showDedicatedRaceLink(race) {
+        const slug = DEDICATED_RACES.indexOf(race) > -1 ? race : null;
+        renderDedicated(document.getElementById('dedicatedRaceLink'), slug, cap(race));
     }
 
     // ============ SEED SHARING ============
@@ -2745,6 +2778,7 @@
                 names.push({name, pron: pron(name), mean: '"' + r(rd.meanings) + '"', backstory: genBackstoryForName(name)});
                 addToHistory(name);
             }
+            showDedicatedRaceLink(selectedRace);
             displayNames(names, document.getElementById('raceResults'));
         });
         
