@@ -132,10 +132,20 @@
     const D = {pre: {"m": ["Gold", "Fair", "Trade", "Swift", "Lucky", "Amber", "Spice", "Silk", "Sun", "Merry", "Wave", "Morning", "Fortune", "Star", "Sea"], "f": ["Black", "Blood", "Dread", "Grim", "Devil", "Skull", "Rogue", "Storm", "Night", "Kraken", "Crimson", "Savage", "Shadow", "Bone", "Rum"], "n": ["Iron", "Steel", "Royal", "Storm", "Thunder", "War", "Bold", "Noble", "Crown", "Sea", "Valiant", "Sovereign", "Tempest", "Vigilant", "Stalwart"]}, suf: {"m": ["runner", "trader", "wind", "fortune", "star", "gull", "dancer", "breeze", "crest", "wake", "merchant", "swallow", "drift", "haven", "spray"], "f": ["reaver", "fury", "vengeance", "curse", "fang", "blade", "serpent", "revenge", "howl", "plague", "hunter", "wraith", "scourge", "maw", "claw"], "n": ["guard", "ward", "lance", "hammer", "shield", "spear", "bastion", "valor", "banner", "sentinel", "pride", "glory", "spirit", "hawk", "defiance"]}, meanings: ["voyage", "adventure", "fortune", "glory", "freedom", "vengeance", "honor", "courage", "speed", "might"]};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    // Same name always yields the same meaning, so a name keeps its identity
+    // across regenerations and shared links.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) {
+        return pool[nameHash(name.toLowerCase()) % pool.length];
+    }
     function generateName(gender) {
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
         let n = r(D.pre[gk] || D.pre.m) + r(D.suf[gk] || D.suf.m);
-        return { name: cap(n), meaning: '"' + r(D.meanings) + '"' };
+        return { name: cap(n), meaning: '"' + meaningFor(n, D.meanings) + '"' };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;

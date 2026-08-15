@@ -134,6 +134,16 @@
     const D = {"infernal":{"pre":["Bael","Astar","Bel","Dis","Mamm","Meph","Bapho","Malph","Balth","Sarg","Levi","Amon","Zeb","Nerg","Gorm","Vass","Rimm","Thal"],"mid":["az","er","ith","on","ar","ul","eb","os"],"meanings":["the contract","pride","the ledger","tyranny","coin","the ninth circle","fine print","ambition","brimstone","the signed name"]},"abyssal":{"pre":["Orcus","Demog","Graz","Juib","Yeeno","Zar","Gor","Drav","Chorn","Karn","Phlog","Xaph","Ur","Gol","Skarn","Vorn","Yss","Krul"],"mid":["ak","oth","ur","az","ul","ix","og","ar"],"meanings":["ruin","the endless layer","locust","madness","maw","the churning","slaughter","entropy","swarm","unmaking"]},"cambion":{"pre":["Lil","Eresh","Heca","Mor","Nyx","Shax","Tiam","Vex","Sith","Kar","Drax","Agr","Carn","Ereb","Isca","Jez","Sel","Verm"],"mid":["ia","en","ur","ae","is","ora","el","ath"],"meanings":["half-blood","the whispered name","inheritance","the mark","temptation","a mortal mother","the second face","bargain-born","veiled","the slow corruption"]},"suf":{"m":["zoth","gorgon","othur","eus","on","azar","emon","roth","phon","rak","xis","goroth","ius","abus","ophis","argon","ezoth","ammon"],"f":["ith","ael","ura","ia","is","yss","rix","ena","yra","oth","eth","ossa","irix","ania","ymra","ashta"],"n":["bringer","lord","prince","master","king","herald","avatar","spawn","born","touched","render","eater","binder","flayer"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    // Same name always yields the same meaning, so a name keeps its identity
+    // across regenerations and shared links.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) {
+        return pool[nameHash(name.toLowerCase()) % pool.length];
+    }
     function pron(n) {
         const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
         const st = Math.floor(s.length / 2);
@@ -148,14 +158,14 @@
         // Collapse a doubled letter where two pieces meet (Lily+y+wing).
         const join = (a, b) => (a.slice(-1).toLowerCase() === b.slice(0,1).toLowerCase() ? a + b.slice(1) : a + b);
         let n = r(data.pre);
-        if (data.standalone) return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        if (data.standalone) return { name: cap(n), pron: pron(n), meaning: '"' + meaningFor(n, data.meanings) + '"', variant: VARIANT_NAMES[v] };
         const suf = r(sufs);
         // Neutral suffixes are whole words ('crusher', 'meadow'), so skip the
         // middle syllable there and after an already-long prefix.
         const wordSuffix = gk === 'n' || suf.length > 4;
         if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
         n = join(n, suf);
-        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        return { name: cap(n), pron: pron(n), meaning: '"' + meaningFor(n, data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;

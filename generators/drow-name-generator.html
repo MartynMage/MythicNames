@@ -126,6 +126,16 @@
     const D = {"noble":{"pre":["Zak","Bael","Rizz","Vand","Faer","Nym","Ilza","Xull","Malic","Char","Tluth","Auvry","Zauv","Nulaen","Sszen","Talab","Qilu","Yril"],"mid":["na","ri","ae","in","or","il"],"meanings":["house pride","spider silk","the matron favour","obsidian","cunning","the Underdark","intrigue","poison","noble blood","ambition"]},"warrior":{"pre":["Drizz","Zakn","Nalf","Ryld","Gromph","Jarl","Sol","Krenn","Vorn","Dinin","Berg","Hazz","Uthe","Xane","Quen","Rhyl","Tsab","Velk"],"mid":["af","ei","ar","ul","in","or"],"meanings":["blade-dancer","twin scimitars","weapon master","exile","the duel","shadow-step","sword-song","the surface","defiance","honour"]},"priestess":{"pre":["Vier","Shri","Trie","Yasr","Ssap","Belar","Zesst","Ilvar","Wal","Nedy","Phaer","Umrae","Ghen","Akor","Chal","Jhael","Myr","Sabal"],"mid":["na","il","ae","ri","un","es"],"meanings":["the Spider Queen","the Weave","divine venom","sacrifice","the matron","the web","dark blessing","judgement","faith","the eight legs"]},"suf":{"m":["afein","ar","tar","ryn","ath","undlin","zen","irr","orn","aun","ric","yl"],"f":["iiryn","afay","ice","ryn","tree","nafay","ae","ril","ynd","tra","eyl","ana"],"n":["ssrin","dro","tar","iss","yr","eth","ual","orn"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    // Same name always yields the same meaning, so a name keeps its identity
+    // across regenerations and shared links.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) {
+        return pool[nameHash(name.toLowerCase()) % pool.length];
+    }
     function pron(n) {
         const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
         const st = Math.floor(s.length / 2);
@@ -145,7 +155,7 @@
         const wordSuffix = gk === 'n' || suf.length > 4;
         if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
         n = join(n, suf);
-        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        return { name: cap(n), pron: pron(n), meaning: '"' + meaningFor(n, data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;

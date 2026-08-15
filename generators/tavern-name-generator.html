@@ -132,10 +132,20 @@
     const D = {pre: {"m": ["Sleeping", "Merry", "Jolly", "Lucky", "Dancing", "Cheerful", "Warm", "Copper", "Honeyed", "Prancing", "Laughing", "Whistling", "Cozy", "Humble", "Wandering"], "f": ["Rusty", "Drunken", "Crooked", "Limping", "Blind", "Ragged", "Leaky", "Sly", "Greasy", "Stumbling", "Mangy", "Soggy", "Grimy", "Rowdy", "Thirsty"], "n": ["Golden", "Silver", "Gilded", "Royal", "Velvet", "Ivory", "Crystal", "Marble", "Noble", "Regal", "Emerald", "Sapphire", "Grand", "Crowned", "Radiant"]}, suf: {"m": ["Pony", "Hearth", "Kettle", "Candle", "Goose", "Lamb", "Piper", "Fiddler", "Rose", "Lantern", "Badger", "Flagon", "Cauldron", "Barrel", "Hound"], "f": ["Rat", "Goblin", "Dagger", "Toad", "Gallows", "Skull", "Eel", "Hag", "Boar", "Crow", "Leech", "Snake", "Weasel", "Barnacle", "Cudgel"], "n": ["Dragon", "Griffin", "Throne", "Unicorn", "Phoenix", "Swan", "Stag", "Lion", "Chalice", "Pegasus", "Peacock", "Scepter", "Star", "Knight", "Wizard"]}, meanings: ["rest", "ale", "mead", "hearth", "refuge", "merriment", "company", "warmth", "adventure", "hospitality"]};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    // Same name always yields the same meaning, so a name keeps its identity
+    // across regenerations and shared links.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) {
+        return pool[nameHash(name.toLowerCase()) % pool.length];
+    }
     function generateName(gender) {
         const gk = gender === 'any' ? r(['m', 'f', 'n']) : gender;
         const n = 'The ' + r(D.pre[gk] || D.pre.m) + ' ' + r(D.suf[gk] || D.suf.m);
-        return { name: n, meaning: '"' + r(D.meanings) + '"' };
+        return { name: n, meaning: '"' + meaningFor(n, D.meanings) + '"' };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;

@@ -126,6 +126,16 @@
     const D = {"raider":{"pre":["Grib","Snag","Krag","Zurk","Mub","Nark","Gash","Drez","Skab","Vorg","Ritz","Grix","Bulk","Zad","Hrak","Snik","Grub","Krul"],"mid":["ak","ub","iz","ur","og","ez"],"meanings":["teeth","scrap","plunder","ambush","warband","bone","spike","snarl","loot","pack"]},"shaman":{"pre":["Zog","Mek","Sha","Yark","Nub","Vex","Ooz","Wubb","Skree","Thrag","Muk","Zib","Gnaw","Rott","Snot","Fizz","Grot","Blek"],"mid":["ub","og","ik","az","uz","ee"],"meanings":["fungus","omen","hex","cave-spirit","bad luck","smoke","rot","tooth-charm","muttering","the deep dark"]},"sneak":{"pre":["Nix","Slik","Twig","Nib","Skit","Pik","Wisp","Fli","Dodge","Creep","Nim","Zip","Quik","Shiv","Tack","Grin","Sly","Flit"],"mid":["it","ik","ip","er","ub","az"],"meanings":["shadow","quick fingers","the unseen","backstab","whisper","lockpick","dagger","escape","trap","silence"]},"suf":{"m":["nak","gub","rot","zik","ug","ak","ob","ik","uz","tusk","snout","fang"],"f":["ga","na","zi","ka","ub","sha","ri","ta","ika","ura","esh","ini"],"n":["tooth","snout","guts","ripper","biter","stabber","chewer","picker","snatcher","gnawer"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+    // Same name always yields the same meaning, so a name keeps its identity
+    // across regenerations and shared links.
+    function nameHash(s) {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+        return (h >>> 0);
+    }
+    function meaningFor(name, pool) {
+        return pool[nameHash(name.toLowerCase()) % pool.length];
+    }
     function pron(n) {
         const s = n.toLowerCase().replace(/[^a-z]/g, '').match(/[^aeiou]*[aeiou]+[^aeiou]*/gi) || [n];
         const st = Math.floor(s.length / 2);
@@ -145,7 +155,7 @@
         const wordSuffix = gk === 'n' || suf.length > 4;
         if (!wordSuffix && n.length <= 5 && Math.random() > 0.4 && data.mid.length && data.mid.join("")) n = join(n, r(data.mid));
         n = join(n, suf);
-        return { name: cap(n), pron: pron(n), meaning: '"' + r(data.meanings) + '"', variant: VARIANT_NAMES[v] };
+        return { name: cap(n), pron: pron(n), meaning: '"' + meaningFor(n, data.meanings) + '"', variant: VARIANT_NAMES[v] };
     }
     function generateNames() {
         const gender = document.getElementById('gender').value;
