@@ -142,6 +142,7 @@ if (fs.existsSync(notFoundPath)) {
     entries.push({u: '/', t: 'Main Name Generator'});
     entries.push({u: '/generators/', t: 'All Name Generators'});
     entries.push({u: '/blog/', t: 'Blog'});
+    entries.push({u: '/favourites', t: 'Saved Names'});
 
     let nf = fs.readFileSync(notFoundPath, 'utf8');
     const eol = nf.includes('\r\n') ? '\r\n' : '\n';
@@ -190,6 +191,7 @@ if (fs.existsSync(searchPath)) {
     idx.push({u: '/', t: 'Main Name Generator', d: readDesc('index.html'), c: 'Tool', k: 'character party world campaign seed'});
     idx.push({u: '/generators/', t: 'All Name Generators', d: readDesc('generators/index.html'), c: 'Index', k: ''});
     idx.push({u: '/blog/', t: 'Blog', d: readDesc('blog/index.html'), c: 'Index', k: ''});
+    idx.push({u: '/favourites', t: 'Saved Names', d: 'Every name you have starred, grouped by generator.', c: 'Tool', k: 'favourites favorites saved starred bookmarks'});
 
     let sp = fs.readFileSync(searchPath, 'utf8');
     const seol = sp.includes('\r\n') ? '\r\n' : '\n';

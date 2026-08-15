@@ -108,6 +108,16 @@ a:hover{color:var(--accent-amber)}
 .article-content strong{color:var(--text-primary)}
 .article-content blockquote{border-left:3px solid var(--accent-gold);padding:1rem 1.25rem;margin:1.5rem 0;background:var(--bg-card);border-radius:0 6px 6px 0;font-style:italic;color:var(--text-secondary)}
 
+/* Outline button, matching the copy/share buttons on the generator rows. Used
+   for page-level actions where the gold cta-btn would shout too loudly. */
+.secondary-btn{display:inline-block;padding:0.5rem 0.9rem;background:transparent;border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-secondary);cursor:pointer;font-size:0.85rem;font-family:inherit;text-decoration:none;transition:all 0.2s}
+.secondary-btn:hover{background:var(--accent-gold);border-color:var(--accent-gold);color:var(--bg-deep)}
+
+/* Transient confirmation. index.html carries its own copy because it does not
+   load this stylesheet. */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent-gold);padding:0.6rem 1.1rem;border-radius:6px;color:var(--accent-amber);font-size:0.85rem;opacity:0;transition:all 0.3s;z-index:100}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
 /* Static example names. These lists run long, so they drop the bullets and
    flow into columns rather than pushing the rest of the page down. */
 .examples-section .example-names{list-style:none;margin:0 0 1.5rem;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.35rem 1.5rem}

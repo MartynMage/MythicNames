@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+      (function(){try{var t=localStorage.getItem('mythicTheme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+    </script>
+    <!-- Google tag (gtag.js) with Consent Mode v2 -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var mythicConsented = false;
+      try { mythicConsented = localStorage.getItem('mythicConsent') === 'granted'; } catch(e) {}
+      var mythicState = mythicConsented ? 'granted' : 'denied';
+      gtag('consent', 'default', {ad_storage: mythicState, ad_user_data: mythicState, ad_personalization: mythicState, analytics_storage: mythicState});
+      gtag('js', new Date());
+      gtag('config', 'G-9C2LDVSHZZ');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C2LDVSHZZ"></script>
+    <script defer src="/consent.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Names | MythicNames</title>
+    <meta name="description" content="Every name you have saved across the MythicNames generators, grouped by where it came from.">
+    <!-- The contents are per-visitor and live only in this browser, so there is
+         nothing here for a crawler to index. -->
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://mythicnames.io/favourites">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#d4a857">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .fav-toolbar{display:flex;flex-wrap:wrap;gap:0.5rem;margin:0 0 1.5rem}
+        .fav-group{margin-bottom:2rem}
+        .fav-group-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--border-subtle);padding-bottom:0.5rem;margin-bottom:0.75rem}
+        .fav-group-head h2{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--accent-gold);margin:0}
+        .fav-group-head a{font-size:0.85rem;color:var(--text-faded);text-decoration:none;white-space:nowrap}
+        .fav-group-head a:hover{color:var(--accent-gold)}
+        .fav-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0.5rem}
+        .fav-item{display:flex;align-items:center;gap:0.5rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:6px;padding:0.5rem 0.75rem}
+        .fav-item .name{font-family:'Cinzel',serif;color:var(--text-primary);flex:1;min-width:0;overflow-wrap:anywhere}
+        .fav-empty{text-align:center;padding:2.5rem 1rem;color:var(--text-secondary)}
+        .fav-empty h2{font-family:'Cinzel',serif;color:var(--accent-gold);font-size:1.3rem;margin-bottom:0.5rem}
+        .fav-empty .suggest{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:1.25rem}
+        .fav-count{font-family:'Cinzel',serif;font-size:0.75rem;color:var(--text-faded);letter-spacing:0.08em}
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <button class="theme-toggle" onclick="mythicToggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light or dark mode">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <script>function mythicToggleTheme(){var h=document.documentElement;var n=h.getAttribute("data-theme")==="light"?"dark":"light";h.setAttribute("data-theme",n);try{localStorage.setItem("mythicTheme",n);}catch(e){}}</script>
+    <div class="ambient-glow glow-1"></div>
+    <div class="container" id="main">
+        <header class="site-header">
+            <a href="./" class="logo-link"><img src="logo.webp" alt="MythicNames" class="logo-icon" width="56" height="56" decoding="async"><span class="logo">MythicNames</span></a>
+            <nav class="site-nav"><a href="./">Generator</a><a href="generators/">All Generators</a><a href="blog/">Blog</a><a href="favourites" class="active">Saved</a></nav>
+        </header>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="./">Home</a> <span>&rsaquo;</span> <span>Saved Names</span></nav>
+        <h1 class="page-title">Saved Names</h1>
+        <p class="page-subtitle">Everything you have starred, grouped by where you found it. Stored in this browser only — nothing is uploaded.</p>
+
+        <div id="hasFavs" hidden>
+            <form class="filter-box" role="search" onsubmit="return false;">
+                <label for="q" class="sr-only">Filter saved names</label>
+                <input type="search" id="q" placeholder="Filter your saved names" autocomplete="off" oninput="render()">
+                <span class="filter-count" id="count" aria-live="polite"></span>
+            </form>
+
+            <div class="fav-toolbar">
+                <button class="secondary-btn" onclick="copyAll()">Copy all</button>
+                <button class="secondary-btn" onclick="downloadAll()">Download .txt</button>
+                <button class="secondary-btn" onclick="clearAll()">Clear all</button>
+            </div>
+
+            <div id="groups"></div>
+            <div class="filter-empty" id="noMatch" hidden>Nothing matched that filter.</div>
+        </div>
+
+        <div class="fav-empty" id="noFavs" hidden>
+            <h2>No saved names yet</h2>
+            <p>Tap the heart beside any name on a generator and it will appear here.</p>
+            <div class="suggest">
+                <a class="secondary-btn" href="generators/elf-name-generator">Elf Names</a>
+                <a class="secondary-btn" href="generators/dwarf-name-generator">Dwarf Names</a>
+                <a class="secondary-btn" href="generators/tavern-name-generator">Tavern Names</a>
+                <a class="secondary-btn" href="generators/starwars-name-generator">Star Wars Names</a>
+                <a class="secondary-btn" href="generators/">All 40 generators</a>
+            </div>
+        </div>
+
+        <footer class="site-footer"><p>© 2026 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="./">Generator</a><a href="generators/">All Generators</a><a href="blog/">Blog</a><a href="search">Search</a><a href="sitemap">Sitemap</a><a href="privacy">Privacy</a></div></footer>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+    function gaEvent(n, p) { try { gtag('event', n, p || {}); } catch (e) {} }
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg; t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 1800);
+    }
+
+    // Favourites are a flat list of names shared with every generator page.
+    // A parallel map records which generator each one came from; names saved
+    // before that existed simply have no entry and fall into "Saved names".
+    let favourites = [];
+    let meta = {};
+    try { favourites = JSON.parse(localStorage.getItem('mythicFavorites') || '[]'); } catch (e) {}
+    try { meta = JSON.parse(localStorage.getItem('mythicFavoriteMeta') || '{}'); } catch (e) {}
+    if (!Array.isArray(favourites)) favourites = [];
+
+    function save() {
+        try {
+            localStorage.setItem('mythicFavorites', JSON.stringify(favourites));
+            localStorage.setItem('mythicFavoriteMeta', JSON.stringify(meta));
+        } catch (e) {}
+    }
+
+    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const UNSORTED = '__none__';
+
+    function groupsOf(list) {
+        const out = new Map();
+        for (const name of list) {
+            const m = meta[name];
+            const key = (m && m.g) || UNSORTED;
+            if (!out.has(key)) out.set(key, { label: (m && m.l) || 'Saved names', slug: (m && m.g) || null, names: [] });
+            out.get(key).names.push(name);
+        }
+        // Newest source first, with the unlabelled bucket last.
+        return [...out.entries()].sort((a, b) => {
+            if (a[0] === UNSORTED) return 1;
+            if (b[0] === UNSORTED) return -1;
+            return a[1].label.localeCompare(b[1].label);
+        }).map(e => e[1]);
+    }
+
+    function render() {
+        const q = (document.getElementById('q').value || '').trim().toLowerCase();
+        const shown = q ? favourites.filter(n => n.toLowerCase().includes(q)) : favourites.slice();
+
+        document.getElementById('hasFavs').hidden = favourites.length === 0;
+        document.getElementById('noFavs').hidden = favourites.length > 0;
+        if (!favourites.length) return;
+
+        document.getElementById('count').textContent =
+            q ? `${shown.length} of ${favourites.length}` : `${favourites.length} saved`;
+        document.getElementById('noMatch').hidden = shown.length > 0;
+
+        let html = '';
+        for (const g of groupsOf(shown)) {
+            const link = g.slug
+                ? `<a href="generators/${esc(g.slug)}-name-generator">Generate more &rsaquo;</a>`
+                : '<a href="generators/">Browse generators &rsaquo;</a>';
+            html += `<section class="fav-group"><div class="fav-group-head"><h2>${esc(g.label)}</h2>${link}</div><ul class="fav-list">`;
+            for (const n of g.names) {
+                const safe = esc(n).replace(/'/g, '&#39;');
+                html += `<li class="fav-item"><span class="name">${esc(n)}</span>` +
+                    `<button class="gen-icon-btn" aria-label="Copy ${safe}" title="Copy" onclick="copyOne(this,'${safe}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>` +
+                    `<button class="gen-icon-btn" aria-label="Remove ${safe}" title="Remove" onclick="removeOne('${safe}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>` +
+                    `</li>`;
+            }
+            html += '</ul></section>';
+        }
+        document.getElementById('groups').innerHTML = html;
+    }
+
+    function copyOne(btn, name) {
+        navigator.clipboard.writeText(name).then(() => showToast('Copied ' + name));
+        gaEvent('copy_name', { source: 'favourites' });
+    }
+
+    function removeOne(name) {
+        const i = favourites.indexOf(name);
+        if (i < 0) return;
+        favourites.splice(i, 1);
+        delete meta[name];
+        save(); render();
+        showToast('Removed ' + name);
+        gaEvent('unfavorite_name', { source: 'favourites' });
+    }
+
+    function copyAll() {
+        if (!favourites.length) return;
+        navigator.clipboard.writeText(favourites.join('\n')).then(() => showToast(favourites.length + ' names copied'));
+        gaEvent('copy_all', { source: 'favourites' });
+    }
+
+    function downloadAll() {
+        if (!favourites.length) return;
+        const lines = groupsOf(favourites).map(g => g.label + '\n' + g.names.map(n => '  ' + n).join('\n')).join('\n\n');
+        const blob = new Blob(['MythicNames — saved names\n\n' + lines + '\n'], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'mythicnames-saved.txt';
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        gaEvent('download_favourites');
+    }
+
+    function clearAll() {
+        if (!favourites.length) return;
+        if (!confirm('Remove all ' + favourites.length + ' saved names? This cannot be undone.')) return;
+        favourites = []; meta = {};
+        save(); render();
+        showToast('All saved names removed');
+        gaEvent('clear_favourites');
+    }
+
+    render();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load', function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});
+    </script>
+</body>
+</html>

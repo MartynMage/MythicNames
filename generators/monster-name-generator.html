@@ -92,7 +92,7 @@
     <div class="container" id="main">
         <header class="site-header">
             <a href="../" class="logo-link"><img src="../logo.webp" alt="MythicNames" class="logo-icon" width="56" height="56" decoding="async"><span class="logo">MythicNames</span></a>
-            <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a></nav>
+            <nav class="site-nav"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../favourites">Saved</a></nav>
         </header>
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../">Home</a> <span>›</span> <a href="./">Name Generators</a> <span>›</span> <span>Monster Names</span></nav>
         <article>
@@ -268,13 +268,21 @@
 
     // Shares the homepage favourites list, so a name starred here shows up there.
     let favourites = [];
+    let favMeta = {};
     try { favourites = JSON.parse(localStorage.getItem('mythicFavorites') || '[]'); } catch (e) {}
+    try { favMeta = JSON.parse(localStorage.getItem('mythicFavoriteMeta') || '{}'); } catch (e) {}
+    const FAV_SOURCE = { g: 'monster', l: "Monster Names" };
     function isFavourite(name) { return favourites.indexOf(name) > -1; }
     function toggleFavourite(btn, name) {
         const i = favourites.indexOf(name);
-        if (i > -1) { favourites.splice(i, 1); btn.classList.remove("on"); btn.setAttribute("aria-pressed", "false"); }
-        else { favourites.push(name); btn.classList.add("on"); btn.setAttribute("aria-pressed", "true"); }
-        try { localStorage.setItem('mythicFavorites', JSON.stringify(favourites)); } catch (e) {}
+        if (i > -1) { favourites.splice(i, 1); delete favMeta[name]; btn.classList.remove("on"); btn.setAttribute("aria-pressed", "false"); }
+        else { favourites.push(name); favMeta[name] = FAV_SOURCE; btn.classList.add("on"); btn.setAttribute("aria-pressed", "true"); }
+        // The flat list is what every other page reads; the map only adds
+        // provenance for /favourites to group by.
+        try {
+            localStorage.setItem('mythicFavorites', JSON.stringify(favourites));
+            localStorage.setItem('mythicFavoriteMeta', JSON.stringify(favMeta));
+        } catch (e) {}
         gaEvent(i > -1 ? 'unfavorite_name' : 'favorite_name');
     }
 

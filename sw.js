@@ -2,7 +2,10 @@
 // Pages: network-first, so a deploy is picked up straight away and the cache
 // is only a fallback. Static assets: cache-first. Third-party requests (ads,
 // analytics, fonts) are left entirely alone.
-const VERSION = 'v1';
+// Bump on any change to PRECACHE or to a long-cached asset (styles.css,
+// consent.js) — activate deletes every cache that is not on the current
+// version, so returning visitors pick the new files up on their next visit.
+const VERSION = 'v2';
 const SHELL = 'mythic-shell-' + VERSION;
 const RUNTIME = 'mythic-runtime-' + VERSION;
 
@@ -14,6 +17,8 @@ const PRECACHE = [
     '/404.html',
     '/generators/',
     '/blog/',
+    // Saved names live in localStorage, so this page is fully usable offline.
+    '/favourites',
     '/logo.webp',
     '/favicon.ico',
     '/icon-192.png',
