@@ -642,7 +642,7 @@
                     <code class="seed-bar-value" id="seedValue"></code>
                     <button class="secondary-btn" onclick="copySeedLink()">🔗 Copy link to these names</button>
                 </div>
-                <div id="resultsContainer">
+                <div id="resultsContainer" aria-live="polite">
                     <div class="empty-state"><div class="empty-icon">📜</div><p>Choose your preferences and generate names</p></div>
                 </div>
             </div>
@@ -686,7 +686,7 @@
                     <button class="generate-btn" id="generatePartyBtn">Generate Party</button>
                 </div>
             </div>
-            <div id="partyContainer"></div>
+            <div id="partyContainer" aria-live="polite"></div>
         </div>
         
         <!-- World Builder Tab -->
@@ -726,7 +726,7 @@
                     <button class="generate-btn" id="generateWorldBtn">Generate Kingdom</button>
                 </div>
             </div>
-            <div id="worldContainer"></div>
+            <div id="worldContainer" aria-live="polite"></div>
         </div>
         
         <!-- Race Names Tab -->
@@ -753,7 +753,7 @@
                     <div class="control-group"><label>&nbsp;</label><button class="generate-btn" id="generateRaceBtn" style="width:100%">Generate</button></div>
                 </div>
             </div>
-            <div id="raceResults"></div>
+            <div id="raceResults" aria-live="polite"></div>
         </div>
         
         <!-- Name Packs Tab -->
@@ -769,7 +769,7 @@
                 <div class="pack-card" data-pack="party"><div class="pack-icon">🎭</div><div class="pack-name">Party</div><div class="pack-desc">Adventuring group</div></div>
                 <div class="pack-card" data-pack="monsters"><div class="pack-icon">🐲</div><div class="pack-name">Monsters</div><div class="pack-desc">Legendary beasts</div></div>
             </div>
-            <div id="packResults"></div>
+            <div id="packResults" aria-live="polite"></div>
         </div>
         
         <!-- Character Creator Tab -->
@@ -785,7 +785,7 @@
                     <button class="generate-btn" id="generateCharBtn">Create Character</button>
                 </div>
             </div>
-            <div id="characterContainer"></div>
+            <div id="characterContainer" aria-live="polite"></div>
         </div>
         
         <!-- History Tab -->
@@ -1867,9 +1867,56 @@
             html += '</div></div>';
         }
         
+        html += '<div class="share-buttons"><button class="share-btn" onclick="copyWorld()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Kingdom</button><button class="share-btn" onclick="downloadWorld()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download</button></div>';
+
         html += '</div>';
         cont.innerHTML = html;
+        lastWorld = w;
         addToHistory(w.kingdomName);
+    }
+
+    // Kingdoms are the one thing here a DM actually wants to paste into notes,
+    // so build a plain-text version rather than only rendering cards.
+    let lastWorld = null;
+
+    function worldToText(w) {
+        const line = '═'.repeat(40);
+        let t = w.kingdomName.toUpperCase() + '\n' + line + '\n';
+        t += cap(w.type) + ' ruled by ' + w.rulerTitle + ' ' + w.rulerName + '\n\n';
+        t += 'CITIES & SETTLEMENTS\n';
+        w.cities.forEach(c => { t += '  • ' + c.name + ' — ' + c.type + ', led by ' + c.leader + '\n'; });
+        t += '\nFACTIONS & POWERS\n';
+        w.factions.forEach(f => { t += '  • ' + f.name + ' — ' + f.type + ', led by ' + f.leader + '\n'; });
+        if (w.conflicts.length) {
+            t += '\nACTIVE CONFLICTS\n';
+            w.conflicts.forEach(c => { t += '  • ' + cap(c) + '\n'; });
+        }
+        t += '\nGenerated with MythicNames.io\n';
+        return t;
+    }
+
+    async function copyWorld() {
+        if (!lastWorld) return;
+        try {
+            await navigator.clipboard.writeText(worldToText(lastWorld));
+            gaEvent('copy_world');
+            showToast('Kingdom copied!');
+        } catch (e) {}
+    }
+
+    function downloadWorld() {
+        if (!lastWorld) return;
+        const blob = new Blob([worldToText(lastWorld)], {type: 'text/plain'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = lastWorld.kingdomName.replace(/[^\w-]+/g, '-').toLowerCase() + '.txt';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        gaEvent('download_world');
+        showToast('Kingdom downloaded');
     }
 
     // ============ DISPLAY FUNCTIONS ============
