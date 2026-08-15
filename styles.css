@@ -118,6 +118,11 @@ a:hover{color:var(--accent-amber)}
 .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent-gold);padding:0.6rem 1.1rem;border-radius:6px;color:var(--accent-amber);font-size:0.85rem;opacity:0;transition:all 0.3s;z-index:100}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
+/* States the game's own naming rules next to the results, so it is clear
+   every name shown can actually be registered. */
+.name-rule{font-size:0.85rem;color:var(--text-secondary);background:var(--bg-card);border:1px solid var(--border-subtle);border-left:3px solid var(--accent-gold);border-radius:0 6px 6px 0;padding:0.6rem 0.9rem;margin:0 0 1rem}
+.name-rule strong{color:var(--accent-gold);font-family:'Cinzel',serif;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em}
+
 /* Static example names. These lists run long, so they drop the bullets and
    flow into columns rather than pushing the rest of the page down. */
 .examples-section .example-names{list-style:none;margin:0 0 1.5rem;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.35rem 1.5rem}

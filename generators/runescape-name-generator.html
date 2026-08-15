@@ -107,7 +107,8 @@
                     <div class="gen-control"><label for="count">Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate RuneScape Names</button>
-                <div class="gen-actions"><button type="button" class="gen-copy-all" onclick="copyAllNames()">Copy all names</button></div>
+                <div class="gen-actions"><button type="button" class="gen-copy-all" onclick="copyAllNames()">Copy all names</button></div>            <p class="name-rule"><strong>Fits the game:</strong> RuneScape display names cap at 12 characters.</p>
+
                 <div class="gen-results" id="results" aria-live="polite"></div>
             </div>
             <!-- AUTO:examples -->
@@ -203,6 +204,11 @@
                     <a href="warhammer40k-name-generator" class="related-link"><span class="icon">💀</span><span class="label">Warhammer 40K Names</span></a>
                     <a href="genshin-name-generator" class="related-link"><span class="icon">⚗️</span><span class="label">Genshin Names</span></a>
                     <a href="starwars-name-generator" class="related-link"><span class="icon">🌌</span><span class="label">Star Wars Names</span></a>
+                    <a href="minecraft-name-generator" class="related-link"><span class="icon">⛏️</span><span class="label">Minecraft Names</span></a>
+                    <a href="roblox-name-generator" class="related-link"><span class="icon">🧱</span><span class="label">Roblox Names</span></a>
+                    <a href="fortnite-name-generator" class="related-link"><span class="icon">🪂</span><span class="label">Fortnite Names</span></a>
+                    <a href="valorant-name-generator" class="related-link"><span class="icon">🎯</span><span class="label">Valorant Names</span></a>
+                    <a href="diablo4-name-generator" class="related-link"><span class="icon">🔥</span><span class="label">Diablo 4 Names</span></a>
                 </div>
                 <p style="margin-top:1rem;font-size:0.9rem;color:var(--text-secondary)">New to a game&rsquo;s naming rules? <a href="../blog/game-naming-conventions">How ten games name their characters</a> breaks down the conventions behind every generator above.</p>
             </section>
@@ -240,6 +246,13 @@
     }
 
     let lastNames = [];
+    // The game rejects anything outside these rules, so a name that would fail
+    // at the character screen is never shown here.
+    const NAME_RULES = {min: 1, max: 12, re: new RegExp("^[A-Za-z0-9 _-]+$")};
+    function fitsGameRules(n) {
+        if (n.length < NAME_RULES.min || n.length > NAME_RULES.max) return false;
+        return NAME_RULES.re.test(n);
+    }
     function generateNames() {
         const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
@@ -250,6 +263,7 @@
         lastNames = [];
         for (let i = 0, tries = 0; i < count && tries < count * 60; tries++) {
             const nm = generateName(variant);
+            if (!fitsGameRules(nm.name)) continue;
             if (!matchesLength(nm.name, lengthWant)) continue;
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
