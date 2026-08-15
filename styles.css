@@ -68,10 +68,13 @@ a:hover{color:var(--accent-amber)}
 .gen-copy-all{font-family:'Cinzel',serif;font-size:0.8rem;padding:0.5rem 1rem;background:transparent;border:1px solid var(--border-subtle);border-radius:5px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s}
 .gen-copy-all:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
 
-.gen-row-actions{display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap}
-.gen-icon-btn{background:transparent;border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-faded);cursor:pointer;font-size:0.85rem;line-height:1;padding:0.35rem 0.5rem;transition:all 0.2s}
+.gen-row-actions{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap}
+/* Matches .gen-copy so the icon buttons sit in the same visual family. */
+.gen-icon-btn{display:inline-flex;align-items:center;justify-content:center;padding:0.4rem 0.6rem;background:transparent;border:1px solid var(--border-subtle);border-radius:4px;color:var(--text-faded);cursor:pointer;transition:all 0.2s;line-height:1}
+.gen-icon-btn svg{width:15px;height:15px;display:block}
 .gen-icon-btn:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
 .gen-icon-btn.on{color:var(--accent-ember);border-color:var(--accent-ember)}
+.gen-icon-btn.on svg{fill:currentColor}
 
 /* Generator name rows */
 .gen-name-pron{color:var(--accent-blue);font-style:italic;font-size:0.9rem}
