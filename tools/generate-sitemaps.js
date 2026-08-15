@@ -72,8 +72,8 @@ console.log('sitemap.xml: index of ' + indexEntries.length + ' sitemaps');
 const GROUPS = {
     races: ['elf', 'dwarf', 'orc', 'human', 'halfling', 'gnome', 'tiefling', 'dragonborn', 'half-elf', 'drow', 'goblin'],
     creatures: ['fairy', 'angel', 'demon', 'vampire'],
-    world: ['tavern', 'kingdom', 'ship', 'dungeon', 'guild'],
-    archetypes: ['wizard', 'knight', 'villain', 'monster'],
+    world: ['tavern', 'town', 'kingdom', 'ship', 'dungeon', 'guild'],
+    archetypes: ['wizard', 'knight', 'villain', 'monster', 'npc', 'family'],
     items: ['weapon', 'spell', 'artifact'],
 };
 const ICONS = {
@@ -81,7 +81,7 @@ const ICONS = {
     tiefling: '😈', dragonborn: '🐲', 'half-elf': '🌗', drow: '🕷️', goblin: '👹',
     fairy: '🧚', angel: '👼', demon: '👿', vampire: '🧛',
     tavern: '🍺', kingdom: '👑', ship: '⛵',
-    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺',
+    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', town: '🏘️', npc: '🧑‍🌾', family: '📜', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺',
 };
 const titleCase = s => s.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('-');
 

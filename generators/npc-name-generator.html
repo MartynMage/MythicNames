@@ -102,6 +102,7 @@
             <div class="generator-box">
                 <div class="gen-controls">
                     <div class="gen-control"><label for="variant">Station</label><select id="variant"><option value="any">Any NPC</option><option value="commoner">Commoner & Trader</option><option value="guard">Guard & Soldier</option><option value="noble">Noble & Official</option></select></div>
+                    <div class="gen-control"><label for="length">Length</label><select id="length"><option value="any">Any</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></select></div>
                     <div class="gen-control"><label for="count">Results</label><select id="count"><option value="5">5 names</option><option value="10" selected>10 names</option><option value="20">20 names</option></select></div>
                 </div>
                 <button class="gen-btn" onclick="generateNames()">Generate NPC Names</button>
@@ -122,7 +123,7 @@
         <footer class="site-footer"><p>© 2026 <strong>MythicNames</strong> — Free Fantasy Name Generator</p><div class="footer-links"><a href="../">Generator</a><a href="./">All Generators</a><a href="../blog/">Blog</a><a href="../sitemap">Sitemap</a><a href="/privacy">Privacy</a></div></footer>
     </div>
     <script>
-    const D = {"commoner":{"patterns":["{given} {trade}","{adj} {given}","{given} the {quirk}"],"pools":{"given":["Bram","Hal","Meg","Tam","Josa","Nell","Wat","Sera","Rob","Ida","Ned","Cass","Perrin","Mattie","Osric","Beth","Corin","Dilla"],"trade":["Cooper","Fletcher","Baker","Tanner","Smith","Miller","Weaver","Chandler","Mason","Potter","Thatcher","Carter","Salter","Dyer"],"adj":["Old","Young","Long","Little","Fat","Quiet"],"quirk":["Elder","Younger","Widow","Limp","Whistler","Quick","Slow","Kind"]},"meanings":["knows everyone's business","overcharges strangers by habit","owes money in the next town","genuinely helpful, rare here","talks constantly while working","has a son in the militia","lost the shop once, bought it back","suspicious of anyone armed","will trade information for drink","the best in three villages, they say"]},"guard":{"patterns":["{rank} {given} {surname}","{given} {surname}","{given} the {quirk}"],"pools":{"rank":["Sergeant","Corporal","Captain","Watchman","Sentry"],"given":["Dav","Rurik","Talia","Bren","Ollan","Mira","Garrick","Wynn","Kess","Roderic","Halvard","Ines"],"surname":["Stone","Hale","Marsh","Blackwood","Ford","Ironside","Vale","Harrow","Grange","Thorne"],"quirk":["Steady","Sour","Sleepless","Straight","Unbribed","Tired"]},"meanings":["twelve years on the same gate","takes bribes, but honestly","passed over for promotion twice","genuinely cannot be bought","counting down to a pension","served in a war nobody mentions","knows every smuggler by name","writes everything in a little book","hates the captain openly","first through the door, always"]},"noble":{"patterns":["{title} {given} {house}","{given} of {house}","{title} {given}"],"pools":{"title":["Lord","Lady","Baron","Baroness","Magistrate","Steward","Reeve","Chancellor"],"given":["Aldric","Rosamund","Emeric","Isolde","Corwin","Aveline","Percival","Marguerite","Everard","Cecily"],"house":["Vane","Ashcroft","Belhame","Marlow","Thornbury","Ostry","Calder","Wexley","Peleran","Drummond"]},"meanings":["third in line, resents it","the title is newer than the money","the money is gone, the title is not","married into everything","genuinely competent, oddly","holds a grudge from a wedding","collects something expensive","has not visited the estate in years","the servants run the household","owes a favour to someone dangerous"]}};
+    const D = {"commoner":{"patterns":["{given} {trade}","{adj} {given}","{given} the {quirk}"],"pools":{"given":["Bram","Hal","Meg","Tam","Josa","Nell","Wat","Sera","Rob","Ida","Ned","Cass","Perrin","Mattie","Osric","Beth","Corin","Dilla"],"trade":["Cooper","Fletcher","Baker","Tanner","Smith","Miller","Weaver","Chandler","Mason","Potter","Thatcher","Carter","Salter","Dyer"],"adj":["Old","Young","Long","Little","Fat","Quiet"],"quirk":["Elder","Younger","Widow","Limp","Whistler","Quick","Slow","Kind"]},"meanings":["knows everyone's business","overcharges strangers by habit","owes money in the next town","genuinely helpful, rare here","talks constantly while working","has a son in the militia","lost the shop once, bought it back","suspicious of anyone armed","will trade information for drink","the best in three villages, they say"]},"guard":{"patterns":["{rank} {given} {surname}","{given} {surname}","{given} the {quirk}"],"pools":{"rank":["Sergeant","Corporal","Captain","Watchman","Sentry"],"given":["Dav","Rurik","Talia","Bren","Ollan","Mira","Garrick","Wynn","Kess","Roderic","Halvard","Ines"],"surname":["Stone","Hale","Marsh","Blackwood","Ford","Ironside","Vale","Harrow","Grange","Thorne"],"quirk":["Steady","Sour","Sleepless","Straight","Unbribed","Tired"]},"meanings":["twelve years on the same gate","takes bribes, but honestly","passed over for promotion twice","genuinely cannot be bought","counting down to a pension","served in a war nobody mentions","knows every smuggler by name","writes everything in a little book","hates the captain openly","first through the door, always"]},"noble":{"patterns":["{mtitle} {mgiven} {house}","{ftitle} {fgiven} {house}","{ntitle} {mgiven} {house}","{ntitle} {fgiven} {house}","{mgiven} of {house}","{fgiven} of {house}"],"pools":{"mtitle":["Lord","Baron","Sir"],"ftitle":["Lady","Baroness","Dame"],"ntitle":["Magistrate","Steward","Reeve","Chancellor","Provost"],"mgiven":["Aldric","Emeric","Corwin","Percival","Everard","Rowan","Alistair","Benedict"],"fgiven":["Rosamund","Isolde","Aveline","Marguerite","Cecily","Eleanor","Beatrix","Adela"],"house":["Vane","Ashcroft","Belhame","Marlow","Thornbury","Ostry","Calder","Wexley","Peleran","Drummond"]},"meanings":["third in line, resents it","the title is newer than the money","the money is gone, the title is not","married into everything","genuinely competent, oddly","holds a grudge from a wedding","collects something expensive","has not visited the estate in years","the servants run the household","owes a favour to someone dangerous"]}};
     const r = a => a[Math.floor(Math.random() * a.length)];
     const VARIANT_NAMES = {"commoner":"Commoner & Trader","guard":"Guard & Soldier","noble":"Noble & Official"};
 
@@ -153,18 +154,21 @@
     function generateNames() {
         const variant = document.getElementById('variant').value;
         const count = parseInt(document.getElementById('count').value);
+        const lengthWant = (document.getElementById('length') || {}).value;
         const results = document.getElementById('results');
         let html = '';
         const seen = new Set();
         lastNames = [];
-        for (let i = 0, tries = 0; i < count && tries < count * 30; tries++) {
+        for (let i = 0, tries = 0; i < count && tries < count * 60; tries++) {
             const nm = generateName(variant);
+            if (!matchesLength(nm.name, lengthWant)) continue;
             if (seen.has(nm.name)) continue;
             seen.add(nm.name);
             lastNames.push(nm.name);
             i++;
             const safe = nm.name.replace(/'/g, "\\'");
-            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
+            const safeName = nm.name.replace(/'/g, "\\'");
+            html += `<div class="gen-name"><div><span class="gen-name-text">${nm.name}</span><div class="gen-name-details"><span class="gen-name-meaning">${nm.meaning}</span><span class="gen-name-variant">${nm.variant}</span></div></div><div class="gen-row-actions"><button class="gen-icon-btn fav-btn ${isFavourite(nm.name) ? 'on' : ''}" aria-pressed="${isFavourite(nm.name)}" aria-label="Save ${nm.name} to favourites" onclick="toggleFavourite(this,'${safeName}')">♥</button><button class="gen-icon-btn" aria-label="Hear ${nm.name} pronounced" onclick="speakName('${safeName}')">🔊</button><button class="gen-copy" onclick="copyName(this,'${safe}')">Copy</button><button class="share-btn" onclick="shareName('${safe}')">Share</button></div></div>`;
         }
         gaEvent('generate_names', {variant: variant, count: count});
         syncUrl();
@@ -202,6 +206,37 @@
         } catch (e) {}
     }
 
+    // ---- Pronunciation, favourites and length filtering ----
+    function speakName(text) {
+        if (!('speechSynthesis' in window)) return;
+        speechSynthesis.cancel();
+        const spoken = text.replace(/-/g, ' ').replace(/([a-z])([A-Z])/g, '    function gaEvent(name, params) { $2').replace(/'/g, '');
+        const u = new SpeechSynthesisUtterance(spoken);
+        u.rate = 0.85; u.pitch = 1;
+        speechSynthesis.speak(u);
+        gaEvent('speak_name');
+    }
+
+    // Shares the homepage favourites list, so a name starred here shows up there.
+    let favourites = [];
+    try { favourites = JSON.parse(localStorage.getItem('mythicFavorites') || '[]'); } catch (e) {}
+    function isFavourite(name) { return favourites.indexOf(name) > -1; }
+    function toggleFavourite(btn, name) {
+        const i = favourites.indexOf(name);
+        if (i > -1) { favourites.splice(i, 1); btn.classList.remove("on"); btn.setAttribute("aria-pressed", "false"); }
+        else { favourites.push(name); btn.classList.add("on"); btn.setAttribute("aria-pressed", "true"); }
+        try { localStorage.setItem('mythicFavorites', JSON.stringify(favourites)); } catch (e) {}
+        gaEvent(i > -1 ? 'unfavorite_name' : 'favorite_name');
+    }
+
+    // Length buckets match the homepage: short 1-6, medium 5-10, long 9+.
+    function matchesLength(name, want) {
+        if (!want || want === 'any') return true;
+        const n = name.replace(/[^A-Za-z]/g, '').length;
+        if (want === 'short') return n <= 6;
+        if (want === 'medium') return n >= 5 && n <= 10;
+        return n >= 9;
+    }
     function gaEvent(name, params) {
         if (typeof gtag === 'function') gtag('event', name, Object.assign({generator: 'npc'}, params || {}));
     }
