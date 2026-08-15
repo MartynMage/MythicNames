@@ -87,7 +87,7 @@
             *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
         }
         /* Theme Toggle */
-        .theme-toggle{position:absolute;top:1rem;right:1rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:50%;width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10}
+        .theme-toggle:not(.header-btn){position:absolute;top:1rem;right:1rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:50%;width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10}
         .theme-toggle:hover{border-color:var(--accent-gold);transform:scale(1.1)}
         .theme-toggle svg{width:20px;height:20px;color:var(--accent-gold);transition:transform 0.3s}
         .theme-toggle:hover svg{transform:rotate(20deg)}
@@ -447,7 +447,7 @@
             .modal-actions button{flex:1;min-width:0;font-size:0.7rem;padding:0.7rem 0.5rem}
             .party-grid{grid-template-columns:1fr}
             .world-grid{grid-template-columns:1fr}
-            .theme-toggle{top:0.5rem;right:0.5rem;width:36px;height:36px}
+            .theme-toggle:not(.header-btn){top:0.5rem;right:0.5rem;width:36px;height:36px}
             .theme-toggle svg{width:16px;height:16px}
             .name-row{flex-wrap:wrap}
             .name-main{width:100%;margin-bottom:0.5rem}
