@@ -75,13 +75,14 @@ const GROUPS = {
     world: ['tavern', 'town', 'kingdom', 'ship', 'dungeon', 'guild'],
     archetypes: ['wizard', 'knight', 'villain', 'monster', 'npc', 'family'],
     items: ['weapon', 'spell', 'artifact'],
+    games: ['wow'],
 };
 const ICONS = {
     elf: '🧝', dwarf: '⛏️', orc: '⚔️', human: '👤', halfling: '🧑‍🌾', gnome: '🎩',
     tiefling: '😈', dragonborn: '🐲', 'half-elf': '🌗', drow: '🕷️', goblin: '👹',
     fairy: '🧚', angel: '👼', demon: '👿', vampire: '🧛',
     tavern: '🍺', kingdom: '👑', ship: '⛵',
-    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', town: '🏘️', npc: '🧑‍🌾', family: '📜', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺',
+    wizard: '🧙', knight: '🛡️', villain: '💀', monster: '🐲', town: '🏘️', npc: '🧑‍🌾', family: '📜', dungeon: '🗝️', guild: '🏛️', weapon: '⚔️', spell: '✨', artifact: '🏺', wow: '🐺',
 };
 const titleCase = s => s.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join('-');
 
@@ -167,7 +168,7 @@ const searchPath = path.join(root, 'search.html');
 if (fs.existsSync(searchPath)) {
     const CATEGORY = {
         races: 'Race Generator', creatures: 'Creature Generator', world: 'World Generator',
-        archetypes: 'Character Generator', items: 'Item Generator'
+        archetypes: 'Character Generator', items: 'Item Generator', games: 'Game Generator'
     };
     const idx = [];
     for (const [key, slugs] of Object.entries(GROUPS)) {
